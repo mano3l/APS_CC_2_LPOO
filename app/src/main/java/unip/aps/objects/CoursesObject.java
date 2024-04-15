@@ -3,7 +3,7 @@ package unip.aps.objects;
 public class CoursesObject {
     String courseName;
     String coordinator;
-    String Semester;
+    int semester;
 
     public String getCourseName() {
         return courseName;
@@ -22,11 +22,21 @@ public class CoursesObject {
     }
 
 
-    public String getSemester() {
-        return Semester;
+    public int getSemester() {
+        return semester;
     }
 
-    public void setSemester(String semester) {
-        Semester = semester;
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    @Override
+    public String toString() {
+        return  "\n" +
+                "Course Name: " + courseName + " "+
+                "Coordinator: " + coordinator + " "+
+                "Semester: " + semester;
     }
 }
+
+

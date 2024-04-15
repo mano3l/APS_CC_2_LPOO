@@ -2,7 +2,16 @@
   {
     "courseName": "Computer Science",
     "coordinator": "Ochoa Burnett",
-    "email": "ochoaburnett@multiflex.com",
-    "registered": "05/19/2003"
+    "semester": 8
+  },
+  {
+    "courseName": "Graphic Design",
+    "coordinator": "Arving da silva ",
+    "semester": 6
+  },
+  {
+    "courseName": "Math",
+    "coordinator": "Jalen Bi Pal",
+    "semester": 8
   }
 ]
