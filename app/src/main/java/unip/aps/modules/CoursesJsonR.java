@@ -40,4 +40,8 @@ public class CoursesJsonR {
             System.out.println(courses.toString());
         }
     }
+
+    public CoursesObject SelectCourse(int course){
+        return courseArray[course];
+    }
 }

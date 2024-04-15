@@ -9,6 +9,7 @@ public class Interface {
 
         CoursesJsonR coursesJson = new CoursesJsonR();
 
-        coursesJson.GetCourses();
+//        coursesJson.GetCourses();
+        System.out.println(coursesJson.SelectCourse(2));
     }
 }
