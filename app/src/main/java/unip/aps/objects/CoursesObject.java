@@ -33,8 +33,8 @@ public class CoursesObject {
     @Override
     public String toString() {
         return  "\n" +
-                "Course Name: " + courseName + " "+
-                "Coordinator: " + coordinator + " "+
+                "Course Name: " + courseName + ", "+
+                "Coordinator: " + coordinator + ", "+
                 "Semester: " + semester;
     }
 }
