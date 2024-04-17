@@ -1,16 +1,17 @@
 package unip.aps;
 
-import unip.aps.modules.CoursesJsonR;
+import unip.aps.modules.CoursesJsonMethods;
+
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Interface {
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        CoursesJsonMethods coursesJson = new CoursesJsonMethods();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("University 2024 - System");
 
-        System.out.print("Courses University 2023 " + "\n");
-
-        CoursesJsonR coursesJson = new CoursesJsonR();
-
-//        coursesJson.GetCourses();
-        System.out.println(coursesJson.SelectCourse(2));
-
+        coursesJson.EditCourse(2);
+        coursesJson.ListCourses();
     }
-}
+    }
