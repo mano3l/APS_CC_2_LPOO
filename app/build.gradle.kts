@@ -35,7 +35,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "unip.aps"
+    mainClass = "unip.aps.modules.ReadJson"
 }
 
 tasks.named<Test>("test") {
