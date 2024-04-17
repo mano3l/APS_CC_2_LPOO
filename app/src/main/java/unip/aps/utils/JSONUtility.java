@@ -12,25 +12,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JSONUtility is a utility class for handling JSON files.
- * It provides methods to parse JSON files into Java objects, append objects to JSON files, and write a list of objects to JSON files.
+ * JSONUtility is a utility class that provides methods for reading and writing JSON data.
+ * It uses Google's Gson library to parse and generate JSON.
+ *
+ * @param <T> the type of objects that this utility will work with
  */
-public class JSONUtility {
+public class JSONUtility<T> {
 
     // The path of the JSON file
     private final Path path;
 
+    // Gson instance for JSON operations
     private final Gson gson;
 
+    // The class of the objects that this utility will work with
+    private final Class<T> type;
+
     /**
-     * Constructs a new JSONUtility with the specified path.
+     * Constructs a new JSONUtility instance.
      * If the file at the specified path does not exist, it will be created.
      *
      * @param path the path of the JSON file
+     * @param type the class of the objects that this utility will work with
+     */
+    public JSONUtility(Path path, Class<T> type) {
+        this.path = path;
+        this.type = type;
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        createFileIfNotExists();
+    }
+
+    /**
+     * Constructs a new JSONUtility instance.
+     * If the file at the specified path does not exist, it will be created.
+     *
+     * @param path the path of the JSON file as a string
+     * @param type the class of the objects that this utility will work with
+     */
+    public JSONUtility(String path, Class<T> type) {
+        this(Paths.get(path), type);
+    }
+
+    /**
+     * Creates the JSON file if it does not exist.
      * @throws RuntimeException if an I/O error occurs
      */
-    public JSONUtility(String path) {
-        this.path = Paths.get(path);
+    private void createFileIfNotExists() {
         if (Files.notExists(this.path)) {
             try {
                 Files.createFile(this.path);
@@ -38,18 +65,16 @@ public class JSONUtility {
                 throw new RuntimeException("Error creating file: " + e);
             }
         }
-        this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
     /**
      * Parses the JSON file into a list of objects of the specified type.
      * If the file is empty or the JSON is invalid, an empty list will be returned.
      *
-     * @param type the class of the objects
-     * @return a list of objects of the specified type
+     * @return a list of objects of type T
      * @throws RuntimeException if an I/O error occurs
      */
-    public <T> List<T> parseJSON(Class<T> type) {
+    public List<T> parseJSON() {
         try (var reader = Files.newBufferedReader(this.path)) {
             List<T> listOfObjects =
                     this.gson.fromJson(reader, TypeToken.getParameterized(List.class, type).getType());
@@ -62,17 +87,15 @@ public class JSONUtility {
 
     /**
      * Appends the specified object to the JSON file.
-     * The object will be added to the end of the existing list of objects in the file.
      *
      * @param object the object to append
-     * @param type   the class of the object
      * @throws RuntimeException if an I/O error occurs
      */
-    public <T> void appendToJSON(T object, Class<T> type) {
-        List<T> listOfObjects = parseJSON(type);
+    public void appendToJSON(T object) {
+        List<T> listOfObjects = parseJSON();
         listOfObjects.add(object);
 
-        try (var writer = Files.newBufferedWriter(this.path)) {;
+        try (var writer = Files.newBufferedWriter(this.path)) {
             this.gson.toJson(listOfObjects, writer);
         } catch (IOException e) {
             throw new RuntimeException("Error writing file: " + e);
@@ -80,13 +103,12 @@ public class JSONUtility {
     }
 
     /**
-     * Writes the specified list of objects to the JSON file.
-     * The existing contents of the file will be replaced with the new list.
+     * Overwrites the JSON file with a specified list of objects.
      *
-     * @param jsonArray the list of objects to write
+     * @param jsonArray the new array of objects
      * @throws RuntimeException if an I/O error occurs
      */
-    public <T> void overwriteJSON(List<T> jsonArray) {
+    public void overwriteJSON(List<T> jsonArray) {
         try (var writer = Files.newBufferedWriter(this.path)) {
             this.gson.toJson(jsonArray, writer);
         } catch (IOException e) {
@@ -94,4 +116,3 @@ public class JSONUtility {
         }
     }
 }
-
