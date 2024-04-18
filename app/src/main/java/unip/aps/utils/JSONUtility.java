@@ -1,15 +1,15 @@
 package unip.aps.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONWriter;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * JSONUtility is a utility class that provides methods for reading and writing JSON data.
@@ -21,9 +21,6 @@ public class JSONUtility<T> {
 
     // The path of the JSON file
     private final Path path;
-
-    // Gson instance for JSON operations
-    private final Gson gson;
 
     // The class of the objects that this utility will work with
     private final Class<T> type;
@@ -37,9 +34,8 @@ public class JSONUtility<T> {
      */
     public JSONUtility(Path path, Class<T> type) {
         this.path = path;
+        this.createFileIfNotExists();
         this.type = type;
-        this.gson = new GsonBuilder().setPrettyPrinting().create();
-        createFileIfNotExists();
     }
 
     /**
@@ -55,6 +51,7 @@ public class JSONUtility<T> {
 
     /**
      * Creates the JSON file if it does not exist.
+     *
      * @throws RuntimeException if an I/O error occurs
      */
     private void createFileIfNotExists() {
@@ -62,7 +59,7 @@ public class JSONUtility<T> {
             try {
                 Files.createFile(this.path);
             } catch (IOException e) {
-                throw new RuntimeException("Error creating file: " + e);
+                throw new RuntimeException("Error creating file " + this.path.getFileName() + "\n" + e);
             }
         }
     }
@@ -76,10 +73,12 @@ public class JSONUtility<T> {
      */
     public List<T> parseJSON() {
         try (var reader = Files.newBufferedReader(this.path)) {
-            List<T> listOfObjects =
-                    this.gson.fromJson(reader, TypeToken.getParameterized(List.class, type).getType());
-
-            return listOfObjects == null ? new ArrayList<>() : listOfObjects;
+            String jsonString = reader.lines().collect(Collectors.joining());
+            if (jsonString.isEmpty()) {
+                return null;
+            }
+            JSONArray jsonArray = JSON.parseArray(jsonString);
+            return jsonArray.toJavaList(this.type);
         } catch (IOException e) {
             throw new RuntimeException("Error reading file: " + e);
         }
@@ -95,8 +94,8 @@ public class JSONUtility<T> {
         List<T> listOfObjects = parseJSON();
         listOfObjects.add(object);
 
-        try (var writer = Files.newBufferedWriter(this.path)) {
-            this.gson.toJson(listOfObjects, writer);
+        try (var writer = Files.newOutputStream(this.path)) {
+            JSON.writeTo(writer, listOfObjects, JSONWriter.Feature.PrettyFormat);
         } catch (IOException e) {
             throw new RuntimeException("Error writing file: " + e);
         }
@@ -108,9 +107,9 @@ public class JSONUtility<T> {
      * @param jsonArray the new array of objects
      * @throws RuntimeException if an I/O error occurs
      */
-    public void overwriteJSON(List<T> jsonArray) {
-        try (var writer = Files.newBufferedWriter(this.path)) {
-            this.gson.toJson(jsonArray, writer);
+    public void updateJSON(List<T> jsonArray) {
+        try (var writer = Files.newOutputStream(this.path)) {
+            JSON.writeTo(writer, jsonArray, JSONWriter.Feature.PrettyFormat);
         } catch (IOException e) {
             throw new RuntimeException("Error writing file: " + e);
         }
