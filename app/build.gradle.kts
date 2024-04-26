@@ -8,6 +8,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    // Plugin to generate JAR files with dependencies included
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 repositories {
@@ -23,8 +25,8 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
-    implementation(libs.gson)
     implementation(libs.fastjson2)
+    implementation(libs.jline)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -36,7 +38,13 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "unip.aps.modules.ReadJson"
+    mainClass = "unip.aps.App"
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "unip.aps.App"
+    }
 }
 
 tasks.named<Test>("test") {
