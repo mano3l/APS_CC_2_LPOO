@@ -14,6 +14,12 @@ import java.util.*;
 import static org.jline.jansi.Ansi.ansi;
 import static org.jline.keymap.KeyMap.key;
 
+/**
+ * This class represents a selectable option component in a terminal-based user interface.
+ * It provides a way to navigate through a list of options and select one.
+ *
+ * @param <E> the type of the options
+ */
 public class SelectOption<E> {
 
     private static final int NAVIGATION_GUIDE_SPACING = 5;
@@ -29,11 +35,18 @@ public class SelectOption<E> {
     private Terminal terminal;
     private int currentPickerIndex;
 
+    /**
+     * Constructs a new SelectOption with the given title, options, and theme.
+     *
+     * @param title      the title of the SelectOption
+     * @param optionsMap the options to be displayed
+     * @param theme      the theme to be used
+     */
     public SelectOption(String title, Map<String, E> optionsMap, Theme theme) {
         this.title = title;
         this.optionsMap = optionsMap;
         this.optionsList = new ArrayList<>();
-        this.picker = styleString(">", theme);
+        this.picker = applyTheme(">", theme);
         this.selectedOption = "";
         this.theme = theme;
         this.terminal = null;
@@ -41,54 +54,71 @@ public class SelectOption<E> {
         initializeKeyHandlers();
     }
 
+    /**
+     * This method is responsible for rendering the SelectOption component on the terminal.
+     * It first adds all the keys from the optionsMap to the optionsList.
+     * Then, it builds a terminal and sets up a BindingReader and a Writer for the terminal.
+     * It also creates a KeyMap for handling key presses.
+     * The method then enters a loop where it clears the terminal screen, prints the title and options,
+     * and waits for a key press. The loop continues until a valid option is selected.
+     * Finally, it returns an Optional containing the selected option, if any.
+     *
+     * @return an Optional containing the selected option, if any
+     * @throws RuntimeException if there is an IOException when building the terminal
+     */
     public Optional<E> render() {
         // Add all keys from the optionsMap to the optionsList
         optionsList.addAll(optionsMap.keySet());
 
-        // Initialize the terminal
         try {
+            // Build the terminal
             terminal = TerminalBuilder.builder().build();
         } catch (IOException e) {
+            // Throw a RuntimeException if there is an IOException when building the terminal
             throw new RuntimeException(e);
         }
 
+        // Set up a BindingReader and a Writer for the terminal
         var bindingReader = new BindingReader(terminal.reader());
         var writer = terminal.writer();
-        // Clear the system terminal before executing the code
         writer.print("\033c");
         terminal.puts(InfoCmp.Capability.cursor_invisible);
 
+        // Create a KeyMap for handling key presses
         KeyMap<Key> keyMap = generateKeyMap(terminal);
 
-        // Set the picker position for the first option
+        // Attach the picker to the first option
         attachPickerTo(0);
 
-        // Enter a loop to handle user input
         do {
-            // Clear the screen and flush the terminal
+            // Clear the terminal screen
             terminal.puts(InfoCmp.Capability.clear_screen);
 
-            // Print the title and the options
+            // Print the title and options
             writer.println(ansi().a("\n   " + setTitleTheme(theme) + "\n"));
             optionsList.stream().map(option -> " ".repeat(3) + option).forEach(writer::println);
 
+            // Print the navigation guide
             writer.print(generateNavigationGuide(terminal.getHeight(), terminal.getWidth()));
 
-            // Listen for key press
+            // Wait for a key press
             Key keyPressed = bindingReader.readBinding(keyMap);
 
+            // Handle the key press
             handleKeyPress(keyPressed);
 
+            // Continue the loop until a valid option is selected
         } while (selectedOption.isEmpty());
-        // Return an Optional with the Enum to witch the specified key is mapped
+
+        // Return an Optional containing the selected option, if any
         return Optional.ofNullable(optionsMap.get(selectedOption));
     }
 
     private String setTitleTheme(Theme theme) {
         if (theme == Theme.BLACK) {
-            return styleString(title, Theme.DEFAULT, Theme.BLACK);
+            return applyTheme(title, Theme.DEFAULT, Theme.BLACK);
         }
-        return styleString(title, Theme.BLACK, theme);
+        return applyTheme(title, Theme.BLACK, theme);
     }
 
     private KeyMap<Key> generateKeyMap(Terminal terminal) {
@@ -157,7 +187,7 @@ public class SelectOption<E> {
 
     private void attachPickerTo(int newIndex) {
         optionsList
-                .set(newIndex, picker + styleString(optionsList.get(newIndex), theme));
+                .set(newIndex, picker + applyTheme(optionsList.get(newIndex), theme));
     }
 
     private void detachPickerFrom(int oldIndex) {
@@ -181,11 +211,11 @@ public class SelectOption<E> {
         return str.replaceAll("\u001B\\[[;\\d]*m", "");
     }
 
-    private String styleString(String str, Theme color) {
+    private String applyTheme(String str, Theme color) {
         return ansi().render("@|" + color.getColor() + " " + str + "|@").toString();
     }
 
-    private String styleString(String str, Theme fgColor, Theme bgColor) {
+    private String applyTheme(String str, Theme fgColor, Theme bgColor) {
         return ansi().render("@|fg_" + fgColor.getColor() + "," + "bg_" + bgColor.getColor() + " " + str + "|@").toString();
     }
 

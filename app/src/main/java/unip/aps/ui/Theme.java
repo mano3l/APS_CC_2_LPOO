@@ -20,6 +20,5 @@ public enum Theme {
     public String getColor() {
         return color;
     }
-
 }
 
