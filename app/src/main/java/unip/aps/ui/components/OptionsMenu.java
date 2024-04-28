@@ -7,6 +7,7 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
 import unip.aps.ui.Theme;
+import unip.aps.ui.Key;
 
 import java.io.IOException;
 import java.util.*;
@@ -220,12 +221,5 @@ public class OptionsMenu<E> {
 
     private String applyTheme(String str, Theme fgColor, Theme bgColor) {
         return ansi().render("@|fg_" + fgColor.getColor() + "," + "bg_" + bgColor.getColor() + " " + str + "|@").toString();
-    }
-
-    private enum Key {
-        UP,
-        DOWN,
-        ENTER,
-        Q
     }
 }
