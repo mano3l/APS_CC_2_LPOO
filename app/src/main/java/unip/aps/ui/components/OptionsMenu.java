@@ -20,7 +20,7 @@ import static org.jline.keymap.KeyMap.key;
  *
  * @param <E> the type of the options
  */
-public class SelectOption<E> {
+public class OptionsMenu<E> {
 
     private static final int NAVIGATION_GUIDE_SPACING = 5;
     private static final int INDENTATION_SPACING = 3;
@@ -36,13 +36,13 @@ public class SelectOption<E> {
     private int currentPickerIndex;
 
     /**
-     * Constructs a new SelectOption with the given title, options, and theme.
+     * Constructs a new OptionsMenu with the given title, options, and theme.
      *
      * @param title      the title of the SelectOption
      * @param optionsMap the options to be displayed
      * @param theme      the theme to be used
      */
-    public SelectOption(String title, Map<String, E> optionsMap, Theme theme) {
+    public OptionsMenu(String title, Map<String, E> optionsMap, Theme theme) {
         this.title = title;
         this.optionsMap = optionsMap;
         this.optionsList = new ArrayList<>();
@@ -55,7 +55,7 @@ public class SelectOption<E> {
     }
 
     /**
-     * This method is responsible for rendering the SelectOption component on the terminal.
+     * This method is responsible for rendering the OptionsMenu component on the terminal.
      * It first adds all the keys from the optionsMap to the optionsList.
      * Then, it builds a terminal and sets up a BindingReader and a Writer for the terminal.
      * It also creates a KeyMap for handling key presses.
@@ -66,52 +66,56 @@ public class SelectOption<E> {
      * @return an Optional containing the selected option, if any
      * @throws RuntimeException if there is an IOException when building the terminal
      */
-    public Optional<E> render() {
+    public Optional<E> init() {
         // Add all keys from the optionsMap to the optionsList
         optionsList.addAll(optionsMap.keySet());
 
         try {
             // Build the terminal
             terminal = TerminalBuilder.builder().build();
+
+
+            // Set up a BindingReader and a Writer for the terminal
+            var bindingReader = new BindingReader(terminal.reader());
+            var writer = terminal.writer();
+            writer.print("\033c");
+            terminal.puts(InfoCmp.Capability.cursor_invisible);
+
+            // Create a KeyMap for handling key presses
+            KeyMap<Key> keyMap = generateKeyMap(terminal);
+
+            // Attach the picker to the first option
+            attachPickerTo(0);
+
+            do {
+                // Clear the terminal screen
+                terminal.puts(InfoCmp.Capability.clear_screen);
+                // Print the title and options
+                writer.println(ansi().a("\n" + setTitleTheme(theme).indent(INDENTATION_SPACING)));
+                optionsList.stream().map(option -> " ".repeat(3) + option).forEach(writer::println);
+
+                // Print the navigation guide
+                writer.print(generateNavigationGuide(terminal.getHeight(), terminal.getWidth()));
+
+                // Wait for a key press
+                Key keyPressed = bindingReader.readBinding(keyMap);
+
+                if (keyPressed == Key.Q) break;
+
+                // Handle the key press
+                handleKeyPress(keyPressed);
+
+                // Continue the loop until a valid option is selected
+            } while (selectedOption.isEmpty());
+
+            // Return an Optional containing the selected option, if any
+            return Optional.ofNullable(optionsMap.get(selectedOption));
         } catch (IOException e) {
             // Throw a RuntimeException if there is an IOException when building the terminal
             throw new RuntimeException(e);
+        } finally {
+            closeTerminal(terminal);
         }
-
-        // Set up a BindingReader and a Writer for the terminal
-        var bindingReader = new BindingReader(terminal.reader());
-        var writer = terminal.writer();
-        writer.print("\033c");
-        terminal.puts(InfoCmp.Capability.cursor_invisible);
-
-        // Create a KeyMap for handling key presses
-        KeyMap<Key> keyMap = generateKeyMap(terminal);
-
-        // Attach the picker to the first option
-        attachPickerTo(0);
-
-        do {
-            // Clear the terminal screen
-            terminal.puts(InfoCmp.Capability.clear_screen);
-
-            // Print the title and options
-            writer.println(ansi().a("\n   " + setTitleTheme(theme) + "\n"));
-            optionsList.stream().map(option -> " ".repeat(3) + option).forEach(writer::println);
-
-            // Print the navigation guide
-            writer.print(generateNavigationGuide(terminal.getHeight(), terminal.getWidth()));
-
-            // Wait for a key press
-            Key keyPressed = bindingReader.readBinding(keyMap);
-
-            // Handle the key press
-            handleKeyPress(keyPressed);
-
-            // Continue the loop until a valid option is selected
-        } while (selectedOption.isEmpty());
-
-        // Return an Optional containing the selected option, if any
-        return Optional.ofNullable(optionsMap.get(selectedOption));
     }
 
     private String setTitleTheme(Theme theme) {
@@ -135,7 +139,6 @@ public class SelectOption<E> {
         keyHandlers.put(Key.DOWN, this::handleDownKeyPress);
         keyHandlers.put(Key.UP, this::handleUpKeyPress);
         keyHandlers.put(Key.ENTER, this::handleEnterKeyPress);
-        keyHandlers.put(Key.Q, this::handleQKeyPress);
     }
 
     private void handleKeyPress(Key keyPressed) {
