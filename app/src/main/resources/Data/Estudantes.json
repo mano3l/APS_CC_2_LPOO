@@ -1,0 +1,15 @@
+[
+	{
+		"idade":28,
+		"nome":"Sofia Oliveira",
+		"sexo":"feminino",
+		"telefone":"1112345678"
+	},
+	{
+		"idade":19,
+		"nome":"Rafael Pinheiros",
+		"ra":"RA8620",
+		"sexo":"masculino",
+		"telefone":"(19) 8765-4321"
+	}
+]

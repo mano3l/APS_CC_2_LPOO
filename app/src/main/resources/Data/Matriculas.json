@@ -1,0 +1,13 @@
+[
+  {
+    "ra": "RA8620",
+    "idade": 24,
+    "nome": "Rafael Pinheiros",
+    "sexo": "masculino",
+    "email": "rpinheiros1@unip.com",
+    "telefone": "(19) 8765-4321",
+    "endereco": "Rua Bento Correia, 185, Guarapés, São Paulo-SP",
+    "nomeDoPrograma": "Ciência da Computação",
+    "dataMatricula": "28/04/2024"
+  }
+]
