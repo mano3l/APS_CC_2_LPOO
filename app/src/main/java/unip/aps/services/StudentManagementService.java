@@ -38,9 +38,11 @@ public class StudentManagementService {
         System.out.println("Digite o nome do estudante que deseja realizar alterações: ");
         String nome = sc.nextLine();
         int i = 0;
+        boolean studentFound = false;
         for (Student student : sms.getStudents() ) {
             i = i + 1;
             if (student.getNome().equals(nome)) {
+                studentFound = true;
                 System.out.println(i);
                 System.out.println(student);
                 System.out.println("Qual das informações você deseja alterar?");
@@ -73,8 +75,13 @@ public class StudentManagementService {
                         student.setTelefone(newTelefone);
                         jsonFile.updateJSON(student,i - 1);
                         break;
+                    default:
+                        System.out.println("Digite 1-5 !");
                 }
             }
+        }
+        if (!studentFound) {
+            System.out.println("Estudante não matriculado");
         }
     }
 }
