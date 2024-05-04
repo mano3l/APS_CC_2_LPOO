@@ -113,4 +113,15 @@ public class JSONUtility<T> {
             throw new RuntimeException("Error writing file: " + e);
         }
     }
+
+    public void deleteJSON(T object, int index) {
+        List<T> listOfObjects = parseJSON();
+        listOfObjects.remove(index);
+
+        try (var writer = Files.newOutputStream(this.path)) {
+            JSON.writeTo(writer, listOfObjects, JSONWriter.Feature.PrettyFormat);
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing file: " + e);
+        }
+    }
 }

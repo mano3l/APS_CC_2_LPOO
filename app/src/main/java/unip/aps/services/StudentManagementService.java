@@ -20,7 +20,6 @@ public class StudentManagementService {
 
     public void registerStudents(Student student) {
         System.out.println("Registro de novo estudante: ");
-//
         System.out.print("Digite o nome completo do Estudante: ");
         student.setNome(sc.nextLine());
         System.out.print("Digite seu sexo: ");
@@ -77,6 +76,28 @@ public class StudentManagementService {
                         break;
                     default:
                         System.out.println("Digite 1-5 !");
+                }
+            }
+        }
+        if (!studentFound) {
+            System.out.println("Estudante não matriculado");
+        }
+    }
+
+    public void deleteStudent(StudentManagementService sms) {
+        System.out.println("Digite o nome do estudante que deseja apagar: ");
+        String nome = sc.nextLine();
+        int i = 0;
+        boolean studentFound = false;
+        for (Student student : sms.getStudents() ) {
+            i = i + 1;
+            if (student.getNome().equals(nome)) {
+                studentFound = true;
+                System.out.println(student);
+                System.out.println("Deseja realmente deletar o estudante acima? (S/N)");
+                String choice = sc.nextLine();
+                if (choice.equals("S")) {
+                    jsonFile.deleteJSON(student, i - 1);
                 }
             }
         }

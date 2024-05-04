@@ -1,20 +1,8 @@
 [
 	{
-		"idade":28,
-		"nome":"Sofia Oliveira",
-		"sexo":"feminino",
-		"telefone":"1112345678"
-	},
-	{
-		"idade":19,
-		"nome":"dads",
-		"sexo":"masculino",
-		"telefone":"(19) 8765-4321"
-	},
-	{
-		"idade":45,
+		"idade":50,
 		"nome":"Ichigo Kurosaki",
-		"sexo":"shinigami",
+		"sexo":"ceifador de almas",
 		"telefone":"0800"
 	},
 	{

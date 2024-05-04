@@ -8,12 +8,6 @@ public class App {
         Student students = new Student();
         students.setRa();
         var sms = new StudentManagementService("./app/src/main/resources/Data/Estudantes.json");
-
-        //sms.registerStudents(new Student());
-        sms.alterStudents(sms);
-        //System.out.print(sms.getStudents());
-
-
+        sms.deleteStudent(sms);
     }
-
 }
