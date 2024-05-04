@@ -7,9 +7,38 @@
 	},
 	{
 		"idade":19,
-		"nome":"Rafael Pinheiros",
-		"ra":"RA8620",
+		"nome":"dads",
 		"sexo":"masculino",
 		"telefone":"(19) 8765-4321"
+	},
+	{
+		"idade":45,
+		"nome":"Ichigo Kurosaki",
+		"sexo":"shinigami",
+		"telefone":"0800"
+	},
+	{
+		"idade":23,
+		"nome":"John Doe",
+		"sexo":"masculino",
+		"telefone":"1999234534"
+	},
+	{
+		"idade":19,
+		"nome":"Bruno Silva",
+		"sexo":"masculino",
+		"telefone":"19992343421"
+	},
+	{
+		"idade":19,
+		"nome":"Basta Tomoi",
+		"sexo":"masculino",
+		"telefone":"(19) 8765-4321"
+	},
+	{
+		"idade":20,
+		"nome":"Okito Tame",
+		"sexo":"masculino",
+		"telefone":"19993062389"
 	}
 ]

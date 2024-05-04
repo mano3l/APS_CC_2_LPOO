@@ -18,7 +18,7 @@ public class StudentManagementService {
         return this.jsonFile.parseJSON();
     }
 
-    public void registerStudents(Student student){
+    public void registerStudents(Student student) {
         System.out.println("Registro de novo estudante: ");
 //
         System.out.print("Digite o nome completo do Estudante: ");
@@ -34,6 +34,49 @@ public class StudentManagementService {
         this.jsonFile.appendToJSON(student);
     }
 
+    public void alterStudents(StudentManagementService sms) {
+        System.out.println("Digite o nome do estudante que deseja realizar alterações: ");
+        String nome = sc.nextLine();
+        int i = 0;
+        for (Student student : sms.getStudents() ) {
+            i = i + 1;
+            if (student.getNome().equals(nome)) {
+                System.out.println(i);
+                System.out.println(student);
+                System.out.println("Qual das informações você deseja alterar?");
+                String choice = sc.nextLine();
+                switch(choice) {
+                    case "1":
+                        System.out.print("O RA não pode ser alterado!");
+                        break;
+                    case "2":
+                        System.out.print("Qual o novo nome? ");
+                        String newNome = sc.nextLine();
+                        student.setNome(newNome);
+                        jsonFile.updateJSON(student,i - 1);
+                        break;
+                    case "3":
+                        System.out.print("Digite a idade: ");
+                        int newIdade = sc.nextInt();
+                        student.setIdade(newIdade);
+                        jsonFile.updateJSON(student,i - 1);
+                        break;
+                    case "4":
+                        System.out.print("Qual o novo sexo? ");
+                        String newSexo = sc.nextLine();
+                        student.setSexo(newSexo);
+                        jsonFile.updateJSON(student,i - 1);
+                        break;
+                    case "5":
+                        System.out.print("Qual o novo telefone? ");
+                        String newTelefone = sc.nextLine();
+                        student.setTelefone(newTelefone);
+                        jsonFile.updateJSON(student,i - 1);
+                        break;
+                }
+            }
+        }
+    }
 }
 
 

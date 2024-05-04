@@ -6,11 +6,12 @@ import unip.aps.services.StudentManagementService;
 public class App {
     public static void main(String[] args) {
         Student students = new Student();
+        students.setRa();
         var sms = new StudentManagementService("./app/src/main/resources/Data/Estudantes.json");
 
-        sms.registerStudents(new Student());
-
-//        System.out.print(sms.getStudents());
+        //sms.registerStudents(new Student());
+        sms.alterStudents(sms);
+        //System.out.print(sms.getStudents());
 
 
     }

@@ -15,8 +15,7 @@ public class Student {
     public void setRa(){
         int rN =  (int) (Math.random() * 9000) + 1000;
         String randomNumber = Integer.toString(rN);
-        ra = "RA" + randomNumber;
-
+        this.ra = "RA" + randomNumber;
     }
 
     public String getNome() {
@@ -51,13 +50,12 @@ public class Student {
         this.telefone = telefone.toLowerCase();
     }
 
-
     @Override
     public String toString() {
-        return "RA: " + getRa() + "\n" +
-                "NOME: " + getNome() + "\n" +
-                "IDADE: " + getIdade() + "\n" +
-                "SEXO: " + getSexo() + "\n" +
-                "TELEFONE: " + getTelefone() + "\n";
+        return "1 - RA: " + getRa() + "\n" +
+                "2 - NOME: " + getNome() + "\n" +
+                "3 - IDADE: " + getIdade() + "\n" +
+                "4 - SEXO: " + getSexo() + "\n" +
+                "5 - TELEFONE: " + getTelefone() + "\n";
     }
 }

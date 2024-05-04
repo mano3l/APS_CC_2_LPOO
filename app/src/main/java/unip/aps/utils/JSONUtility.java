@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.function.Consumer;
 
 /**
  * JSONUtility is a utility class that provides methods for reading and writing JSON data.
@@ -101,15 +102,13 @@ public class JSONUtility<T> {
         }
     }
 
-    /**
-     * Overwrites the JSON file with a specified list of objects.
-     *
-     * @param jsonArray the new array of objects
-     * @throws RuntimeException if an I/O error occurs
-     */
-    public void updateJSON(List<T> jsonArray) {
+
+    public void updateJSON(T object, int index) {
+        List<T> listOfObjects = parseJSON();
+        listOfObjects.set(index,object);
+
         try (var writer = Files.newOutputStream(this.path)) {
-            JSON.writeTo(writer, jsonArray, JSONWriter.Feature.PrettyFormat);
+            JSON.writeTo(writer, listOfObjects, JSONWriter.Feature.PrettyFormat);
         } catch (IOException e) {
             throw new RuntimeException("Error writing file: " + e);
         }
