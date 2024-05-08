@@ -3,26 +3,35 @@ package unip.aps.models;
 import java.util.Arrays;
 
 public class Programs {
-    private String nomeDoPrograma;
-    private String nivelDoCurso;
+    private  String noemDoPrograma;
+    private String niveldoCurso;
+    private String duracao;
     private String horario;
     private String descricao;
     private String[] matriculados;
 
-    public String getNomeDoPrograma() {
-        return nomeDoPrograma;
+    public String getNoemDoPrograma() {
+        return noemDoPrograma;
     }
 
-    public void setNomeDoPrograma(String nomeDoPrograma) {
-        this.nomeDoPrograma = nomeDoPrograma;
+    public void setNoemDoPrograma(String noemDoPrograma) {
+        this.noemDoPrograma = noemDoPrograma;
     }
 
-    public String getNivelDoCurso() {
-        return nivelDoCurso;
+    public String getNiveldoCurso() {
+        return niveldoCurso;
     }
 
-    public void setNivelDoCurso(String nivelDoCurso) {
-        this.nivelDoCurso = nivelDoCurso;
+    public void setNiveldoCurso(String niveldoCurso) {
+        this.niveldoCurso = niveldoCurso;
+    }
+
+    public String getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(String duracao) {
+        this.duracao = duracao;
     }
 
     public String getHorario() {
@@ -52,8 +61,9 @@ public class Programs {
     @Override
     public String toString() {
         return "Programs{" +
-                "nomeDoPrograma='" + nomeDoPrograma + '\'' +
-                ", nivelDoCurso='" + nivelDoCurso + '\'' +
+                "noemDoPrograma='" + noemDoPrograma + '\'' +
+                ", niveldoCurso='" + niveldoCurso + '\'' +
+                ", duracao='" + duracao + '\'' +
                 ", horario='" + horario + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", matriculados=" + Arrays.toString(matriculados) +

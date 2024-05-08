@@ -1,32 +1,16 @@
 [
 	{
-		"idade":50,
-		"nome":"Ichigo Kurosaki",
-		"sexo":"ceifador de almas",
-		"telefone":"0800"
-	},
-	{
 		"idade":23,
-		"nome":"John Doe",
+		"nome":"Rafael Pinheiros",
+		"ra":"RA9855",
 		"sexo":"masculino",
-		"telefone":"1999234534"
+		"telefone":"11 11111111"
 	},
 	{
 		"idade":19,
-		"nome":"Bruno Silva",
-		"sexo":"masculino",
-		"telefone":"19992343421"
-	},
-	{
-		"idade":19,
-		"nome":"Basta Tomoi",
-		"sexo":"masculino",
-		"telefone":"(19) 8765-4321"
-	},
-	{
-		"idade":20,
-		"nome":"Okito Tame",
-		"sexo":"masculino",
-		"telefone":"19993062389"
+		"nome":"Luana Silva",
+		"ra":"RA7796",
+		"sexo":"feminino",
+		"telefone":"12 22222222"
 	}
 ]

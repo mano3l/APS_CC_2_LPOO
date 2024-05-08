@@ -29,8 +29,14 @@ public class StudentManagementService {
         System.out.print("Digite a idade: ");
         student.setIdade(sc.nextInt());
         System.out.println("Gerando seu RA........");
-        student.setRa();
+        student.setRa(genRA());
         this.jsonFile.appendToJSON(student);
+    }
+
+    private String genRA() {
+        int rN =  (int) (Math.random() * 9000) + 1000;
+        String randomNumber = Integer.toString(rN);
+        return "RA" + randomNumber;
     }
 
     public void alterStudents(StudentManagementService sms) {

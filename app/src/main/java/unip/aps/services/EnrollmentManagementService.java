@@ -15,8 +15,7 @@ public class EnrollmentManagementService {
         this.jsonFile = new JSONUtility<>(path, Enrollment.class);
     }
 
-    public List<Enrollment> getEnrollments() {
-        return this.jsonFile.parseJSON();
-    }
-}
+    public List<Enrollment> getEnrollments() {return this.jsonFile.parseJSON();
 
+    }
+    }
