@@ -4,6 +4,7 @@ public class Enrollment {
     private String ra;
     private int idade;
     private String nome;
+    private String sobrenome;
     private String sexo;
     private String email;
     private String telefone;
@@ -81,6 +82,14 @@ public class Enrollment {
 
     public void setDataMatricula(String dataMatricula) {
         this.dataMatricula = dataMatricula;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     @Override

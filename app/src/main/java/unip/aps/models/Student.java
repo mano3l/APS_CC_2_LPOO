@@ -2,18 +2,20 @@
 
 
     public class Student {
-        private String ra;
+        private String cpf;
         private String nome;
+        private String sobrenome;
+        private String endereco;
         private int idade;
         private String sexo;
         private String telefone;
 
-        public String getRa() {
-            return ra;
+        public String getCpf() {
+            return cpf;
         }
 
-        public void setRa(String ra) {
-            this.ra = ra;
+        public void setCpf(String cpf) {
+            this.cpf = cpf;
         }
 
         public String getNome() {
@@ -22,6 +24,22 @@
 
         public void setNome(String nome) {
             this.nome = nome;
+        }
+
+        public String getSobrenome() {
+            return sobrenome;
+        }
+
+        public void setSobrenome(String sobrenome) {
+            this.sobrenome = sobrenome;
+        }
+
+        public String getEndereco() {
+            return endereco;
+        }
+
+        public void setEndereco(String endereco) {
+            this.endereco = endereco;
         }
 
         public int getIdade() {
@@ -37,7 +55,7 @@
         }
 
         public void setSexo(String sexo) {
-            this.sexo = sexo.toLowerCase();
+            this.sexo = sexo;
         }
 
         public String getTelefone() {
@@ -45,16 +63,19 @@
         }
 
         public void setTelefone(String telefone) {
-            this.telefone = telefone.toLowerCase();
+            this.telefone = telefone;
         }
 
         @Override
         public String toString() {
-            return "1 - RA: " + getRa() + "\n" +
-                    "2 - NOME: " + getNome() + "\n" +
-                    "3 - IDADE: " + getIdade() + "\n" +
-                    "4 - SEXO: " + getSexo() + "\n" +
-                    "5 - TELEFONE: " + getTelefone() + "\n";
+            return "Student{" +
+                    "cpf='" + cpf + '\'' +
+                    ", nome='" + nome + '\'' +
+                    ", sobrenome='" + sobrenome + '\'' +
+                    ", endereco='" + endereco + '\'' +
+                    ", idade=" + idade +
+                    ", sexo='" + sexo + '\'' +
+                    ", telefone='" + telefone + '\'' +
+                    '}';
         }
     }
-   

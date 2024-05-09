@@ -21,21 +21,34 @@ public class EnrollmentManagementService {
     public List<Enrollment> getEnrollments() {return this.jsonFile.parseJSON();}
 
     public String generateEmail(Student students) {
-        String name = students.getNome();
-        String[] nameParts = name.split(" ");
-        String formattedEmail = nameParts[0].toLowerCase() + "." + nameParts[1].toLowerCase() + "%s"+ "@unip.br" ;
+        String name = students.getNome().toLowerCase();
+        String lastName = students.getSobrenome().toLowerCase();
+        String baseMail = name + "." + lastName;
+
+        String formattedEmail = name + "." + lastName + "@unip.br";
+
         int i = 1;
         for (Enrollment enrollment : getEnrollments()) {
-            if (enrollment.getEmail().equals(formattedEmail.formatted(""))) {
+            if (enrollment.getEmail().equals(formattedEmail)) {
+                formattedEmail = String.format("%s%d@unip.br", baseMail, i);
                 i++;
-                String newI = String.valueOf(i);
-                System.out.println(formattedEmail);
-                return formattedEmail.formatted(newI);
             }
-
         }
-        return formattedEmail.formatted("");
 
+        return formattedEmail;
+
+
+    }
+
+    private String genRA() {
+        int rN = (int) (Math.random() * 9000) + 1000;
+        String randomNumber = Integer.toString(rN);
+        String formattedRa = "RA" + randomNumber;
+        for (Enrollment existingEnrollment : getEnrollments()) {
+            if (existingEnrollment.getRa().equals(formattedRa)) {
+                return genRA();
+            }
+        }return formattedRa;
     }
 
 
@@ -43,31 +56,35 @@ public class EnrollmentManagementService {
         var pms = new ProgramManagementService("./app/src/main/resources/Data/Cursos.json");
         var sms = new StudentManagementService("./app/src/main/resources/Data/Estudantes.json");
 //        var ems = new EnrollmentManagementService("./app/src/main/resources/Data/Matriculas.json");
-        System.out.println("Digite o RA do Aluno que deseja matricular: ");
-        String ra = sc.nextLine();
+        System.out.println("Digite o CPF do Aluno que deseja matricular: ");
+        String cpf = sc.nextLine();
 
 //        boolean studentFound = false;
         for (Student student : sms.getStudents()) {
-            if (student.getRa().equals(ra)) {
+            if (student.getCpf().equals(cpf)) {
 //                studentFound = true;
                 System.out.println(student);
                 System.out.println("Deseja realmente Cadastrar o estudante acima? (S/N): ");
                 String choice = sc.nextLine();
                 if (choice.equals("S")) {
                         DataFormatter df = new DataFormatter();
-                        enrollment.setNome(student.getNome());
-                        enrollment.setIdade(student.getIdade());
-                        enrollment.setRa(student.getRa());
-                        enrollment.setSexo(student.getSexo());
-                        enrollment.setEndereco("Rua tal de tal, Campinas-SP");
-                        enrollment.setEmail(generateEmail(student));
-                        enrollment.setTelefone(student.getTelefone());
-                        enrollment.setDataMatricula(df.setDate());
                         System.out.print("Digite o nome do programa que deseja matricular o aluno: ");
                         String programName = sc.nextLine();
                         for (Programs programs : pms.getPrograms()) {
                             if (programs.getNomeDoPrograma().equals(programName)) {
                                 enrollment.setNomeDoPrograma(programs.getNomeDoPrograma());
+                                enrollment.setNome(student.getNome());
+                                enrollment.setSobrenome(student.getSobrenome());
+                                enrollment.setIdade(student.getIdade());
+                                enrollment.setRa(student.getCpf());
+                                enrollment.setSexo(student.getSexo());
+                                enrollment.setEndereco(student.getEndereco());
+                                enrollment.setEmail(generateEmail(student));
+                                enrollment.setTelefone(student.getTelefone());
+                                enrollment.setDataMatricula(df.setDate());
+                                System.out.println("MATRICULA REALIZADA!");
+                                System.out.println("Gerando RA.....");
+                                enrollment.setRa(genRA());
                                 this.jsonFile.appendToJSON(enrollment);
 
                             }

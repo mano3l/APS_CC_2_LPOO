@@ -21,9 +21,16 @@ public class StudentManagementService {
 
     public void registerStudents(Student student) {
         DataFormatter dF = new DataFormatter();
-        System.out.println("Registro de novo estudante: ");
-        System.out.print("Digite o nome completo do Estudante: ");
+        System.out.println("\t||| Registro de novo estudante ||| ");
+        System.out.print("Digite o primeiro nome: ");
         student.setNome(sc.nextLine());
+        System.out.print("Digite o  sobrenome: ");
+        student.setSobrenome(sc.nextLine());
+        System.out.print("Digite o cpf: ");
+        String cpf = sc.nextLine();
+        System.out.print("Digite o seu endereço: ");
+        student.setEndereco(sc.nextLine());
+        student.setCpf(dF.formatCpf(cpf));
         System.out.print("Digite seu sexo: ");
         student.setSexo(sc.nextLine());
         System.out.print("Digite seu telefone: ");
@@ -31,15 +38,7 @@ public class StudentManagementService {
         student.setTelefone(dF.formatPhoneNumber(telefone));
         System.out.print("Digite a idade: ");
         student.setIdade(sc.nextInt());
-        System.out.println("Gerando seu RA........");
-        student.setRa(genRA());
         this.jsonFile.appendToJSON(student);
-    }
-
-    private String genRA() {
-        int rN =  (int) (Math.random() * 9000) + 1000;
-        String randomNumber = Integer.toString(rN);
-        return "RA" + randomNumber;
     }
 
     public void changeStudent(StudentManagementService sms) {

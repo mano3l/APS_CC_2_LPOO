@@ -1,30 +1,11 @@
 [
 	{
-		"idade":88,
-		"nome":"Vegeta Silva",
-		"ra":"RA0060",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
-	},
-	{
-		"idade":88,
-		"nome":"Vegeta Silva",
-		"ra":"RA1560",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
-	},
-	{
-		"idade":88,
-		"nome":"Vegeta Silva",
-		"ra":"RA7130",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
-	},
-	{
-		"idade":88,
-		"nome":"Vegeta Silva",
-		"ra":"RA1260",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
+		"cpf":"123.456.789-10",
+		"endereco":"Rua tal, Campinas-SP",
+		"idade":90,
+		"nome":"Vegeta",
+		"sexo":"prince",
+		"sobrenome":"Silva",
+		"telefone":"(12) 34567-8910"
 	}
 ]

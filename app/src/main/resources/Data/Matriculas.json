@@ -1,46 +1,14 @@
 [
 	{
-		"dataMatricula":"08/05/2024",
+		"dataMatricula":"09/05/2024",
 		"email":"vegeta.silva@unip.br",
-		"endereco":"Rua tal de tal, Campinas-SP",
-		"idade":88,
-		"nome":"Vegeta Silva",
+		"endereco":"Rua tal, Campinas-SP",
+		"idade":90,
+		"nome":"Vegeta",
 		"nomeDoPrograma":"Agiotagem",
-		"ra":"RA1560",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
-	},
-	{
-		"dataMatricula":"08/05/2024",
-		"email":"vegeta.2silva@unip.br",
-		"endereco":"Rua tal de tal, Campinas-SP",
-		"idade":88,
-		"nome":"Vegeta Silva",
-		"nomeDoPrograma":"Agiotagem",
-		"ra":"RA0060",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
-	},
-	{
-		"dataMatricula":"08/05/2024",
-		"email":"vegeta.2silva@unip.br",
-		"endereco":"Rua tal de tal, Campinas-SP",
-		"idade":88,
-		"nome":"Vegeta Silva",
-		"nomeDoPrograma":"Agiotagem",
-		"ra":"RA7130",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
-	},
-	{
-		"dataMatricula":"08/05/2024",
-		"email":"vegeta.silva2@unip.br",
-		"endereco":"Rua tal de tal, Campinas-SP",
-		"idade":88,
-		"nome":"Vegeta Silva",
-		"nomeDoPrograma":"Agiotagem",
-		"ra":"RA7130",
-		"sexo":"prince ",
-		"telefone":"número de telefone inválido"
+		"ra":"RA3484",
+		"sexo":"prince",
+		"sobrenome":"Silva",
+		"telefone":"(12) 34567-8910"
 	}
 ]

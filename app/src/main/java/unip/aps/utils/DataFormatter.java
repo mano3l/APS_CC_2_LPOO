@@ -22,6 +22,19 @@ public class DataFormatter {
         return formattedNumber;
     }
 
+    public String formatCpf(String cpf) {
+        String cleanedNumber = cpf.replaceAll("[^0-9]", "");
+
+        if (cleanedNumber.length() != 11) {
+            // Se o tamanho não for correto, retorna uma mensagem de erro
+            return "CPF inválido";
+        }
+        return cleanedNumber.substring(0, 3) + "." +
+                cleanedNumber.substring(3, 6) + "." +
+                cleanedNumber.substring(6, 9) + "-" +
+                cleanedNumber.substring(9);
+    }
+
     public String setDate() {
         LocalDateTime now = LocalDateTime.now();
 
