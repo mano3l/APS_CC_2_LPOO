@@ -1,18 +1,9 @@
 [
-  {
-    "nomeDoPrograma": "Ciência da Computação",
-    "nivelDoCurso": "Graduação",
-    "duracao": "4 Anos",
-    "horario": "Diurno",
-    "descricao": "Mergulhe no mundo dos algoritmos, linguagens de programação e desenvolvimento de software. Aprenda a projetar e construir soluções inovadoras para problemas complexos em tecnologia.",
-    "matriculados": []
-  },
-  {
-    "nomeDoPrograma": "Administração de Empresas",
-    "nivelDoCurso": "Mestrado",
-    "duracao": "2 Anos",
-    "horario": "Online",
-    "descricao": "Desenvolva habilidades essenciais em finanças, marketing e gestão. Obtenha uma compreensão abrangente das operações de negócios e estratégias para o sucesso em diversas indústrias.",
-    "matriculados": []
-  }
+	{
+		"descricao":"putaria e roubo",
+		"duracao":"muita",
+		"horario":"todo dia",
+		"niveldoCurso":"master",
+		"nomeDoPrograma":"Agiotagem"
+	}
 ]

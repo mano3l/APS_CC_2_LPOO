@@ -1,13 +1,46 @@
 [
-  {
-    "ra": "RA8620",
-    "idade": 24,
-    "nome": "Rafael Pinheiros",
-    "sexo": "masculino",
-    "email": "rpinheiros1@unip.com",
-    "telefone": "(19) 8765-4321",
-    "endereco": "Rua Bento Correia, 185, Guarapés, São Paulo-SP",
-    "nomeDoPrograma": "Ciência da Computação",
-    "dataMatricula": "28/04/2024"
-  }
+	{
+		"dataMatricula":"08/05/2024",
+		"email":"vegeta.silva@unip.br",
+		"endereco":"Rua tal de tal, Campinas-SP",
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"nomeDoPrograma":"Agiotagem",
+		"ra":"RA1560",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
+	},
+	{
+		"dataMatricula":"08/05/2024",
+		"email":"vegeta.2silva@unip.br",
+		"endereco":"Rua tal de tal, Campinas-SP",
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"nomeDoPrograma":"Agiotagem",
+		"ra":"RA0060",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
+	},
+	{
+		"dataMatricula":"08/05/2024",
+		"email":"vegeta.2silva@unip.br",
+		"endereco":"Rua tal de tal, Campinas-SP",
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"nomeDoPrograma":"Agiotagem",
+		"ra":"RA7130",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
+	},
+	{
+		"dataMatricula":"08/05/2024",
+		"email":"vegeta.silva2@unip.br",
+		"endereco":"Rua tal de tal, Campinas-SP",
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"nomeDoPrograma":"Agiotagem",
+		"ra":"RA7130",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
+	}
 ]

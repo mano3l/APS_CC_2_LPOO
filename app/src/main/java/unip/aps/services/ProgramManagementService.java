@@ -17,4 +17,14 @@ public class ProgramManagementService {
     public List<Programs> getPrograms() {
         return this.jsonFile.parseJSON();
     }
+
+    public void registerProgram(Programs program) {
+        System.out.println("Please enter the name of the program you would like to register.");
+        program.setNomeDoPrograma(sc.nextLine());
+        program.setDescricao(sc.nextLine());
+        program.setDuracao(sc.nextLine());
+        program.setHorario(sc.nextLine());
+        program.setNiveldoCurso(sc.nextLine());
+        this.jsonFile.appendToJSON(program);
+    }
 }

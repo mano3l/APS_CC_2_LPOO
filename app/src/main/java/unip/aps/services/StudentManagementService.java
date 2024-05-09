@@ -1,6 +1,7 @@
 package unip.aps.services;
 
 import unip.aps.models.Student;
+import unip.aps.utils.DataFormatter;
 import unip.aps.utils.JSONUtility;
 
 import java.util.List;
@@ -19,13 +20,15 @@ public class StudentManagementService {
     }
 
     public void registerStudents(Student student) {
+        DataFormatter dF = new DataFormatter();
         System.out.println("Registro de novo estudante: ");
         System.out.print("Digite o nome completo do Estudante: ");
         student.setNome(sc.nextLine());
         System.out.print("Digite seu sexo: ");
         student.setSexo(sc.nextLine());
         System.out.print("Digite seu telefone: ");
-        student.setTelefone(sc.nextLine());
+        String telefone = sc.nextLine();
+        student.setTelefone(dF.formatPhoneNumber(telefone));
         System.out.print("Digite a idade: ");
         student.setIdade(sc.nextInt());
         System.out.println("Gerando seu RA........");
@@ -39,7 +42,7 @@ public class StudentManagementService {
         return "RA" + randomNumber;
     }
 
-    public void alterStudents(StudentManagementService sms) {
+    public void changeStudent(StudentManagementService sms) {
         System.out.println("Digite o nome do estudante que deseja realizar alterações: ");
         String nome = sc.nextLine();
         int i = 0;

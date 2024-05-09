@@ -1,16 +1,30 @@
 [
 	{
-		"idade":23,
-		"nome":"Rafael Pinheiros",
-		"ra":"RA9855",
-		"sexo":"masculino",
-		"telefone":"11 11111111"
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"ra":"RA0060",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
 	},
 	{
-		"idade":19,
-		"nome":"Luana Silva",
-		"ra":"RA7796",
-		"sexo":"feminino",
-		"telefone":"12 22222222"
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"ra":"RA1560",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
+	},
+	{
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"ra":"RA7130",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
+	},
+	{
+		"idade":88,
+		"nome":"Vegeta Silva",
+		"ra":"RA1260",
+		"sexo":"prince ",
+		"telefone":"número de telefone inválido"
 	}
 ]

@@ -3,19 +3,19 @@ package unip.aps.models;
 import java.util.Arrays;
 
 public class Programs {
-    private  String noemDoPrograma;
+    private  String nomeDoPrograma;
     private String niveldoCurso;
     private String duracao;
     private String horario;
     private String descricao;
     private String[] matriculados;
 
-    public String getNoemDoPrograma() {
-        return noemDoPrograma;
+    public String getNomeDoPrograma() {
+        return nomeDoPrograma;
     }
 
-    public void setNoemDoPrograma(String noemDoPrograma) {
-        this.noemDoPrograma = noemDoPrograma;
+    public void setNomeDoPrograma(String nomeDoPrograma) {
+        this.nomeDoPrograma = nomeDoPrograma;
     }
 
     public String getNiveldoCurso() {
@@ -61,7 +61,7 @@ public class Programs {
     @Override
     public String toString() {
         return "Programs{" +
-                "noemDoPrograma='" + noemDoPrograma + '\'' +
+                "noemDoPrograma='" + nomeDoPrograma + '\'' +
                 ", niveldoCurso='" + niveldoCurso + '\'' +
                 ", duracao='" + duracao + '\'' +
                 ", horario='" + horario + '\'' +

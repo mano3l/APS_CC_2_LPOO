@@ -1,5 +1,7 @@
 package unip.aps;
 
+import unip.aps.models.Enrollment;
+import unip.aps.models.Programs;
 import unip.aps.models.Student;
 import unip.aps.services.EnrollmentManagementService;
 import unip.aps.services.ProgramManagementService;
@@ -13,9 +15,11 @@ public class App {
         var pms = new ProgramManagementService("./app/src/main/resources/Data/Cursos.json");
 
 //        sms.getStudents();
-        sms.registerStudents(new Student());
+//        sms.registerStudents(new Student());
+        ems.enrollmentStudent(new Enrollment());
 //        System.out.print(ems.getEnrollments());
 //        pms.getPrograms();
+//          pms.registerProgram(new Programs());
 
     }
 }
