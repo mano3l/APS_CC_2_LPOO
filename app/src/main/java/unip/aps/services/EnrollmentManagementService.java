@@ -52,10 +52,12 @@ public class EnrollmentManagementService {
     }
 
 
+
+
     public void enrollmentStudent(Enrollment enrollment) {
         var pms = new ProgramManagementService("./app/src/main/resources/Data/Cursos.json");
         var sms = new StudentManagementService("./app/src/main/resources/Data/Estudantes.json");
-//        var ems = new EnrollmentManagementService("./app/src/main/resources/Data/Matriculas.json");
+        var ems = new EnrollmentManagementService("./app/src/main/resources/Data/Matriculas.json");
         System.out.println("Digite o CPF do Aluno que deseja matricular: ");
         String cpf = sc.nextLine();
 
@@ -65,7 +67,7 @@ public class EnrollmentManagementService {
 //                studentFound = true;
                 System.out.println(student);
                 System.out.println("Deseja realmente Cadastrar o estudante acima? (S/N): ");
-                String choice = sc.nextLine();
+                String choice = sc.nextLine().toUpperCase();
                 if (choice.equals("S")) {
                         DataFormatter df = new DataFormatter();
                         System.out.print("Digite o nome do programa que deseja matricular o aluno: ");
@@ -85,16 +87,16 @@ public class EnrollmentManagementService {
                                 System.out.println("MATRICULA REALIZADA!");
                                 System.out.println("Gerando RA.....");
                                 enrollment.setRa(genRA());
+                                pms.appendStudent(enrollment.getRa(), enrollment.getNomeDoPrograma());
                                 this.jsonFile.appendToJSON(enrollment);
 
                             }
 
-
                         }
 
                     }
-
                 }
+
             }
         }
 

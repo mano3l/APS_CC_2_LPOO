@@ -15,8 +15,8 @@ public class App {
         var pms = new ProgramManagementService("./app/src/main/resources/Data/Cursos.json");
 
 //        sms.getStudents();
-//        sms.registerStudents(new Student());
-        ems.enrollmentStudent(new Enrollment());
+        sms.registerStudents(new Student());
+//        ems.enrollmentStudent(new Enrollment());
 //        System.out.print(ems.getEnrollments());
 //        pms.getPrograms();
 //          pms.registerProgram(new Programs());

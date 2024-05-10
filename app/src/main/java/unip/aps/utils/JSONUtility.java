@@ -103,12 +103,21 @@ public class JSONUtility<T> {
     }
 
 
+
     public void updateJSON(T object, int index) {
         List<T> listOfObjects = parseJSON();
         listOfObjects.set(index,object);
 
         try (var writer = Files.newOutputStream(this.path)) {
             JSON.writeTo(writer, listOfObjects, JSONWriter.Feature.PrettyFormat);
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing file: " + e);
+        }
+    }
+
+    public void updateJSON(List<T> jsonArray) {
+        try (var writer = Files.newOutputStream(this.path)) {
+            JSON.writeTo(writer, jsonArray, JSONWriter.Feature.PrettyFormat);
         } catch (IOException e) {
             throw new RuntimeException("Error writing file: " + e);
         }

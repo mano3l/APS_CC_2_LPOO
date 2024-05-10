@@ -1,14 +1,16 @@
 package unip.aps.models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Programs {
-    private  String nomeDoPrograma;
-    private String niveldoCurso;
+    private String nomeDoPrograma;
+    private String nivelDoPrograma;
     private String duracao;
     private String horario;
     private String descricao;
-    private String[] matriculados;
+    private List<String> matriculados;
 
     public String getNomeDoPrograma() {
         return nomeDoPrograma;
@@ -18,12 +20,12 @@ public class Programs {
         this.nomeDoPrograma = nomeDoPrograma;
     }
 
-    public String getNiveldoCurso() {
-        return niveldoCurso;
+    public String getNivelDoPrograma() {
+        return nivelDoPrograma;
     }
 
-    public void setNiveldoCurso(String niveldoCurso) {
-        this.niveldoCurso = niveldoCurso;
+    public void setNivelDoPrograma(String nivelDoPrograma) {
+        this.nivelDoPrograma = nivelDoPrograma;
     }
 
     public String getDuracao() {
@@ -50,23 +52,23 @@ public class Programs {
         this.descricao = descricao;
     }
 
-    public String[] getMatriculados() {
+    public List<String> getMatriculados() {
         return matriculados;
     }
 
-    public void setMatriculados(String[] matriculados) {
-        this.matriculados = matriculados;
+    public void addRA(String RA) {
+        this.matriculados.add(RA);
     }
 
     @Override
     public String toString() {
         return "Programs{" +
-                "noemDoPrograma='" + nomeDoPrograma + '\'' +
-                ", niveldoCurso='" + niveldoCurso + '\'' +
+                "nomeDoPrograma='" + nomeDoPrograma + '\'' +
+                ", nivelDoPrograma='" + nivelDoPrograma + '\'' +
                 ", duracao='" + duracao + '\'' +
                 ", horario='" + horario + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", matriculados=" + Arrays.toString(matriculados) +
+                ", matriculados=" + matriculados +
                 '}';
     }
 }

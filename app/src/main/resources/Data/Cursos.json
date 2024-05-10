@@ -1,9 +1,10 @@
 [
 	{
-		"descricao":"putaria e roubo",
-		"duracao":"muita",
-		"horario":"todo dia",
-		"niveldoCurso":"master",
+		"descricao":"Roubo e putaria",
+		"duracao":"muito",
+		"horario":"noite",
+		"matriculados":["RA2636","RA9711"],
+		"nivelDoPrograma":"master",
 		"nomeDoPrograma":"Agiotagem"
 	}
 ]

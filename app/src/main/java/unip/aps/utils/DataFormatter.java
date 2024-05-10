@@ -5,12 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 public class DataFormatter {
     public String formatPhoneNumber(String phoneNumber) {
-        // Removendo caracteres não numéricos do número de telefone
         String cleanedNumber = phoneNumber.replaceAll("[^0-9]", "");
-
-        // Verificando se o número é válido (possui 11 dígitos)
         if (cleanedNumber.length() != 11) {
-            // Aqui você pode tratar caso o número não tenha a quantidade correta de dígitos
             return "Número de telefone inválido";
         }
 
@@ -26,7 +22,6 @@ public class DataFormatter {
         String cleanedNumber = cpf.replaceAll("[^0-9]", "");
 
         if (cleanedNumber.length() != 11) {
-            // Se o tamanho não for correto, retorna uma mensagem de erro
             return "CPF inválido";
         }
         return cleanedNumber.substring(0, 3) + "." +
