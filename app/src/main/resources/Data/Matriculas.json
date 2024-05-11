@@ -1,26 +1,26 @@
 [
 	{
-		"dataMatricula":"09/05/2024",
-		"email":"vegeta.silva@unip.br",
-		"endereco":"Rua tal, Campinas-SP",
-		"idade":90,
-		"nome":"Vegeta",
-		"nomeDoPrograma":"Agiotagem",
-		"ra":"RA2508",
-		"sexo":"prince",
-		"sobrenome":"Silva",
-		"telefone":"(12) 34567-8910"
+		"dataMatricula":"11/05/2024",
+		"email":"joao.kaizen@unip.br",
+		"endereco":"rarr",
+		"idade":12,
+		"nome":"joao",
+		"nomeDoPrograma":"Fisica",
+		"ra":"RA6872",
+		"sexo":"homne",
+		"sobrenome":"kaizen",
+		"telefone":"NÃºmero de telefone invÃ¡lido"
 	},
 	{
-		"dataMatricula":"09/05/2024",
-		"email":"goku.silva@unip.br",
-		"endereco":"Rua tal, Campinas-SP",
-		"idade":90,
-		"nome":"Goku",
-		"nomeDoPrograma":"Agiotagem",
-		"ra":"RA9711",
-		"sexo":"prince",
-		"sobrenome":"Silva",
+		"dataMatricula":"11/05/2024",
+		"email":"urubu.pix@unip.br",
+		"endereco":"Rua tal, Campinas-Sp",
+		"idade":69,
+		"nome":"Urubu",
+		"nomeDoPrograma":"Fisica",
+		"ra":"RA7698",
+		"sexo":"gosta",
+		"sobrenome":"Pix",
 		"telefone":"(12) 34567-8910"
 	}
 ]

@@ -20,32 +20,35 @@ public class StudentManagementService {
     }
 
     public void registerStudents(Student student) {
+        Boolean flag = true;
+        DataFormatter dF = new DataFormatter();
+        System.out.print("Digite o CPF para iniciar o registro: ");
+        String cpf = sc.nextLine();
         for (Student s : this.getStudents()) {
-            DataFormatter dF = new DataFormatter();
-            System.out.print("Digite o CPF para iniciar o registro: ");
-            String cpf = sc.nextLine();
             student.setCpf(dF.formatCpf(cpf));
             if(s.getCpf().equals(student.getCpf())) {
+                flag = false;
                 System.out.println("\tALUNO JA CADASTRADO");
-            }else{
-                System.out.println("\t||| Registro de novo estudante ||| ");
-                System.out.print("Digite o primeiro nome: ");
-                student.setNome(sc.nextLine());
-                System.out.print("Digite o  sobrenome: ");
-                student.setSobrenome(sc.nextLine());
-                System.out.print("Digite o seu endereço: ");
-                student.setEndereco(sc.nextLine());
-                student.setCpf(dF.formatCpf(cpf));
-                System.out.print("Digite seu sexo: ");
-                student.setSexo(sc.nextLine());
-                System.out.print("Digite seu telefone: ");
-                String telefone = sc.nextLine();
-                student.setTelefone(dF.formatPhoneNumber(telefone));
-                System.out.print("Digite a idade: ");
-                student.setIdade(sc.nextInt());
-                this.jsonFile.appendToJSON(student);
                 break;
             }
+        }
+        if (flag.equals(true)) {
+            System.out.println("\t||| Registro de novo estudante ||| ");
+            System.out.print("Digite o primeiro nome: ");
+            student.setNome(sc.nextLine());
+            System.out.print("Digite o  sobrenome: ");
+            student.setSobrenome(sc.nextLine());
+            System.out.print("Digite o seu endereço: ");
+            student.setEndereco(sc.nextLine());
+            student.setCpf(dF.formatCpf(cpf));
+            System.out.print("Digite seu sexo: ");
+            student.setSexo(sc.nextLine());
+            System.out.print("Digite seu telefone: ");
+            String telefone = sc.nextLine();
+            student.setTelefone(dF.formatPhoneNumber(telefone));
+            System.out.print("Digite a idade: ");
+            student.setIdade(sc.nextInt());
+            this.jsonFile.appendToJSON(student);
         }
 
     }

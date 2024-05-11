@@ -12,6 +12,10 @@ public class Programs {
     private String descricao;
     private List<String> matriculados;
 
+    public  Programs() {
+        this.matriculados = new ArrayList<>();
+    }
+
     public String getNomeDoPrograma() {
         return nomeDoPrograma;
     }

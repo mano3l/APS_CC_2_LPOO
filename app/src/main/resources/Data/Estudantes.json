@@ -25,5 +25,14 @@
 		"sexo":"gosta",
 		"sobrenome":"Pix",
 		"telefone":"(12) 34567-8910"
+	},
+	{
+		"cpf":"124.496.789-50",
+		"endereco":"rarr",
+		"idade":12,
+		"nome":"joao",
+		"sexo":"homne",
+		"sobrenome":"kaizen",
+		"telefone":"NÃºmero de telefone invÃ¡lido"
 	}
 ]
