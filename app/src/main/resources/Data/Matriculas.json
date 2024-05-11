@@ -1,26 +1,2 @@
 [
-	{
-		"dataMatricula":"11/05/2024",
-		"email":"joao.kaizen@unip.br",
-		"endereco":"rarr",
-		"idade":12,
-		"nome":"joao",
-		"nomeDoPrograma":"Fisica",
-		"ra":"RA6872",
-		"sexo":"homne",
-		"sobrenome":"kaizen",
-		"telefone":"NÃºmero de telefone invÃ¡lido"
-	},
-	{
-		"dataMatricula":"11/05/2024",
-		"email":"urubu.pix@unip.br",
-		"endereco":"Rua tal, Campinas-Sp",
-		"idade":69,
-		"nome":"Urubu",
-		"nomeDoPrograma":"Fisica",
-		"ra":"RA7698",
-		"sexo":"gosta",
-		"sobrenome":"Pix",
-		"telefone":"(12) 34567-8910"
-	}
 ]

@@ -13,13 +13,13 @@ public class App {
         var sms = new StudentManagementService("./app/src/main/resources/Data/Estudantes.json");
         var ems = new EnrollmentManagementService("./app/src/main/resources/Data/Matriculas.json");
         var pms = new ProgramManagementService("./app/src/main/resources/Data/Cursos.json");
-
 //        sms.getStudents();
 //        sms.registerStudents(new Student());
-        ems.enrollmentStudent(new Enrollment());
+//        ems.enrollmentStudent(new Enrollment());
 //        System.out.print(ems.getEnrollments());
 //        pms.getPrograms();
 //          pms.registerProgram(new Programs());
-
+        sms.deleteStudent(sms);
+//        ems.deleteEnrollment(ems);
     }
 }

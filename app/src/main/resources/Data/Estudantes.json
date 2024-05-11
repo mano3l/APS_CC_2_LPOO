@@ -1,38 +1,3 @@
 [
-	{
-		"cpf":"123.456.789-10",
-		"endereco":"Rua tal, Campinas-SP",
-		"idade":90,
-		"nome":"Vegeta",
-		"sexo":"prince",
-		"sobrenome":"Silva",
-		"telefone":"(12) 34567-8910"
-	},
-	{
-		"cpf":"124.496.789-10",
-		"endereco":"Rua tal, Campinas-SP",
-		"idade":90,
-		"nome":"Goku",
-		"sexo":"prince",
-		"sobrenome":"Silva",
-		"telefone":"(12) 34567-8910"
-	},
-	{
-		"cpf":"333.333.333-33",
-		"endereco":"Rua tal, Campinas-Sp",
-		"idade":69,
-		"nome":"Urubu",
-		"sexo":"gosta",
-		"sobrenome":"Pix",
-		"telefone":"(12) 34567-8910"
-	},
-	{
-		"cpf":"124.496.789-50",
-		"endereco":"rarr",
-		"idade":12,
-		"nome":"joao",
-		"sexo":"homne",
-		"sobrenome":"kaizen",
-		"telefone":"NÃºmero de telefone invÃ¡lido"
-	}
+	
 ]

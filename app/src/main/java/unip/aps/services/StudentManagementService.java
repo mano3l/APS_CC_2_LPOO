@@ -1,5 +1,6 @@
 package unip.aps.services;
 
+import unip.aps.models.Enrollment;
 import unip.aps.models.Student;
 import unip.aps.utils.DataFormatter;
 import unip.aps.utils.JSONUtility;
@@ -105,24 +106,30 @@ public class StudentManagementService {
     }
 
     public void deleteStudent(StudentManagementService sms) {
-        System.out.println("Digite o nome do estudante que deseja apagar: ");
-        String nome = sc.nextLine();
+        var enrollments = new EnrollmentManagementService("./app/src/main/resources/Data/Matriculas.json");
+        System.out.println("Digite o cpf do estudante que deseja apagar: ");
+        String cpf = sc.nextLine();
         int i = 0;
         boolean studentFound = false;
         for (Student student : sms.getStudents() ) {
             i = i + 1;
-            if (student.getNome().equals(nome)) {
+            if (student.getCpf().equals(cpf)) {
                 studentFound = true;
                 System.out.println(student);
                 System.out.println("Deseja realmente deletar o estudante acima? (S/N)");
-                String choice = sc.nextLine();
+                String choice = sc.nextLine().toUpperCase();
                 if (choice.equals("S")) {
                     jsonFile.deleteJSON(student, i - 1);
                 }
+//                for (Enrollment ems : enrollments.getEnrollments()) {
+//                    if (ems.getCpf().equals(student.getCpf())) {
+//
+//                    }
+//                }
             }
         }
         if (!studentFound) {
-            System.out.println("Estudante não matriculado");
+            System.out.println("Estudante não cadastrado");
         }
     }
 }

@@ -3,7 +3,7 @@
 		"descricao":"Roubo e putaria",
 		"duracao":"muito",
 		"horario":"noite",
-		"matriculados":[],
+		"matriculados":["RA6634","RA7516","RA8698"],
 		"nivelDoPrograma":"master",
 		"nomeDoPrograma":"Agiotagem"
 	},
@@ -11,7 +11,7 @@
 		"descricao":"sexo",
 		"duracao":"4",
 		"horario":"meio dia pras 10",
-		"matriculados":[],
+		"matriculados":["RA2626","RA5772"],
 		"nivelDoPrograma":"superior",
 		"nomeDoPrograma":"Marketing"
 	},

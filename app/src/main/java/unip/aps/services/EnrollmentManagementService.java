@@ -18,7 +18,9 @@ public class EnrollmentManagementService {
         this.jsonFile = new JSONUtility<>(path, Enrollment.class);
     }
 
-    public List<Enrollment> getEnrollments() {return this.jsonFile.parseJSON();}
+    public List<Enrollment> getEnrollments() {
+        return this.jsonFile.parseJSON();
+    }
 
     public String generateEmail(Student students) {
         String name = students.getNome().toLowerCase();
@@ -26,7 +28,6 @@ public class EnrollmentManagementService {
         String baseMail = name + "." + lastName;
 
         String formattedEmail = name + "." + lastName + "@unip.br";
-
         int i = 1;
         for (Enrollment enrollment : getEnrollments()) {
             if (enrollment.getEmail().equals(formattedEmail)) {
@@ -34,10 +35,7 @@ public class EnrollmentManagementService {
                 i++;
             }
         }
-
         return formattedEmail;
-
-
     }
 
     private String genRA() {
@@ -48,11 +46,9 @@ public class EnrollmentManagementService {
             if (existingEnrollment.getRa().equals(formattedRa)) {
                 return genRA();
             }
-        }return formattedRa;
+        }
+        return formattedRa;
     }
-
-
-
 
     public void enrollmentStudent(Enrollment enrollment) {
         var pms = new ProgramManagementService("./app/src/main/resources/Data/Cursos.json");
@@ -60,45 +56,71 @@ public class EnrollmentManagementService {
         var ems = new EnrollmentManagementService("./app/src/main/resources/Data/Matriculas.json");
         System.out.println("Digite o CPF do Aluno que deseja matricular: ");
         String cpf = sc.nextLine();
-
-//        boolean studentFound = false;
-        for (Student student : sms.getStudents()) {
-            if (student.getCpf().equals(cpf)) {
-//                studentFound = true;
-                System.out.println(student);
-                System.out.println("Deseja realmente Cadastrar o estudante acima? (S/N): ");
-                String choice = sc.nextLine().toUpperCase();
-                if (choice.equals("S")) {
+        boolean studentFound = true;
+        boolean studentExists = true;
+        for (Enrollment e : ems.getEnrollments()) {
+            if (e.getCpf().equals(cpf)) {
+                studentFound = false;
+                System.out.println("Estudante já matriculado");
+            }
+        }
+        if (studentFound) {
+            for (Student student : sms.getStudents()) {
+                if (student.getCpf().equals(cpf)) {
+                    studentExists = false;
+                    System.out.println(student);
+                    System.out.println("Deseja realmente Cadastrar o estudante acima? (S/N): ");
+                    String choice = sc.nextLine().toUpperCase();
+                    if (choice.equals("S")) {
                         DataFormatter df = new DataFormatter();
                         System.out.print("Digite o nome do programa que deseja matricular o aluno: ");
                         String programName = sc.nextLine();
                         for (Programs programs : pms.getPrograms()) {
                             if (programs.getNomeDoPrograma().equals(programName)) {
                                 enrollment.setNomeDoPrograma(programs.getNomeDoPrograma());
-                                enrollment.setNome(student.getNome());
-                                enrollment.setSobrenome(student.getSobrenome());
-                                enrollment.setIdade(student.getIdade());
+                                enrollment.setCpf(student.getCpf());
                                 enrollment.setRa(student.getCpf());
-                                enrollment.setSexo(student.getSexo());
-                                enrollment.setEndereco(student.getEndereco());
-                                enrollment.setEmail(generateEmail(student));
-                                enrollment.setTelefone(student.getTelefone());
+                                enrollment.setEmail(ems.generateEmail(student));
                                 enrollment.setDataMatricula(df.setDate());
                                 System.out.println("MATRICULA REALIZADA!");
                                 System.out.println("Gerando RA.....");
                                 enrollment.setRa(genRA());
                                 pms.appendStudent(enrollment.getRa(), enrollment.getNomeDoPrograma());
                                 this.jsonFile.appendToJSON(enrollment);
-
                             }
 
                         }
 
                     }
+
                 }
 
             }
+            if (studentExists) {
+                System.out.println("Estudante não existe!");
+            }
         }
 
-
     }
+    public void deleteEnrollment(EnrollmentManagementService ems) {
+        System.out.println("Digite o ra da matricula que deseja apagar: ");
+        String ra = sc.nextLine();
+        int i = 0;
+        boolean studentFound = false;
+        for (Enrollment enrollment : ems.getEnrollments()) {
+            i = i + 1;
+            if (enrollment.getRa().equals(ra)) {
+                studentFound = true;
+                System.out.println(enrollment);
+                System.out.println("Deseja realmente deletar a matricula acima? (S/N)");
+                String choice = sc.nextLine().toUpperCase();
+                if (choice.equals("S")) {
+                    jsonFile.deleteJSON(enrollment, i - 1);
+                }
+            }
+        }
+        if (!studentFound) {
+            System.out.println("Estudante não matriculado");
+        }
+    }
+}
