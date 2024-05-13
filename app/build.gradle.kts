@@ -27,6 +27,7 @@ dependencies {
     implementation(libs.guava)
     implementation(libs.fastjson2)
     implementation(libs.jline)
+    implementation(libs.jline.console.ui)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

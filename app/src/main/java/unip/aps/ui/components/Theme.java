@@ -1,4 +1,4 @@
-package unip.aps.ui;
+package unip.aps.ui.components;
 
 public enum Theme {
     BLACK("black"),

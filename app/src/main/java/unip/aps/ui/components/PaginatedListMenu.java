@@ -6,8 +6,6 @@ import org.jline.keymap.KeyMap;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.InfoCmp;
-import unip.aps.ui.Key;
-import unip.aps.ui.Theme;
 
 import java.io.IOException;
 import java.util.*;

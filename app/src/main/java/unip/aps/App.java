@@ -1,16 +1,13 @@
 package unip.aps;
 
-import unip.aps.models.Student;
-import unip.aps.services.EnrollmentManagementService;
-import unip.aps.services.ProgramManagementService;
-import unip.aps.services.StudentManagementService;
+import unip.aps.ui.scenes.MainMenu;
 
 public class App {
     public static void main(String[] args) {
-        Student students = new Student();
-        var sms = new StudentManagementService("Estudantes.json");
-        var ems = new EnrollmentManagementService("Matriculas.json");
-        var pms = new ProgramManagementService("Cursos.json");
+//        Student students = new Student();
+//        var sms = new StudentManagementService("Estudantes.json");
+//        var ems = new EnrollmentManagementService("Matriculas.json");
+//        var pms = new ProgramManagementService("Cursos.json");
 //        sms.getStudents();
 //        sms.registerStudents(new Student());
 //        ems.enrollmentStudent(new Enrollment());
@@ -19,5 +16,10 @@ public class App {
 //        pms.registerProgram(new Programs());
 //        sms.deleteStudent(sms);
 //        ems.deleteEnrollment(ems);
+
+        // ========================= TESTE UI ==========================
+
+        var menu = new MainMenu();
+        menu.init();
     }
 }
