@@ -7,6 +7,8 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
+import unip.aps.models.Student;
+import unip.aps.services.StudentManagementService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class RegisterStudentScene implements Runnable {
         PromptBuilder promptBuilder = prompt.getPromptBuilder();
 
         List<AttributedString> header = new ArrayList<>();
-        header.add(new AttributedStringBuilder().append(ansi().bgBrightYellow().fgBlack().a("Registro de estudante\n").reset().toString()).toAttributedString());
+        header.add(new AttributedStringBuilder().append(ansi().bgBrightYellow().fgBlack().a(" Registro de estudante \n").reset().toString()).toAttributedString());
 
         promptBuilder
                 .createInputPrompt()
@@ -44,13 +46,13 @@ public class RegisterStudentScene implements Runnable {
                 .name("cpf")
                 .message("Digite o cpf: ").addPrompt()
                 .createInputPrompt()
-                .name("Sexo")
+                .name("sex")
                 .message("Digite o sexo: ").addPrompt()
                 .createInputPrompt()
-                .name("Telefone")
+                .name("cellphone")
                 .message("Digite o telefone: ").addPrompt()
                 .createInputPrompt()
-                .name("idade")
+                .name("age")
                 .message("Digite a idade: ").addPrompt();
 
         Map<String, PromptResultItemIF> result = null;
@@ -60,8 +62,28 @@ public class RegisterStudentScene implements Runnable {
             throw new RuntimeException(e);
         }
 
-        result.forEach((key, value) -> {
-            System.out.println((key + ": " + value.getResult()));
-        });
+        Student student = new Student(
+                result.get("cpf").getResult(),
+                result.get("firstName").getResult(),
+                result.get("lastName").getResult(),
+                result.get("address").getResult(),
+                Integer.parseInt(result.get("age").getResult()),
+                result.get("sex").getResult(),
+                result.get("cellphone").getResult()
+        );
+
+        StudentManagementService sms = new StudentManagementService("Estudantes.json");
+
+        if (sms.isRegistered(student)) {
+            terminal.writer().println("Estudante já cadastrado.");
+            return;
+        }
+
+        if(sms.registerStudent(student)) {
+            terminal.writer().println("Estudante cadastrado com sucesso.");
+            return;
+        }
+
+        terminal.writer().println("Erro ao cadastrar estudante.");
     }
 }

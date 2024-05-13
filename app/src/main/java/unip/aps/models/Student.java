@@ -10,6 +10,16 @@
         private String sexo;
         private String telefone;
 
+        public Student(String cpf, String nome, String sobrenome, String endereco, int idade, String sexo, String telefone) {
+            this.cpf = cpf;
+            this.nome = nome;
+            this.sobrenome = sobrenome;
+            this.endereco = endereco;
+            this.idade = idade;
+            this.sexo = sexo;
+            this.telefone = telefone;
+        }
+
         public String getCpf() {
             return cpf;
         }

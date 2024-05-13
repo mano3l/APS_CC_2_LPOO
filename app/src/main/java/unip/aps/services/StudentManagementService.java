@@ -18,7 +18,7 @@ public class StudentManagementService {
         return this.jsonFile.parseJSON();
     }
 
-    public boolean registerStudents(Student student) {
+    public boolean registerStudent(Student student) {
         if (!isRegistered(student)) {
             this.jsonFile.appendToJSON(student);
             return true;
@@ -27,12 +27,14 @@ public class StudentManagementService {
     }
 
     public boolean isRegistered(Student student) {
+        if (this.getStudents() == null || this.getStudents().isEmpty()) {
+            return false;
+        }
+
         List<Student> students = this.getStudents();
-        if (!students.isEmpty()) {
-            for (Student s : students) {
-                if (s.getCpf().equals(student.getCpf())) {
-                    return true;
-                }
+        for (Student s : students) {
+            if (s.getCpf().equals(student.getCpf())) {
+                return true;
             }
         }
         return false;

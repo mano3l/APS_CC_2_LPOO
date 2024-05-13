@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.function.Consumer;
@@ -76,7 +77,7 @@ public class JSONUtility<T> {
         try (var reader = Files.newBufferedReader(this.path)) {
             String jsonString = reader.lines().collect(Collectors.joining());
             if (jsonString.isEmpty()) {
-                return null;
+                return new ArrayList<>();
             }
             JSONArray jsonArray = JSON.parseArray(jsonString);
             return jsonArray.toJavaList(this.type);
