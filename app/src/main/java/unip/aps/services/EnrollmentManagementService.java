@@ -51,9 +51,9 @@ public class EnrollmentManagementService {
     }
 
     public void enrollmentStudent(Enrollment enrollment) {
-        var pms = new ProgramManagementService("./app/src/main/resources/Data/Cursos.json");
-        var sms = new StudentManagementService("./app/src/main/resources/Data/Estudantes.json");
-        var ems = new EnrollmentManagementService("./app/src/main/resources/Data/Matriculas.json");
+        var pms = new ProgramManagementService("Cursos.json");
+        var sms = new StudentManagementService("Estudantes.json");
+        var ems = new EnrollmentManagementService("Matriculas.json");
         System.out.println("Digite o CPF do Aluno que deseja matricular: ");
         String cpf = sc.nextLine();
         boolean studentFound = true;
@@ -102,12 +102,12 @@ public class EnrollmentManagementService {
         }
 
     }
-    public void deleteEnrollment(EnrollmentManagementService ems) {
+    public void deleteEnrollment(String cpf) {
         System.out.println("Digite o ra da matricula que deseja apagar: ");
         String ra = sc.nextLine();
         int i = 0;
         boolean studentFound = false;
-        for (Enrollment enrollment : ems.getEnrollments()) {
+        for (Enrollment enrollment : getEnrollments()) {
             i = i + 1;
             if (enrollment.getRa().equals(ra)) {
                 studentFound = true;
