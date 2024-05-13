@@ -18,8 +18,8 @@ public class App {
 //        ems.enrollmentStudent(new Enrollment());
 //        System.out.print(ems.getEnrollments());
 //        pms.getPrograms();
-//          pms.registerProgram(new Programs());
-        sms.deleteStudent(sms);
+//        pms.registerProgram(new Programs());
+//        sms.deleteStudent(sms);
 //        ems.deleteEnrollment(ems);
     }
 }
