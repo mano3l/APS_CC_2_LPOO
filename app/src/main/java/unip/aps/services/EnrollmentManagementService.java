@@ -72,7 +72,6 @@ public class EnrollmentManagementService {
                     System.out.println("Deseja realmente Cadastrar o estudante acima? (S/N): ");
                     String choice = sc.nextLine().toUpperCase();
                     if (choice.equals("S")) {
-                        DataFormatter df = new DataFormatter();
                         System.out.print("Digite o nome do programa que deseja matricular o aluno: ");
                         String programName = sc.nextLine();
                         for (Programs programs : pms.getPrograms()) {
@@ -81,7 +80,7 @@ public class EnrollmentManagementService {
                                 enrollment.setCpf(student.getCpf());
                                 enrollment.setRa(student.getCpf());
                                 enrollment.setEmail(ems.generateEmail(student));
-                                enrollment.setDataMatricula(df.setDate());
+                                enrollment.setDataMatricula(DataFormatter.setDate());
                                 System.out.println("MATRICULA REALIZADA!");
                                 System.out.println("Gerando RA.....");
                                 enrollment.setRa(genRA());

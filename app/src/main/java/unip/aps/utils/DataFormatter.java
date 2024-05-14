@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DataFormatter {
-    public String formatPhoneNumber(String phoneNumber) {
+    public static String formatPhoneNumber(String phoneNumber) {
         String cleanedNumber = phoneNumber.replaceAll("[^0-9]", "");
         if (cleanedNumber.length() != 11) {
             return "Número de telefone inválido";
@@ -18,7 +18,7 @@ public class DataFormatter {
         return formattedNumber;
     }
 
-    public String formatCpf(String cpf) {
+    public static String formatCpf(String cpf) {
         String cleanedNumber = cpf.replaceAll("[^0-9]", "");
 
         if (cleanedNumber.length() != 11) {
@@ -30,7 +30,7 @@ public class DataFormatter {
                 cleanedNumber.substring(9);
     }
 
-    public String setDate() {
+    public static String setDate() {
         LocalDateTime now = LocalDateTime.now();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

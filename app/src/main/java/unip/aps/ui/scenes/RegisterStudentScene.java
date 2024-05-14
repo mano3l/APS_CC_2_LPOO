@@ -2,7 +2,6 @@ package unip.aps.ui.scenes;
 
 import org.jline.consoleui.prompt.ConsolePrompt;
 import org.jline.consoleui.prompt.PromptResultItemIF;
-import org.jline.consoleui.prompt.builder.PromptBuilder;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
@@ -10,6 +9,7 @@ import org.jline.utils.AttributedStringBuilder;
 import unip.aps.models.Student;
 import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.Theme;
+import unip.aps.utils.DataFormatter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,13 +87,13 @@ public class RegisterStudentScene implements Runnable {
 
     public Student createStudent(Map<String, PromptResultItemIF> result) {
         return new Student(
-                result.get("cpf").getResult(),
+                DataFormatter.formatCpf(result.get("cpf").getResult()),
                 result.get("firstName").getResult(),
                 result.get("lastName").getResult(),
                 result.get("address").getResult(),
                 Integer.parseInt(result.get("age").getResult()),
                 result.get("sex").getResult(),
-                result.get("cellphone").getResult()
+                DataFormatter.formatPhoneNumber(result.get("cellphone").getResult())
         );
     }
 
