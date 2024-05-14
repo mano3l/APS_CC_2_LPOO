@@ -12,6 +12,7 @@ import java.util.*;
 
 import static org.jline.jansi.Ansi.ansi;
 import static org.jline.keymap.KeyMap.key;
+import static unip.aps.utils.UiUtility.applyStyleTo;
 
 /**
  * This class represents a selectable option component in a terminal-based user interface.
@@ -45,7 +46,7 @@ public class OptionsMenu<E> {
         this.title = title;
         this.optionsMap = optionsMap;
         this.optionsList = new ArrayList<>();
-        this.picker = applyTheme(">", theme);
+        this.picker = applyStyleTo(">", theme);
         this.selectedOption = "";
         this.theme = theme;
         this.terminal = null;
@@ -119,9 +120,9 @@ public class OptionsMenu<E> {
 
     private String setTitleTheme(Theme theme) {
         if (theme == Theme.BLACK) {
-            return applyTheme(title, Theme.DEFAULT, Theme.BLACK);
+            return applyStyleTo(title, Theme.DEFAULT, Theme.BLACK);
         }
-        return applyTheme(title, Theme.BLACK, theme);
+        return applyStyleTo(title, Theme.BLACK, theme);
     }
 
     private KeyMap<Key> generateKeyMap(Terminal terminal) {
@@ -189,7 +190,7 @@ public class OptionsMenu<E> {
 
     private void attachPickerTo(int newIndex) {
         optionsList
-                .set(newIndex, picker + applyTheme(optionsList.get(newIndex), theme));
+                .set(newIndex, picker + applyStyleTo(optionsList.get(newIndex), theme));
     }
 
     private void detachPickerFrom(int oldIndex) {
@@ -213,11 +214,4 @@ public class OptionsMenu<E> {
         return str.replaceAll("\u001B\\[[;\\d]*m", "");
     }
 
-    private String applyTheme(String str, Theme color) {
-        return ansi().render("@|" + color.getColor() + " " + str + "|@").toString();
-    }
-
-    private String applyTheme(String str, Theme fgColor, Theme bgColor) {
-        return ansi().render("@|fg_" + fgColor.getColor() + "," + "bg_" + bgColor.getColor() + " " + str + "|@").toString();
-    }
 }

@@ -12,6 +12,7 @@ import java.util.*;
 
 import static org.jline.jansi.Ansi.ansi;
 import static org.jline.keymap.KeyMap.key;
+import static unip.aps.utils.UiUtility.applyStyleTo;
 
 public class PaginatedListMenu<E> {
 
@@ -275,14 +276,6 @@ public class PaginatedListMenu<E> {
 
     private String removeAnsiAttributes(String str) {
         return str.replaceAll("\u001B\\[[;\\d]*m", "");
-    }
-
-    private String applyStyleTo(String str, Theme color) {
-        return ansi().render("@|" + color.getColor() + " " + str + "|@").toString();
-    }
-
-    private String applyStyleTo(String str, Theme fgColor, Theme bgColor) {
-        return ansi().render("@|fg_" + fgColor.getColor() + "," + "bg_" + bgColor.getColor() + " " + str + "|@").toString();
     }
 
 }

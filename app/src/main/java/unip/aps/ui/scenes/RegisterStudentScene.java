@@ -9,28 +9,32 @@ import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
 import unip.aps.models.Student;
 import unip.aps.services.StudentManagementService;
+import unip.aps.ui.components.Theme;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.jline.jansi.Ansi.ansi;
+import static unip.aps.utils.UiUtility.applyStyleTo;
 
 public class RegisterStudentScene implements Runnable {
     @Override
     public void run() {
-        Terminal terminal = null;
+        Terminal terminal;
         try {
             terminal = TerminalBuilder.builder().system(true).build();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ConsolePrompt prompt = new ConsolePrompt(terminal);
-        PromptBuilder promptBuilder = prompt.getPromptBuilder();
 
+        // Cria o cabeçalho da tela
         List<AttributedString> header = new ArrayList<>();
-        header.add(new AttributedStringBuilder().append(ansi().bgBrightYellow().fgBlack().a(" Registro de estudante \n").reset().toString()).toAttributedString());
+        header.add(new AttributedStringBuilder().append(applyStyleTo(" Registro de estudante \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
+
+        var prompt = new ConsolePrompt(terminal);
+        var promptBuilder = prompt.getPromptBuilder();
+
 
         promptBuilder
                 .createInputPrompt()
@@ -55,14 +59,34 @@ public class RegisterStudentScene implements Runnable {
                 .name("age")
                 .message("Digite a idade: ").addPrompt();
 
-        Map<String, PromptResultItemIF> result = null;
+        // Recebe os dados inseridos pelo usuário
+        Map<String, PromptResultItemIF> result;
         try {
             result = prompt.prompt(header, promptBuilder.build());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        Student student = new Student(
+        var student = createStudent(result);
+
+        var sms = new StudentManagementService("Estudantes.json");
+
+        var writer = terminal.writer();
+        if (sms.isRegistered(student)) {
+            writer.println("Estudante já cadastrado.");
+            return;
+        }
+
+        if (sms.registerStudent(student)) {
+            writer.println("Estudante cadastrado com sucesso.");
+            return;
+        }
+
+        writer.println("Erro ao cadastrar estudante.");
+    }
+
+    public Student createStudent(Map<String, PromptResultItemIF> result) {
+        return new Student(
                 result.get("cpf").getResult(),
                 result.get("firstName").getResult(),
                 result.get("lastName").getResult(),
@@ -71,19 +95,6 @@ public class RegisterStudentScene implements Runnable {
                 result.get("sex").getResult(),
                 result.get("cellphone").getResult()
         );
-
-        StudentManagementService sms = new StudentManagementService("Estudantes.json");
-
-        if (sms.isRegistered(student)) {
-            terminal.writer().println("Estudante já cadastrado.");
-            return;
-        }
-
-        if(sms.registerStudent(student)) {
-            terminal.writer().println("Estudante cadastrado com sucesso.");
-            return;
-        }
-
-        terminal.writer().println("Erro ao cadastrar estudante.");
     }
+
 }
