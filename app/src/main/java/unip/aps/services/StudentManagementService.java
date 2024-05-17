@@ -1,5 +1,6 @@
 package unip.aps.services;
 
+import unip.aps.models.Enrollment;
 import unip.aps.models.Student;
 import unip.aps.utils.JSONUtility;
 
@@ -90,31 +91,19 @@ public class StudentManagementService {
         }
     }
 
-    public void deleteStudent(StudentManagementService sms) {
-        var enrollments = new EnrollmentManagementService("Matriculas.json");
-        System.out.println("Digite o cpf do estudante que deseja apagar: ");
-        String cpf = sc.nextLine();
-        int i = 0;
-        boolean studentFound = false;
-        for (Student student : sms.getStudents()) {
-            i = i + 1;
+    public void deleteStudent(String cpf) {
+        List<Student> students = this.getStudents();
+        for (Student student : students) {
             if (student.getCpf().equals(cpf)) {
-                studentFound = true;
-                System.out.println(student);
-                System.out.println("Deseja realmente deletar o estudante acima? (S/N)");
-                String choice = sc.nextLine().toUpperCase();
-                if (choice.equals("S")) {
-                    jsonFile.deleteJSON(student, i - 1);
+                for (Enrollment enrollment : new EnrollmentManagementService("enrollments.json").getEnrollments()) {
+                    if (enrollment.getCpf().equals(cpf)) {
+                        new EnrollmentManagementService("enrollments.json").deleteEnrollmentByCPF(cpf);
+                    }
                 }
-//                for (Enrollment ems : enrollments.getEnrollments()) {
-//                    if (ems.getCpf().equals(student.getCpf())) {
-//
-//                    }
-//                }
+                students.remove(student);
+                this.jsonFile.updateJSON(students);
+                return;
             }
-        }
-        if (!studentFound) {
-            System.out.println("Estudante não cadastrado");
         }
     }
 }

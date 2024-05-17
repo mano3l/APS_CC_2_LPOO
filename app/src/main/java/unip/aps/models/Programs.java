@@ -1,7 +1,6 @@
 package unip.aps.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Programs {
@@ -62,6 +61,10 @@ public class Programs {
 
     public void addRA(String RA) {
         this.matriculados.add(RA);
+    }
+
+    public void removeRA(String RA) {
+        this.matriculados.remove(RA);
     }
 
     @Override
