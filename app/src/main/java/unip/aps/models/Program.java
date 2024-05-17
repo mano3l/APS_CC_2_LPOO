@@ -1,10 +1,9 @@
 package unip.aps.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Programs {
+public class Program {
     private String nomeDoPrograma;
     private String nivelDoPrograma;
     private String duracao;
@@ -12,8 +11,13 @@ public class Programs {
     private String descricao;
     private List<String> matriculados;
 
-    public  Programs() {
-        this.matriculados = new ArrayList<>();
+    public Program(String nomeDoPrograma, String nivelDoPrograma, String duracao, String horario, String descricao, List<String> matriculados) {
+        this.nomeDoPrograma = nomeDoPrograma;
+        this.nivelDoPrograma = nivelDoPrograma;
+        this.duracao = duracao;
+        this.horario = horario;
+        this.descricao = descricao;
+        this.matriculados = matriculados;
     }
 
     public String getNomeDoPrograma() {

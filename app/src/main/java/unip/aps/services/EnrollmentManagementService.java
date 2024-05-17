@@ -1,7 +1,7 @@
 package unip.aps.services;
 
 import unip.aps.models.Enrollment;
-import unip.aps.models.Programs;
+import unip.aps.models.Program;
 import unip.aps.models.Student;
 import unip.aps.utils.DataFormatter;
 import unip.aps.utils.JSONUtility;
@@ -74,9 +74,9 @@ public class EnrollmentManagementService {
                     if (choice.equals("S")) {
                         System.out.print("Digite o nome do programa que deseja matricular o aluno: ");
                         String programName = sc.nextLine();
-                        for (Programs programs : pms.getPrograms()) {
-                            if (programs.getNomeDoPrograma().equals(programName)) {
-                                enrollment.setNomeDoPrograma(programs.getNomeDoPrograma());
+                        for (Program program : pms.getPrograms()) {
+                            if (program.getNomeDoPrograma().equals(programName)) {
+                                enrollment.setNomeDoPrograma(program.getNomeDoPrograma());
                                 enrollment.setCpf(student.getCpf());
                                 enrollment.setRa(student.getCpf());
                                 enrollment.setEmail(ems.generateEmail(student));
