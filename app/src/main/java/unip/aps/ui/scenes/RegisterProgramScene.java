@@ -19,6 +19,7 @@ import java.util.Map;
 import static unip.aps.utils.UiUtility.applyStyleTo;
 
 public class RegisterProgramScene implements  Runnable {
+
     @Override
     public void run() {
         Terminal terminal;
@@ -34,6 +35,7 @@ public class RegisterProgramScene implements  Runnable {
 
         var prompt = new ConsolePrompt(terminal);
         var promptBuilder = prompt.getPromptBuilder();
+        var menu = new MainMenu();
 
 
         promptBuilder
@@ -51,7 +53,7 @@ public class RegisterProgramScene implements  Runnable {
                 .message("Digite o horario do programa: ").addPrompt()
                 .createInputPrompt()
                 .name("descricao")
-                .message("Digite a descricao do curso").addPrompt();
+                .message("Digite a descricao do curso: ").addPrompt();
 
         // Recebe os dados inseridos pelo usuario
         Map<String, PromptResultItemIF> result;
@@ -68,15 +70,18 @@ public class RegisterProgramScene implements  Runnable {
         var writer = terminal.writer();
         if (pms.isRegistered(program)) {
             writer.println("Programa ja cadastrado!.");
+            menu.init();
             return;
         }
 
         if (pms.registerPrograms(program)) {
             writer.println("Programa cadastrado com sucesso.");
+            menu.init();
             return;
         }
 
         writer.println("Erro ao cadastrar programa.");
+        menu.init();
     }
 
     public Program createProgram(Map<String, PromptResultItemIF> result) {
