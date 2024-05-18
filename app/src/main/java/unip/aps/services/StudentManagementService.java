@@ -20,14 +20,14 @@ public class StudentManagementService {
     }
 
     public boolean registerStudent(Student student) {
-        if (!isRegistered(student)) {
+        if (!isStudentRegistered(student)) {
             this.jsonFile.appendToJSON(student);
             return true;
         }
         return false;
     }
 
-    public boolean isRegistered(Student student) {
+    public boolean isStudentRegistered(Student student) {
         if (this.getStudents() == null || this.getStudents().isEmpty()) {
             return false;
         }

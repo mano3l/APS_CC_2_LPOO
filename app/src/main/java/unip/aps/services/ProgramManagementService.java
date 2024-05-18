@@ -1,7 +1,7 @@
 package unip.aps.services;
 
 // import unip.aps.models.Enrollment;
-import unip.aps.models.Programs;
+import unip.aps.models.Program;
 import unip.aps.utils.JSONUtility;
 
 // import java.util.ArrayList;
@@ -9,42 +9,42 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProgramManagementService {
-    private final JSONUtility<Programs> jsonFile;
+    private final JSONUtility<Program> jsonFile;
     Scanner sc = new Scanner(System.in);
 
     public ProgramManagementService(String path) {
-        this.jsonFile = new JSONUtility<>(path, Programs.class);
+        this.jsonFile = new JSONUtility<>(path, Program.class);
     }
 
-    public List<Programs> getPrograms() {
+    public List<Program> getPrograms() {
         return this.jsonFile.parseJSON();
     }
 
-    public boolean registerProgram(Programs program) {
-        if (!isProgramRegistered(program)) {
-            this.jsonFile.appendToJSON(program);
+    public boolean registerProgram(Program programs) {
+        if (!isProgramRegistered(programs)) {
+            this.jsonFile.appendToJSON(programs);
             return true;
         }
         return false;
     }
 
-    public boolean isProgramRegistered(Programs program) {
+    public boolean isProgramRegistered(Program programs) {
         if (this.getPrograms() == null || this.getPrograms().isEmpty()) {
             return false;
         }
 
-        List<Programs> programs = this.getPrograms();
-        for (Programs p : programs) {
-            if (p.getNomeDoPrograma().equals(program.getNomeDoPrograma())) {
+        List<Program> program = this.getPrograms();
+        for (Program p : program) {
+            if (p.getNomeDoPrograma().equals(programs.getNomeDoPrograma())) {
                 return true;
             }
         }
         return false;
     }
 
-    public Programs getProgramByName(String programName) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+    public Program getProgramByName(String programName) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 return program;
             }
@@ -53,8 +53,8 @@ public class ProgramManagementService {
     }
 
     public void changeProgramName(String programName, String newName) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 program.setNomeDoPrograma(newName);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
@@ -63,8 +63,8 @@ public class ProgramManagementService {
     }
 
     public void changeProgramLevel(String programName, String newLevel) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 program.setNivelDoPrograma(newLevel);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
@@ -73,8 +73,8 @@ public class ProgramManagementService {
     }
 
     public void changeProgramDuration(String programName, String newDuration) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 program.setDuracao(newDuration);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
@@ -83,8 +83,8 @@ public class ProgramManagementService {
     }
 
     public void changeProgramSchedule(String programName, String newSchedule) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 program.setHorario(newSchedule);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
@@ -93,8 +93,8 @@ public class ProgramManagementService {
     }
 
     public void changeProgramDescription(String programName, String newDescription) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 program.setDescricao(newDescription);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
@@ -103,8 +103,8 @@ public class ProgramManagementService {
     }
 
     public void changeProgramEnrollment(String programName, String ra, boolean isEnrolled) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 if (isEnrolled) {
                     program.addRA(ra);
@@ -117,8 +117,8 @@ public class ProgramManagementService {
     }
 
     public void deleteProgram(String programName) {
-        List<Programs> programs = this.getPrograms();
-        for (Programs program : programs) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
                 for (String ra : program.getMatriculados()) {
                     EnrollmentManagementService enrollmentManagementService = new EnrollmentManagementService("enrollments.json");
@@ -130,4 +130,4 @@ public class ProgramManagementService {
             }
         }
     }
- }
+}

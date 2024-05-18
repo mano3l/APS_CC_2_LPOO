@@ -28,7 +28,7 @@ public class RegisterStudentScene implements Runnable {
             throw new RuntimeException(e);
         }
 
-        // Cria o cabeçalho da tela
+        // Cria o cabeï¿½alho da tela
         List<AttributedString> header = new ArrayList<>();
         header.add(new AttributedStringBuilder().append(applyStyleTo(" Registro de estudante \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
 
@@ -45,7 +45,7 @@ public class RegisterStudentScene implements Runnable {
                 .message("Digite o sobrenome: ").addPrompt()
                 .createInputPrompt()
                 .name("address")
-                .message("Digite o endereço: ").addPrompt()
+                .message("Digite o endereï¿½o: ").addPrompt()
                 .createInputPrompt()
                 .name("cpf")
                 .message("Digite o cpf: ").addPrompt()
@@ -59,7 +59,7 @@ public class RegisterStudentScene implements Runnable {
                 .name("age")
                 .message("Digite a idade: ").addPrompt();
 
-        // Recebe os dados inseridos pelo usuário
+        // Recebe os dados inseridos pelo usuï¿½rio
         Map<String, PromptResultItemIF> result;
         try {
             result = prompt.prompt(header, promptBuilder.build());
@@ -72,8 +72,8 @@ public class RegisterStudentScene implements Runnable {
         var sms = new StudentManagementService("Estudantes.json");
 
         var writer = terminal.writer();
-        if (sms.isRegistered(student)) {
-            writer.println("Estudante já cadastrado.");
+        if (sms.isStudentRegistered(student)) {
+            writer.println("Estudante jï¿½ cadastrado.");
             return;
         }
 
