@@ -70,13 +70,11 @@ public class Program {
 
     @Override
     public String toString() {
-        return "Programs{" +
-                "nomeDoPrograma='" + nomeDoPrograma + '\'' +
-                ", nivelDoPrograma='" + nivelDoPrograma + '\'' +
-                ", duracao='" + duracao + '\'' +
-                ", horario='" + horario + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", matriculados=" + matriculados +
-                '}';
+        return "Nome do Programa: " + nomeDoPrograma + "\n" +
+                "Nivel do Programa: " + nivelDoPrograma + "\n"
+                + "Duracao: " + duracao + "\n"
+                + "Horario: " + horario + "\n"
+                + "Descricao: " + descricao + "\n"
+                + "Matriculados: " + matriculados + "\n";
     }
 }

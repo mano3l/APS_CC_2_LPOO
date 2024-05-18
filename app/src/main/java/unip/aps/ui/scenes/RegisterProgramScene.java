@@ -35,7 +35,6 @@ public class RegisterProgramScene implements  Runnable {
 
         var prompt = new ConsolePrompt(terminal);
         var promptBuilder = prompt.getPromptBuilder();
-        var menu = new MainMenu();
 
 
         promptBuilder
@@ -70,18 +69,15 @@ public class RegisterProgramScene implements  Runnable {
         var writer = terminal.writer();
         if (pms.isRegistered(program)) {
             writer.println("Programa ja cadastrado!.");
-            menu.init();
             return;
         }
 
         if (pms.registerPrograms(program)) {
             writer.println("Programa cadastrado com sucesso.");
-            menu.init();
             return;
         }
 
         writer.println("Erro ao cadastrar programa.");
-        menu.init();
     }
 
     public Program createProgram(Map<String, PromptResultItemIF> result) {
