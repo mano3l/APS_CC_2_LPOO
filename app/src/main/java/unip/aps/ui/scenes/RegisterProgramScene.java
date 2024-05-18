@@ -67,12 +67,12 @@ public class RegisterProgramScene implements  Runnable {
         var pms = new ProgramManagementService("Cursos.json");
 
         var writer = terminal.writer();
-        if (pms.isRegistered(program)) {
+        if (pms.isProgramRegistered(program)) {
             writer.println("Programa ja cadastrado!.");
             return;
         }
 
-        if (pms.registerPrograms(program)) {
+        if (pms.registerProgram(program)) {
             writer.println("Programa cadastrado com sucesso.");
             return;
         }

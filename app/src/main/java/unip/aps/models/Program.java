@@ -68,6 +68,10 @@ public class Program {
         this.matriculados.add(RA);
     }
 
+    public void removeRA(String RA) {
+        this.matriculados.remove(RA);
+    }
+
     @Override
     public String toString() {
         return "Nome do Programa: " + nomeDoPrograma + "\n" +

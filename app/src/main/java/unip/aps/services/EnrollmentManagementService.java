@@ -1,9 +1,7 @@
 package unip.aps.services;
 
 import unip.aps.models.Enrollment;
-import unip.aps.models.Program;
 import unip.aps.models.Student;
-import unip.aps.utils.DataFormatter;
 import unip.aps.utils.JSONUtility;
 
 
@@ -22,6 +20,71 @@ public class EnrollmentManagementService {
         return this.jsonFile.parseJSON();
     }
 
+    public boolean registerEnrollment(Enrollment enrollment) {
+        if (!isEnrollmentRegistered(enrollment)) {
+            this.jsonFile.appendToJSON(enrollment);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isEnrollmentRegistered(Enrollment enrollment) {
+        if (this.getEnrollments() == null || this.getEnrollments().isEmpty()) {
+            return false;
+        }
+
+        List<Enrollment> enrollments = this.getEnrollments();
+        for (Enrollment e : enrollments) {
+            if (e.getRa().equals(enrollment.getRa())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Enrollment getEnrollmentByRA(String ra) {
+        List<Enrollment> enrollments = this.getEnrollments();
+        for (Enrollment enrollment : enrollments) {
+            if (enrollment.getRa().equals(ra)) {
+                return enrollment;
+            }
+        }
+        return null;
+    }
+
+    public void changeStudentProgram(String ra, String newProgram) {
+        List<Enrollment> enrollments = this.getEnrollments();
+        for (Enrollment enrollment : enrollments) {
+            if (enrollment.getRa().equals(ra)) {
+                enrollment.setNomeDoPrograma(newProgram);
+                this.jsonFile.updateJSON(enrollment, enrollments.indexOf(enrollment));
+            }
+        }
+    }
+
+
+    public void deleteEnrollmentByRA(String ra) {
+        List<Enrollment> enrollments = this.getEnrollments();
+        for (Enrollment enrollment : enrollments) {
+            if (enrollment.getRa().equals(ra)) {
+                enrollments.remove(enrollment);
+                this.jsonFile.updateJSON(enrollments);
+                return;
+            }
+        }
+    }
+
+    public void deleteEnrollmentByCPF(String cpf) {
+        List<Enrollment> enrollments = this.getEnrollments();
+        for (Enrollment enrollment : enrollments) {
+            if (enrollment.getCpf().equals(cpf)) {
+                enrollments.remove(enrollment);
+                this.jsonFile.updateJSON(enrollments);
+                return;
+            }
+        }
+    }
+
     public String generateEmail(Student students) {
         String name = students.getNome().toLowerCase();
         String lastName = students.getSobrenome().toLowerCase();
@@ -38,7 +101,7 @@ public class EnrollmentManagementService {
         return formattedEmail;
     }
 
-    private String genRA() {
+    public String genRA() {
         int rN = (int) (Math.random() * 9000) + 1000;
         String randomNumber = Integer.toString(rN);
         String formattedRa = "RA" + randomNumber;
@@ -50,76 +113,4 @@ public class EnrollmentManagementService {
         return formattedRa;
     }
 
-    public void enrollmentStudent(Enrollment enrollment) {
-        var pms = new ProgramManagementService("Cursos.json");
-        var sms = new StudentManagementService("Estudantes.json");
-        var ems = new EnrollmentManagementService("Matriculas.json");
-        System.out.println("Digite o CPF do Aluno que deseja matricular: ");
-        String cpf = sc.nextLine();
-        boolean studentFound = true;
-        boolean studentExists = true;
-        for (Enrollment e : ems.getEnrollments()) {
-            if (e.getCpf().equals(cpf)) {
-                studentFound = false;
-                System.out.println("Estudante já matriculado");
-            }
-        }
-        if (studentFound) {
-            for (Student student : sms.getStudents()) {
-                if (student.getCpf().equals(cpf)) {
-                    studentExists = false;
-                    System.out.println(student);
-                    System.out.println("Deseja realmente Cadastrar o estudante acima? (S/N): ");
-                    String choice = sc.nextLine().toUpperCase();
-                    if (choice.equals("S")) {
-                        System.out.print("Digite o nome do programa que deseja matricular o aluno: ");
-                        String programName = sc.nextLine();
-                        for (Program program : pms.getPrograms()) {
-                            if (program.getNomeDoPrograma().equals(programName)) {
-                                enrollment.setNomeDoPrograma(program.getNomeDoPrograma());
-                                enrollment.setCpf(student.getCpf());
-                                enrollment.setRa(student.getCpf());
-                                enrollment.setEmail(ems.generateEmail(student));
-                                enrollment.setDataMatricula(DataFormatter.setDate());
-                                System.out.println("MATRICULA REALIZADA!");
-                                System.out.println("Gerando RA.....");
-                                enrollment.setRa(genRA());
-                                pms.appendStudent(enrollment.getRa(), enrollment.getNomeDoPrograma());
-                                this.jsonFile.appendToJSON(enrollment);
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-            if (studentExists) {
-                System.out.println("Estudante não existe!");
-            }
-        }
-
-    }
-    public void deleteEnrollment(String cpf) {
-        System.out.println("Digite o ra da matricula que deseja apagar: ");
-        String ra = sc.nextLine();
-        int i = 0;
-        boolean studentFound = false;
-        for (Enrollment enrollment : getEnrollments()) {
-            i = i + 1;
-            if (enrollment.getRa().equals(ra)) {
-                studentFound = true;
-                System.out.println(enrollment);
-                System.out.println("Deseja realmente deletar a matricula acima? (S/N)");
-                String choice = sc.nextLine().toUpperCase();
-                if (choice.equals("S")) {
-                    jsonFile.deleteJSON(enrollment, i - 1);
-                }
-            }
-        }
-        if (!studentFound) {
-            System.out.println("Estudante não matriculado");
-        }
-    }
 }
