@@ -19,51 +19,51 @@ import java.util.Map;
 
 import static unip.aps.utils.UiUtility.applyStyleTo;
 
-public class DeleteEnrollmentScene implements  Runnable {
+public class DeleteEnrollmentScene implements Runnable {
     @Override
     public void run() {
-        Terminal terminal;
-        try {
-            terminal = TerminalBuilder.builder().system(true).build();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
 
-        // Cria o cabe�alho da tela
-        List<AttributedString> header = new ArrayList<>();
-        header.add(new AttributedStringBuilder().append(applyStyleTo(" Deletar matricula \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
+            // Cria o cabe�alho da tela
+            List<AttributedString> header = new ArrayList<>();
+            header.add(new AttributedStringBuilder().append(applyStyleTo(" Deletar matricula \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
 
-        var prompt = new ConsolePrompt(terminal);
-        var promptBuilder = prompt.getPromptBuilder();
+            var prompt = new ConsolePrompt(terminal);
+            var promptBuilder = prompt.getPromptBuilder();
 
 
-        promptBuilder
-                .createInputPrompt()
-                .name("ra")
-                .message("Digite o ra da matricula que deseja deletar: ").addPrompt();
+            promptBuilder
+                    .createInputPrompt()
+                    .name("ra")
+                    .message("Digite o ra da matricula que deseja deletar: ").addPrompt();
 
-        // Recebe os dados inseridos pelo usu�rio
-        Map<String, PromptResultItemIF> result;
-        try {
-            result = prompt.prompt(header, promptBuilder.build());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            // Recebe os dados inseridos pelo usu�rio
+            Map<String, PromptResultItemIF> result;
+            try {
+                result = prompt.prompt(header, promptBuilder.build());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
         var ems = new EnrollmentManagementService("Matriculas.json");
         var sms = new StudentManagementService("Estudantes.json");
 
-        var writer = terminal.writer();
+            var writer = terminal.writer();
 
-        var enrollmentObj = ems.getEnrollmentByRA(result.get("ra").getResult());
+            var enrollmentObj = ems.getEnrollmentByRA(result.get("ra").getResult());
 
-        if(!ems.isEnrollmentRegistered(enrollmentObj)){
-            writer.println("Estudante não matriculado!");
-        }else{
-            Enrollment enrollment = ems.getEnrollmentByRA(result.get("ra").getResult());
-            sms.deleteStudent(enrollment.getCpf());
-            ems.deleteEnrollmentByRA(result.get("ra").getResult());
-            writer.println("Matricula deletada com sucesso!");
+            if (!ems.isEnrollmentRegistered(enrollmentObj)) {
+                writer.println("Estudante não matriculado!");
+                Thread.sleep(2000);
+            } else {
+                Enrollment enrollment = ems.getEnrollmentByRA(result.get("ra").getResult());
+                sms.deleteStudent(enrollment.getCpf());
+                ems.deleteEnrollmentByRA(result.get("ra").getResult());
+                writer.println("Matricula deletada com sucesso!");
+                Thread.sleep(2000);
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }
