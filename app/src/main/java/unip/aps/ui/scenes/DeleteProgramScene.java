@@ -21,46 +21,45 @@ import static unip.aps.utils.UiUtility.applyStyleTo;
 public class DeleteProgramScene implements Runnable {
     @Override
     public void run() {
-        Terminal terminal;
-        try {
-            terminal = TerminalBuilder.builder().system(true).build();
-        } catch (IOException e) {
+        try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
+
+            // Cria o cabe�alho da tela
+            List<AttributedString> header = new ArrayList<>();
+            header.add(new AttributedStringBuilder().append(applyStyleTo(" Deletar curso \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
+
+            var prompt = new ConsolePrompt(terminal);
+            var promptBuilder = prompt.getPromptBuilder();
+
+
+            promptBuilder
+                    .createInputPrompt()
+                    .name("programName")
+                    .message("Digite o curso: ").addPrompt();
+
+            // Recebe os dados inseridos pelo usu�rio
+            Map<String, PromptResultItemIF> result;
+            try {
+                result = prompt.prompt(header, promptBuilder.build());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            var pms = new ProgramManagementService("Cursos.json");
+
+            var writer = terminal.writer();
+
+            var programObj = pms.getProgramByName(result.get("programName").getResult());
+
+            if (!pms.isProgramRegistered(programObj)) {
+                writer.println("Curso nao cadastrado!");
+                Thread.sleep(2000);
+            } else {
+                pms.deleteProgram(result.get("programName").getResult());
+                writer.println("Curso deletado com sucesso!");
+                Thread.sleep(2000);
+            }
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
-        }
-
-        // Cria o cabe�alho da tela
-        List<AttributedString> header = new ArrayList<>();
-        header.add(new AttributedStringBuilder().append(applyStyleTo(" Deletar curso \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
-
-        var prompt = new ConsolePrompt(terminal);
-        var promptBuilder = prompt.getPromptBuilder();
-
-
-        promptBuilder
-                .createInputPrompt()
-                .name("programName")
-                .message("Digite o curso: ").addPrompt();
-
-        // Recebe os dados inseridos pelo usu�rio
-        Map<String, PromptResultItemIF> result;
-        try {
-            result = prompt.prompt(header, promptBuilder.build());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        var pms = new ProgramManagementService("Cursos.json");
-
-        var writer = terminal.writer();
-
-        var programObj = pms.getProgramByName(result.get("programName").getResult());
-
-        if(!pms.isProgramRegistered(programObj)){
-            writer.println("Curso nao cadastrado!");
-        }else{
-            pms.deleteProgram(result.get("programName").getResult());
-            writer.println("Curso deletado com sucesso!");
         }
     }
-
 }

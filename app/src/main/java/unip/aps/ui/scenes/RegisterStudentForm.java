@@ -79,8 +79,8 @@ public class RegisterStudentForm implements Runnable {
                 return;
             }
 
-            Thread.sleep(2000);
             writer.println("Erro ao cadastrar estudante.");
+            Thread.sleep(2000);
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }

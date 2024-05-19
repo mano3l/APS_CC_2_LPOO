@@ -19,68 +19,68 @@ import static unip.aps.utils.UiUtility.applyStyleTo;
 public class ChangeStudentNameScene implements Runnable {
     @Override
     public void run() {
-        Terminal terminal;
-        try {
-            terminal = TerminalBuilder.builder().system(true).build();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
 
-        // Cria o cabe�alho da tela
-        List<AttributedString> header = new ArrayList<>();
-        header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar nome do aluno \n", Theme.BLACK, Theme.WHITE)).toAttributedString());
+            // Cria o cabe�alho da tela
+            List<AttributedString> header = new ArrayList<>();
+            header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar nome do aluno \n", Theme.BLACK, Theme.WHITE)).toAttributedString());
 
-        var prompt = new ConsolePrompt(terminal);
-        var promptBuilder = prompt.getPromptBuilder();
+            var prompt = new ConsolePrompt(terminal);
+            var promptBuilder = prompt.getPromptBuilder();
 
 
-        promptBuilder
-                .createInputPrompt()
-                .name("cpf")
-                .message("Digite o CPF do aluno que deseja alterar: ").addPrompt();
+            promptBuilder
+                    .createInputPrompt()
+                    .name("cpf")
+                    .message("Digite o CPF do aluno que deseja alterar: ").addPrompt();
 
-        // Recebe os dados inseridos pelo usu�rio
-        Map<String, PromptResultItemIF> result;
-
-        try {
-            result = prompt.prompt(header, promptBuilder.build());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        var sms = new StudentManagementService("Estudantes.json");
-
-        var writer = terminal.writer();
-
-        var studentObj = sms.getStudentByCPF(result.get("cpf").getResult());
-
-        if(!sms.isStudentRegistered(studentObj)){
-            writer.println("Estudante nao cadastrado!");
-        }else{
-            var promptBuilders = prompt.getPromptBuilder();
-
-            Map<String, PromptResultItemIF> results;
-
-            promptBuilders
-                .createInputPrompt()
-                .name("newStudentName")
-                .message("Digite o novo nome do estudante: ").addPrompt()
-                .createInputPrompt()
-                .name("newStudentLastName")
-                .message("Digite o sobrenome do estudante: ").addPrompt();
+            // Recebe os dados inseridos pelo usu�rio
+            Map<String, PromptResultItemIF> result;
 
             try {
-                results = prompt.prompt(promptBuilders.build());
+                result = prompt.prompt(header, promptBuilder.build());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            String studentName = results.get("newStudentName").getResult();
-            String studentLastName = results.get("newStudentLastName").getResult();
-            String cpf = result.get("cpf").getResult();
+            var sms = new StudentManagementService("Estudantes.json");
 
-            sms.changeStudentName(cpf, studentName, studentLastName);
-            writer.println("Curso alterado com sucesso!");
+            var writer = terminal.writer();
+
+            var studentObj = sms.getStudentByCPF(result.get("cpf").getResult());
+
+            if (!sms.isStudentRegistered(studentObj)) {
+                writer.println("Estudante nao cadastrado!");
+                Thread.sleep(2000);
+            } else {
+                var promptBuilders = prompt.getPromptBuilder();
+
+                Map<String, PromptResultItemIF> results;
+
+                promptBuilders
+                        .createInputPrompt()
+                        .name("newStudentName")
+                        .message("Digite o novo nome do estudante: ").addPrompt()
+                        .createInputPrompt()
+                        .name("newStudentLastName")
+                        .message("Digite o sobrenome do estudante: ").addPrompt();
+
+                try {
+                    results = prompt.prompt(promptBuilders.build());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                String studentName = results.get("newStudentName").getResult();
+                String studentLastName = results.get("newStudentLastName").getResult();
+                String cpf = result.get("cpf").getResult();
+
+                sms.changeStudentName(cpf, studentName, studentLastName);
+                writer.println("Curso alterado com sucesso!");
+                Thread.sleep(2000);
+            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

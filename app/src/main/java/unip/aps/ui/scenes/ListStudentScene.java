@@ -15,29 +15,27 @@ import java.util.List;
 
 import static unip.aps.utils.UiUtility.applyStyleTo;
 
-public class ListStudentScene implements  Runnable {
+public class ListStudentScene implements Runnable {
 
     @Override
     public void run() {
-        Terminal terminal;
-        try {
-            terminal = TerminalBuilder.builder().system(true).build();
+        try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
+
+            // Cria o cabecalho da tela
+            List<AttributedString> header = new ArrayList<>();
+            header.add(new AttributedStringBuilder().append(applyStyleTo(" Lista de Estudantes \n", Theme.BLACK, Theme.MAGENTA)).toAttributedString());
+
+            var prompt = new ConsolePrompt(terminal);
+            var promptBuilder = prompt.getPromptBuilder();
+            var writer = terminal.writer();
+            var sms = new StudentManagementService("Estudantes.json");
+
+            for (Student s : sms.getStudents()) {
+                writer.println(s.toString());
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        // Cria o cabecalho da tela
-        List<AttributedString> header = new ArrayList<>();
-        header.add(new AttributedStringBuilder().append(applyStyleTo(" Lista de Estudantes \n", Theme.BLACK, Theme.MAGENTA)).toAttributedString());
-
-        var prompt = new ConsolePrompt(terminal);
-        var promptBuilder = prompt.getPromptBuilder();
-        var writer = terminal.writer();
-        var sms = new StudentManagementService("Estudantes.json");
-
-        for (Student s : sms.getStudents()) {
-            writer.println(s.toString());
-        }
-
     }
 }
