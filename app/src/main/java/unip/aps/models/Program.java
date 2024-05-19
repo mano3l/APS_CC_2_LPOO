@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Program {
+    private String codigoDoPrograma;
     private String nomeDoPrograma;
     private String nivelDoPrograma;
     private String duracao;
@@ -11,13 +12,22 @@ public class Program {
     private String descricao;
     private List<String> matriculados;
 
-    public Program(String nomeDoPrograma, String nivelDoPrograma, String duracao, String horario, String descricao, List<String> matriculados) {
+    public Program(String codigoDoPrograma, String nomeDoPrograma, String nivelDoPrograma, String duracao, String horario, String descricao, List<String> matriculados) {
+        this.codigoDoPrograma = codigoDoPrograma;
         this.nomeDoPrograma = nomeDoPrograma;
         this.nivelDoPrograma = nivelDoPrograma;
         this.duracao = duracao;
         this.horario = horario;
         this.descricao = descricao;
         this.matriculados = matriculados;
+    }
+
+    public String getCodigoDoPrograma() {
+        return codigoDoPrograma;
+    }
+
+    public void setCodigoDoPrograma(String codigoDoPrograma) {
+        this.codigoDoPrograma = codigoDoPrograma;
     }
 
     public String getNomeDoPrograma() {
