@@ -35,7 +35,6 @@ public class DeleteStudentScene implements Runnable {
         var prompt = new ConsolePrompt(terminal);
         var promptBuilder = prompt.getPromptBuilder();
 
-
         promptBuilder
                 .createInputPrompt()
                 .name("cpf")
