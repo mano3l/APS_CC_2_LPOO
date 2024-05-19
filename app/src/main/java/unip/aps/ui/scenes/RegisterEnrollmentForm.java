@@ -24,9 +24,7 @@ import static unip.aps.utils.UiUtility.applyStyleTo;
 public class RegisterEnrollmentForm implements Runnable {
     @Override
     public void run() {
-        Terminal terminal;
-        try {
-            terminal = TerminalBuilder.builder().system(true).build();
+        try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
             // Cria o cabe?alho da tela
             List<AttributedString> header = new ArrayList<>();
             header.add(new AttributedStringBuilder().append(applyStyleTo(" Matricular estudante \n", Theme.BLACK, Theme.RED)).toAttributedString());
@@ -102,7 +100,7 @@ public class RegisterEnrollmentForm implements Runnable {
     public Enrollment createEnrollment(Map<String, PromptResultItemIF> result) {
         var ems = new EnrollmentManagementService("Matriculas.json");
         var sms = new StudentManagementService("Estudantes.json");
-        return new Enrollment (
+        return new Enrollment(
                 ems.genRA(),
                 DataFormatter.formatCpf(result.get("cpf").getResult()),
                 ems.generateEmail(result.get("firstName").getResult(), result.get("lastName").getResult()),

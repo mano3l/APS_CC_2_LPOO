@@ -21,7 +21,6 @@ public class ListProgramScene implements Runnable {
 
     @Override
     public void run() {
-        try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
             var pms = new ProgramManagementService("Cursos.json");
 
             LinkedHashMap<List<String>, String> mapOptions = new LinkedHashMap<>();
@@ -50,11 +49,8 @@ public class ListProgramScene implements Runnable {
 //            writer.println(p.toString());
             }
 
-            PaginatedListMenu<String> plm = new PaginatedListMenu<>(" Cursos dispon?veis: ", mapOptions, Theme.YELLOW);
+            PaginatedListMenu<String> plm = new PaginatedListMenu<>(" Cursos disponíveis: ", mapOptions, Theme.YELLOW);
             System.out.println(plm.init());
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
