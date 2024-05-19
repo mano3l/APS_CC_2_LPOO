@@ -27,7 +27,7 @@ public class ChangeStudentProgram implements Runnable {
             throw new RuntimeException(e);
         }
 
-        // Cria o cabeï¿½alho da tela
+        // Cria o cabe?alho da tela
         List<AttributedString> header = new ArrayList<>();
         header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar nome do curso \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
 
@@ -40,7 +40,7 @@ public class ChangeStudentProgram implements Runnable {
                 .name("ra")
                 .message("Digite o ra da matricula que deseja alterar: ").addPrompt();
 
-        // Recebe os dados inseridos pelo usuï¿½rio
+        // Recebe os dados inseridos pelo usu?rio
         Map<String, PromptResultItemIF> result;
 
         try {
@@ -50,13 +50,14 @@ public class ChangeStudentProgram implements Runnable {
         }
 
         var ems = new EnrollmentManagementService("Matriculas.json");
+        var pms = new ProgramManagementService("Cursos.json");
 
         var writer = terminal.writer();
 
         var enrollmentObj = ems.getEnrollmentByRA(result.get("ra").getResult());
 
-        if(!ems.isEnrollmentRegistered(enrollmentObj)){
-            writer.println("Estudante nÃ£o matriculado!");
+        if(enrollmentObj == null){
+            writer.println("Estudante não matriculado!");
         }else{
             var promptBuilders = prompt.getPromptBuilder();
 
@@ -65,16 +66,20 @@ public class ChangeStudentProgram implements Runnable {
             promptBuilders
                     .createInputPrompt()
                     .name("newProgramName")
-                    .message("Digite o novo nome do curso: ").addPrompt();
+                    .message("Digite o nome do novo curso: ").addPrompt();
 
             try {
                 results = prompt.prompt(promptBuilders.build());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            ems.changeStudentProgram(result.get("ra").getResult(), results.get("newProgramName").getResult());
-            writer.println("Estudante mudou de curso!");
+            var programObj = pms.getProgramByName(results.get("newProgramName").getResult());
+            if (!pms.isProgramRegistered(programObj)) {
+                writer.println("Curso não disponível!");
+            } else {
+                ems.changeStudentProgram(result.get("ra").getResult(), results.get("newProgramName").getResult());
+                writer.println("Estudante mudou de curso!");
+            }
         }
     }
 }
