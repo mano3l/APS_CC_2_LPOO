@@ -7,6 +7,14 @@ public class Enrollment {
     private String nomeDoPrograma;
     private String dataMatricula;
 
+    public Enrollment(String ra, String cpf, String email, String nomeDoPrograma, String dataMatricula) {
+        this.ra = ra;
+        this.cpf = cpf;
+        this.email = email;
+        this.nomeDoPrograma = nomeDoPrograma;
+        this.dataMatricula = dataMatricula;
+    }
+
     public String getRa() {
         return ra;
     }
@@ -49,11 +57,10 @@ public class Enrollment {
 
     @Override
     public String toString() {
-        return "Enrollment{" +
-                "ra='" + ra + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", nomeDoPrograma='" + nomeDoPrograma + '\'' +
-                ", dataMatricula='" + dataMatricula + '\'' +
-                '}';
+        return "RA: " + ra + "\n" +
+                "CPF: " + cpf + "\n" +
+                "Nome do Programa: " + nomeDoPrograma + "\n" +
+                "Data da Matricula: " + dataMatricula + "\n" +
+                "Email: " + email + "\n";
     }
 }

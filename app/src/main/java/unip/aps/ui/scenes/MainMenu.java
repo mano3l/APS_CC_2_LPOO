@@ -13,8 +13,10 @@ public class MainMenu {
     }
 
     public void init() {
-        var menu = new OptionsMenu<>("Selecione uma opção: ", scenesMap, Theme.GREEN);
-        menu.init().ifPresent(Runnable::run);
+        while (true) {
+            var menu = new OptionsMenu<>("Selecione uma opcao: ", scenesMap, Theme.GREEN);
+            menu.init().ifPresent(Runnable::run);
+        }
     }
 
     public Map<String, Runnable> initializeOptionsMap() {

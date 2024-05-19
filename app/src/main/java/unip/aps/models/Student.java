@@ -78,14 +78,12 @@
 
         @Override
         public String toString() {
-            return "Student{" +
-                    "cpf='" + cpf + '\'' +
-                    ", nome='" + nome + '\'' +
-                    ", sobrenome='" + sobrenome + '\'' +
-                    ", endereco='" + endereco + '\'' +
-                    ", idade=" + idade +
-                    ", sexo='" + sexo + '\'' +
-                    ", telefone='" + telefone + '\'' +
-                    '}';
+            return  "CPF: " + cpf + '\n' +
+                    "Nome: " + nome + '\n' +
+                    "Sobrenome: " + sobrenome + '\n' +
+                    "Idade: " + idade + '\n' +
+                    "Endereco: " + endereco + '\n' +
+                    "Sexo: " + sexo + '\n' +
+                    "Telefone: " + telefone + '\n';
         }
     }
