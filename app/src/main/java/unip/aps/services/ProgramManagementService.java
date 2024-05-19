@@ -67,50 +67,50 @@ public class ProgramManagementService {
         return null;
     }
 
-    public void changeProgramName(String programName, String newName) {
+    public void changeProgramName(String programCode, String newName) {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
+            if (program.getCodigoDoPrograma().equals(programCode)) {
                 program.setNomeDoPrograma(newName);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
             }
         }
     }
 
-    public void changeProgramLevel(String programName, String newLevel) {
+    public void changeProgramLevel(String programCode, String newLevel) {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
+            if (program.getCodigoDoPrograma().equals(programCode)) {
                 program.setNivelDoPrograma(newLevel);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
             }
         }
     }
 
-    public void changeProgramDuration(String programName, String newDuration) {
+    public void changeProgramDuration(String programCode, String newDuration) {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
+            if (program.getCodigoDoPrograma().equals(programCode)) {
                 program.setDuracao(newDuration);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
             }
         }
     }
 
-    public void changeProgramSchedule(String programName, String newSchedule) {
+    public void changeProgramSchedule(String programCode, String newSchedule) {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
+            if (program.getCodigoDoPrograma().equals(programCode)) {
                 program.setHorario(newSchedule);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
             }
         }
     }
 
-    public void changeProgramDescription(String programName, String newDescription) {
+    public void changeProgramDescription(String programCode, String newDescription) {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
+            if (program.getCodigoDoPrograma().equals(programCode)) {
                 program.setDescricao(newDescription);
                 this.jsonFile.updateJSON(program, programs.indexOf(program));
             }
@@ -131,10 +131,10 @@ public class ProgramManagementService {
         }
     }
 
-    public void deleteProgram(String programName) {
+    public void deleteProgram(String programCode) {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
+            if (program.getCodigoDoPrograma().equals(programCode)) {
                 for (String ra : program.getMatriculados()) {
                     EnrollmentManagementService enrollmentManagementService = new EnrollmentManagementService("enrollments.json");
                     enrollmentManagementService.deleteEnrollmentByRA(ra);

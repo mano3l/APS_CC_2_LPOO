@@ -38,7 +38,7 @@ public class DeleteProgramScene implements Runnable {
 
         promptBuilder
                 .createInputPrompt()
-                .name("programName")
+                .name("programCode")
                 .message("Digite o curso: ").addPrompt();
 
         // Recebe os dados inseridos pelo usu�rio
@@ -53,12 +53,12 @@ public class DeleteProgramScene implements Runnable {
 
         var writer = terminal.writer();
 
-        var programObj = pms.getProgramByName(result.get("programName").getResult());
+        var programObj = pms.getProgramByCode(result.get("programCode").getResult());
 
         if(!pms.isProgramRegistered(programObj)){
             writer.println("Curso nao cadastrado!");
         }else{
-            pms.deleteProgram(result.get("programName").getResult());
+            pms.deleteProgram(result.get("programCode").getResult());
             writer.println("Curso deletado com sucesso!");
         }
     }
