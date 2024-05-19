@@ -86,9 +86,9 @@ public class EnrollmentManagementService {
         }
     }
 
-    public String generateEmail(Student students) {
-        String name = students.getNome().toLowerCase();
-        String lastName = students.getSobrenome().toLowerCase();
+    public String generateEmail(String fisrtname, String lastname) {
+        String name = fisrtname.toLowerCase();
+        String lastName = lastname.toLowerCase();
         String baseMail = name + "." + lastName;
 
         String formattedEmail = name + "." + lastName + "@unip.br";

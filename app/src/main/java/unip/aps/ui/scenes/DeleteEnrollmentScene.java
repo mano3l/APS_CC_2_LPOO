@@ -6,8 +6,10 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
+import unip.aps.models.Enrollment;
 import unip.aps.services.EnrollmentManagementService;
 import unip.aps.services.ProgramManagementService;
+import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.Theme;
 
 import java.io.IOException;
@@ -49,6 +51,7 @@ public class DeleteEnrollmentScene implements  Runnable {
         }
 
         var ems = new EnrollmentManagementService("Matriculas.json");
+        var sms = new StudentManagementService("Estudantes.json");
 
         var writer = terminal.writer();
 
@@ -57,6 +60,8 @@ public class DeleteEnrollmentScene implements  Runnable {
         if(!ems.isEnrollmentRegistered(enrollmentObj)){
             writer.println("Estudante não matriculado!");
         }else{
+            Enrollment enrollment = ems.getEnrollmentByRA(result.get("ra").getResult());
+            sms.deleteStudent(enrollment.getCpf());
             ems.deleteEnrollmentByRA(result.get("ra").getResult());
             writer.println("Matricula deletada com sucesso!");
         }
