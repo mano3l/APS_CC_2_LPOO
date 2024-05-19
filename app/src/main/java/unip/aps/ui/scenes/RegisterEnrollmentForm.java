@@ -1,5 +1,6 @@
 package unip.aps.ui.scenes;
 
+import org.checkerframework.checker.units.qual.s;
 import org.jline.consoleui.prompt.ConsolePrompt;
 import org.jline.consoleui.prompt.PromptResultItemIF;
 import org.jline.terminal.Terminal;
@@ -37,8 +38,8 @@ public class RegisterEnrollmentForm implements Runnable {
                     .name("cpf")
                     .message("Digite o cpf do estudante que deseja matricular: ").addPrompt()
                     .createInputPrompt()
-                    .name("programName")
-                    .message("Digite o nome do curso que deseja matricular o estudante: ").addPrompt()
+                    .name("programCode")
+                    .message("Digite o código do curso que deseja matricular o estudante: ").addPrompt()
                     .createInputPrompt();
 
             var ems = new EnrollmentManagementService("Matriculas.json");
@@ -80,7 +81,7 @@ public class RegisterEnrollmentForm implements Runnable {
                 ems.genRA(),
                 result.get("cpf").getResult(),
                 ems.generateEmail(student),
-                result.get("programName").getResult(),
+                result.get("programCode").getResult(),
                 DataFormatter.setDate()
         );
     }

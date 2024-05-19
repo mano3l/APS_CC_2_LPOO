@@ -36,8 +36,8 @@ public class ChangeProgramNameScene implements Runnable {
 
         promptBuilder
                 .createInputPrompt()
-                .name("programName")
-                .message("Digite o nome do curso que deseja alterar: ").addPrompt();
+                .name("programCode")
+                .message("Digite o código do curso que deseja alterar: ").addPrompt();
 
         // Recebe os dados inseridos pelo usu�rio
         Map<String, PromptResultItemIF> result;
@@ -52,7 +52,7 @@ public class ChangeProgramNameScene implements Runnable {
 
         var writer = terminal.writer();
 
-        var programObj = pms.getProgramByName(result.get("programName").getResult());
+        var programObj = pms.getProgramByCode(result.get("programCode").getResult());
 
         if(!pms.isProgramRegistered(programObj)){
             writer.println("Curso nao cadastrado!");
@@ -72,7 +72,7 @@ public class ChangeProgramNameScene implements Runnable {
                 throw new RuntimeException(e);
             }
 
-            pms.changeProgramName(result.get("programName").getResult(), results.get("newProgramName").getResult());
+            pms.changeProgramName(result.get("programCode").getResult(), results.get("newProgramName").getResult());
             writer.println("Curso alterado com sucesso!");
         }
     }

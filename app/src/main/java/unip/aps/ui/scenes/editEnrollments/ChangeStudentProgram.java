@@ -57,7 +57,7 @@ public class ChangeStudentProgram implements Runnable {
         var enrollmentObj = ems.getEnrollmentByRA(result.get("ra").getResult());
 
         if(enrollmentObj == null){
-            writer.println("Estudante não matriculado!");
+            writer.println("Estudante nï¿½o matriculado!");
         }else{
             var promptBuilders = prompt.getPromptBuilder();
 
@@ -65,7 +65,7 @@ public class ChangeStudentProgram implements Runnable {
 
             promptBuilders
                     .createInputPrompt()
-                    .name("newProgramName")
+                    .name("newProgramCode")
                     .message("Digite o nome do novo curso: ").addPrompt();
 
             try {
@@ -73,11 +73,11 @@ public class ChangeStudentProgram implements Runnable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            var programObj = pms.getProgramByName(results.get("newProgramName").getResult());
+            var programObj = pms.getProgramByCode(results.get("newProgramCode").getResult());
             if (!pms.isProgramRegistered(programObj)) {
-                writer.println("Curso não disponível!");
+                writer.println("Curso nï¿½o disponï¿½vel!");
             } else {
-                ems.changeStudentProgram(result.get("ra").getResult(), results.get("newProgramName").getResult());
+                ems.changeStudentProgram(result.get("ra").getResult(), results.get("newProgramCode").getResult());
                 writer.println("Estudante mudou de curso!");
             }
         }

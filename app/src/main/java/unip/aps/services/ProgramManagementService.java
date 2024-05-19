@@ -1,5 +1,6 @@
 package unip.aps.services;
 
+import unip.aps.models.Enrollment;
 // import unip.aps.models.Enrollment;
 import unip.aps.models.Program;
 import unip.aps.utils.JSONUtility;
@@ -34,14 +35,15 @@ public class ProgramManagementService {
         }
 
         List<Program> program = this.getPrograms();
-            for (Program p : program) {
-                if (programs == null) {
-                    return false;
-                }
-                if (p.getNomeDoPrograma().equals(programs.getNomeDoPrograma())) {
-                    return true;
-                }
+        for (Program p : program) {
+            if (programs == null || p == null) {
+                return false;
             }
+            String codigoDoPrograma = p.getCodigoDoPrograma();
+            if (codigoDoPrograma != null && codigoDoPrograma.equals(programs.getCodigoDoPrograma())) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -49,6 +51,16 @@ public class ProgramManagementService {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
             if (program.getNomeDoPrograma().equals(programName)) {
+                return program;
+            }
+        }
+        return null;
+    }
+
+    public Program getProgramByCode(String programCOD) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
+            if (program.getCodigoDoPrograma().equals(programCOD)) {
                 return program;
             }
         }
@@ -132,5 +144,24 @@ public class ProgramManagementService {
                 return;
             }
         }
+    }
+
+    public String genCode() {
+        int rN = (int) (Math.random() * 9000) + 1000;
+        String randomNumber = Integer.toString(rN);
+        String formattedCode = "COD" + randomNumber;
+        // if (getPrograms() == null || getPrograms().isEmpty()) {
+        //     return formattedCode;
+        // }
+
+        // for (Program existingProgram : getPrograms()) {
+        //     if (existingProgram == null) {
+        //         return formattedCode;
+        //     }
+        //     if (existingProgram.getCodigoDoPrograma().equals(formattedCode)) {
+        //         return genCode();
+        //     }
+        // }
+        return formattedCode;
     }
 }
