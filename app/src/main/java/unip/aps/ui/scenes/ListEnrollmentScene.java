@@ -33,7 +33,7 @@ public class ListEnrollmentScene implements Runnable{
         var prompt = new ConsolePrompt(terminal);
         var promptBuilder = prompt.getPromptBuilder();
         var writer = terminal.writer();
-        var ems = new EnrollmentManagementService("Cursos.json");
+        var ems = new EnrollmentManagementService("Matriculas.json");
 
         for (Enrollment e : ems.getEnrollments()) {
             writer.println(e.toString());

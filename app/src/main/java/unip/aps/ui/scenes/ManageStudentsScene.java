@@ -30,7 +30,6 @@ public class ManageStudentsScene implements Runnable {
         scenes.put("Listar estudantes", new ListStudentScene());
         scenes.put("Editar estudante", new EditStudentScene());
         scenes.put("Excluir estudante", new DeleteStudentScene());
-        scenes.put("Rematricular estudante", new ReenrollStudentScene());
         scenes.put("Voltar", null);
         return scenes;
     }

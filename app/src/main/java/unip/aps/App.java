@@ -24,7 +24,5 @@ public class App {
 
         var menu = new MainMenu();
         menu.init();
-
-
     }
 }

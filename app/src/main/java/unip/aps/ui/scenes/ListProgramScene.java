@@ -46,7 +46,7 @@ public class ListProgramScene implements  Runnable {
 //            writer.println(p.toString());
         }
 
-        PaginatedListMenu<String> plm = new PaginatedListMenu<>(" Cursos disponíveis: ", mapOptions, Theme.YELLOW);
+        PaginatedListMenu<String> plm = new PaginatedListMenu<>(" Cursos dispon?veis: ", mapOptions, Theme.YELLOW);
         System.out.println(plm.init());
     }
 }
