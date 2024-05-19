@@ -7,7 +7,6 @@ import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
 import unip.aps.services.EnrollmentManagementService;
-import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.Theme;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ import java.util.Map;
 
 import static unip.aps.utils.UiUtility.applyStyleTo;
 
-public class ReenrollStudentScene implements Runnable{
+public class ReenrollStudentForm implements Runnable{
     @Override
     public void run() {
         Terminal terminal;

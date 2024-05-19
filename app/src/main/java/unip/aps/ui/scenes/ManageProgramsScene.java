@@ -16,7 +16,7 @@ public class ManageProgramsScene implements Runnable {
 
     public Map<String, Runnable> initializeOptionsMap() {
         Map<String, Runnable> scenes = new LinkedHashMap<>();
-        scenes.put("Cadastrar Programa", new RegisterProgramScene());
+        scenes.put("Cadastrar Programa", new RegisterProgramForm());
         scenes.put("Listar Programas", new ListProgramScene());
         scenes.put("Editar programa", new EditProgramScene());
         scenes.put("Excluir Programa", new DeleteProgramScene());

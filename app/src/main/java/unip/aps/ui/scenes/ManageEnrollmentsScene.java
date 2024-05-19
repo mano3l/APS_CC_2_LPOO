@@ -15,7 +15,7 @@ public class ManageEnrollmentsScene implements Runnable {
 
     public Map<String, Runnable> initializeOptionsMap() {
         Map<String, Runnable> scenes = new LinkedHashMap<>();
-        scenes.put("Cadastrar matricula", new RegisterEnrollmentScene());
+        scenes.put("Cadastrar matricula", new RegisterEnrollmentForm());
         scenes.put("Listar matriculas", new ListEnrollmentScene());
         scenes.put("Editar matricula", new EditEnrollmentScene());
         scenes.put("Excluir matricula", new DeleteEnrollmentScene());
