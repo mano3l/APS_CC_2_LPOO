@@ -1,11 +1,10 @@
 package unip.aps.services;
 
-import unip.aps.models.Enrollment;
 import unip.aps.models.Student;
+import unip.aps.utils.DataFormatter;
 import unip.aps.utils.JSONUtility;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class StudentManagementService {
     private final JSONUtility<Student> jsonFile;
@@ -54,17 +53,18 @@ public class StudentManagementService {
         return null;
     }
 
-    public void changeName(String cpf, String newName) {
+    public void changeStudentName(String cpf, String newName, String newLastName) {
         List<Student> students = this.getStudents();
         for (Student student : students) {
             if (student.getCpf().equals(cpf)) {
                 student.setNome(newName);
+                student.setSexo(newLastName);
                 this.jsonFile.updateJSON(student, students.indexOf(student));
             }
         }
     }
 
-    public void changeAge(String cpf, int newAge) {
+    public void changeStudentAge(String cpf, int newAge) {
         List<Student> students = this.getStudents();
         for (Student student : students) {
             if (student.getCpf().equals(cpf)) {
@@ -74,7 +74,7 @@ public class StudentManagementService {
         }
     }
 
-    public void changeSex(String cpf, String newSex) {
+    public void changeStudentSex(String cpf, String newSex) {
         List<Student> students = this.getStudents();
         for (Student student : students) {
             if (student.getCpf().equals(cpf)) {
@@ -84,11 +84,23 @@ public class StudentManagementService {
         }
     }
 
-    public void changePhone(String cpf, String newPhone) {
+    public void changeStudentPhone(String cpf, String newPhone) {
         List<Student> students = this.getStudents();
         for (Student student : students) {
             if (student.getCpf().equals(cpf)) {
-                student.setTelefone(newPhone);
+                DataFormatter df = new DataFormatter();
+                String formattedPhone = df.formatPhoneNumber(newPhone);
+                student.setTelefone(formattedPhone);
+                this.jsonFile.updateJSON(student, students.indexOf(student));
+            }
+        }
+    }
+
+    public void changeStudentAddress(String cpf, String newAddress) {
+        List<Student> students = this.getStudents();
+        for (Student student : students) {
+            if (student.getCpf().equals(cpf)) {
+                student.setEndereco(newAddress);
                 this.jsonFile.updateJSON(student, students.indexOf(student));
             }
         }

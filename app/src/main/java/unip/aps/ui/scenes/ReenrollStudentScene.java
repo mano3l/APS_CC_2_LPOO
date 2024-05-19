@@ -6,7 +6,8 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
-import unip.aps.services.ProgramManagementService;
+import unip.aps.services.EnrollmentManagementService;
+import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.Theme;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 import static unip.aps.utils.UiUtility.applyStyleTo;
 
-public class ChangeProgramNameScene implements Runnable {
+public class ReenrollStudentScene implements Runnable{
     @Override
     public void run() {
         Terminal terminal;
@@ -28,7 +29,7 @@ public class ChangeProgramNameScene implements Runnable {
 
         // Cria o cabe�alho da tela
         List<AttributedString> header = new ArrayList<>();
-        header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar nome do curso \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
+        header.add(new AttributedStringBuilder().append(applyStyleTo(" Rematricular aluno \n", Theme.BLACK, Theme.YELLOW)).toAttributedString());
 
         var prompt = new ConsolePrompt(terminal);
         var promptBuilder = prompt.getPromptBuilder();
@@ -36,8 +37,8 @@ public class ChangeProgramNameScene implements Runnable {
 
         promptBuilder
                 .createInputPrompt()
-                .name("programName")
-                .message("Digite o nome do curso que deseja alterar: ").addPrompt();
+                .name("ra")
+                .message("Digite o RA do aluno que deseja rematricular: ").addPrompt();
 
         // Recebe os dados inseridos pelo usu�rio
         Map<String, PromptResultItemIF> result;
@@ -48,23 +49,24 @@ public class ChangeProgramNameScene implements Runnable {
             throw new RuntimeException(e);
         }
 
-        var pms = new ProgramManagementService("Cursos.json");
+        var ems = new EnrollmentManagementService("Matriculas.json");
 
         var writer = terminal.writer();
 
-        var programObj = pms.getProgramByName(result.get("programName").getResult());
+        var enrollmentObj = ems.getEnrollmentByRA(result.get("ra").getResult());
 
-        if(!pms.isProgramRegistered(programObj)){
-            writer.println("Curso nao cadastrado!");
+        if(!ems.isEnrollmentRegistered(enrollmentObj)){
+            writer.println("Estudante nao cadastrado!");
         }else{
             var promptBuilders = prompt.getPromptBuilder();
 
             Map<String, PromptResultItemIF> results;
 
             promptBuilders
-                .createInputPrompt()
-                .name("newProgramName")
-                .message("Digite o novo nome do curso: ").addPrompt();
+                    .createInputPrompt()
+                    .name("newEnrollment")
+                    .message("Digite o curso que deseja rematricular o aluno: ").addPrompt();
+//              COLOCAR TRATAMENTO DE ERRO PARA CHECAR SE O CURSO PASSADO ESTA NO JSON
 
             try {
                 results = prompt.prompt(promptBuilders.build());
@@ -72,8 +74,11 @@ public class ChangeProgramNameScene implements Runnable {
                 throw new RuntimeException(e);
             }
 
-            pms.changeProgramName(result.get("programName").getResult(), results.get("newProgramName").getResult());
-            writer.println("Curso alterado com sucesso!");
+            String newEnrollment = results.get("newEnrollment").getResult();
+            String ra = result.get("ra").getResult();
+
+            ems.changeStudentProgram(ra, newEnrollment);
+            writer.println("Matricula alterada com sucesso!");
         }
     }
 }

@@ -20,7 +20,7 @@ public class ManageStudentsScene implements Runnable {
 
     @Override
     public void run() {
-        var menu = new OptionsMenu<>("Gerenciar estudantes", initializeOptionsMap(), Theme.YELLOW);
+        var menu = new OptionsMenu<>("Gerenciar estudantes", initializeOptionsMap(), Theme.WHITE);
         menu.init().ifPresent(Runnable::run);
     }
 
@@ -28,7 +28,9 @@ public class ManageStudentsScene implements Runnable {
         Map<String, Runnable> scenes = new LinkedHashMap<>();
         scenes.put("Cadastrar estudante", new RegisterStudentScene());
         scenes.put("Listar estudantes", new ListStudentScene());
+        scenes.put("Editar estudante", new EditStudentScene());
         scenes.put("Excluir estudante", new DeleteStudentScene());
+        scenes.put("Rematricular estudante", new ReenrollStudentScene());
         scenes.put("Voltar", null);
         return scenes;
     }

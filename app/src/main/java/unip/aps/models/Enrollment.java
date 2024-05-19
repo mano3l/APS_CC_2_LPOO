@@ -49,11 +49,10 @@ public class Enrollment {
 
     @Override
     public String toString() {
-        return "Enrollment{" +
-                "ra='" + ra + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", nomeDoPrograma='" + nomeDoPrograma + '\'' +
-                ", dataMatricula='" + dataMatricula + '\'' +
-                '}';
+        return "RA: " + ra + "\n" +
+                "CPF: " + cpf + "\n" +
+                "Nome do Programa" + nomeDoPrograma + "\n" +
+                "Data da Matricula: " + dataMatricula + "\n" +
+                "Email: " + email + "\n";
     }
 }
