@@ -34,11 +34,14 @@ public class ProgramManagementService {
         }
 
         List<Program> program = this.getPrograms();
-        for (Program p : program) {
-            if (p.getNomeDoPrograma().equals(programs.getNomeDoPrograma())) {
-                return true;
+            for (Program p : program) {
+                if (programs == null) {
+                    return false;
+                }
+                if (p.getNomeDoPrograma().equals(programs.getNomeDoPrograma())) {
+                    return true;
+                }
             }
-        }
         return false;
     }
 

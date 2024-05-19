@@ -1,11 +1,14 @@
 package unip.aps;
 
+import unip.aps.services.EnrollmentManagementService;
+import unip.aps.services.StudentManagementService;
 import unip.aps.ui.scenes.MainMenu;
+
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
 //        Student students = new Student();
-//        var sms = new StudentManagementService("Estudantes.json");
 //        var ems = new EnrollmentManagementService("Matriculas.json");
 //        var pms = new ProgramManagementService("Cursos.json");
 //        sms.getStudents();
@@ -21,5 +24,7 @@ public class App {
 
         var menu = new MainMenu();
         menu.init();
+
+
     }
 }

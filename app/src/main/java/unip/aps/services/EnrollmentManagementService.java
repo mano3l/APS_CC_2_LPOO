@@ -76,12 +76,12 @@ public class EnrollmentManagementService {
 
     public void deleteEnrollmentByCPF(String cpf) {
         List<Enrollment> enrollments = this.getEnrollments();
+        int i = 0;
         for (Enrollment enrollment : enrollments) {
             if (enrollment.getCpf().equals(cpf)) {
-                enrollments.remove(enrollment);
-                this.jsonFile.updateJSON(enrollments);
-                return;
+                this.jsonFile.deleteJSON(enrollment, i);
             }
+            i++;
         }
     }
 

@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class StudentManagementService {
     private final JSONUtility<Student> jsonFile;
-    Scanner sc = new Scanner(System.in);
 
     public StudentManagementService(String path) {
         this.jsonFile = new JSONUtility<>(path, Student.class);
@@ -34,6 +33,9 @@ public class StudentManagementService {
 
         List<Student> students = this.getStudents();
         for (Student s : students) {
+            if (student == null) {
+                return false;
+            }
             if (s.getCpf().equals(student.getCpf())) {
                 return true;
             }
@@ -48,6 +50,7 @@ public class StudentManagementService {
                 return student;
             }
         }
+
         return null;
     }
 
@@ -93,17 +96,14 @@ public class StudentManagementService {
 
     public void deleteStudent(String cpf) {
         List<Student> students = this.getStudents();
+        var ems = new EnrollmentManagementService("Matriculas.json");
+        int i =0;
         for (Student student : students) {
             if (student.getCpf().equals(cpf)) {
-                for (Enrollment enrollment : new EnrollmentManagementService("enrollments.json").getEnrollments()) {
-                    if (enrollment.getCpf().equals(cpf)) {
-                        new EnrollmentManagementService("enrollments.json").deleteEnrollmentByCPF(cpf);
-                    }
-                }
-                students.remove(student);
-                this.jsonFile.updateJSON(students);
-                return;
+                ems.deleteEnrollmentByCPF(cpf);
+                this.jsonFile.deleteJSON(student, i);
             }
+            i++;
         }
     }
 }
