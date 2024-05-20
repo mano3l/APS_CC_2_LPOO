@@ -52,7 +52,7 @@ public class ChangeStudentProgram implements Runnable {
             var enrollmentObj = ems.getEnrollmentByRA(result.get("ra").getResult());
 
             if (enrollmentObj == null) {
-                writer.println("Estudante n�o matriculado!");
+                writer.println("Estudante nao matriculado!");
                 Thread.sleep(2000);
             } else {
                 var promptBuilders = prompt.getPromptBuilder();
@@ -71,7 +71,7 @@ public class ChangeStudentProgram implements Runnable {
                 }
                 var programObj = pms.getProgramByCode(results.get("newProgramCode").getResult());
                 if (!pms.isProgramRegistered(programObj)) {
-                    writer.println("Curso n�o dispon�vel!");
+                    writer.println("Curso nao disponivel!");
                     Thread.sleep(2000);
                 } else {
                     ems.changeStudentProgram(result.get("ra").getResult(), results.get("newProgramCode").getResult());

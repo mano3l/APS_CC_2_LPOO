@@ -33,6 +33,11 @@ public class PaginatedListMenu<E> {
     private int currentPickerIndex;
 
     public PaginatedListMenu(String title, Map<List<String>, E> optionsMap, Theme theme) {
+        this(title, optionsMap, theme, null);
+    }
+
+    // overloaded constructor...
+    public PaginatedListMenu(String title, Map<List<String>, E> optionsMap, Theme theme, Terminal terminal) {
         this.title = title;
         this.optionsMap = optionsMap;
         this.optionsList = new ArrayList<>();
@@ -42,9 +47,13 @@ public class PaginatedListMenu<E> {
         this.theme = theme;
         this.pageIndex = 0;
         this.pages = new ArrayList<>();
-        this.terminal = null;
         this.currentPickerIndex = 0;
         this.optionsPerPage = 0;
+        try {
+            this.terminal = terminal != null ? terminal : TerminalBuilder.builder().build();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         initializeKeyHandlers();
     }
 
@@ -61,7 +70,6 @@ public class PaginatedListMenu<E> {
         // Initialize the terminal
         try {
             // Initial terminal config
-            terminal = TerminalBuilder.builder().build();
             optionsPerPage = (terminal.getSize().getRows() - 10) / 3;
             terminal.puts(InfoCmp.Capability.cursor_invisible);
             var bindingReader = new BindingReader(terminal.reader());
@@ -104,9 +112,6 @@ public class PaginatedListMenu<E> {
             } while (selectedOption.isEmpty());
             // Return an Optional with the value to witch the specified option is mapped
             return getValueFromPartialKey(selectedOption, optionsMap);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } finally {
             closeTerminal(terminal);
         }

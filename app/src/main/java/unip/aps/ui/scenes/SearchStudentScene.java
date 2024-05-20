@@ -16,13 +16,11 @@ import unip.aps.services.EnrollmentManagementService;
 import unip.aps.services.ProgramManagementService;
 import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.PaginatedListMenu;
+import unip.aps.ui.components.Popup;
 import unip.aps.ui.components.Theme;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static unip.aps.utils.UiUtility.applyStyleTo;
 
@@ -39,21 +37,21 @@ public class SearchStudentScene implements Runnable {
             var promptBuilder = prompt.getPromptBuilder();
 
             promptBuilder.createListPrompt()
-                .name("sortType")
-                .message("Como voce quer ordenar os Estudantes?")
-                .newItem("nome").text("Ordem Alfabetica").add()
-                .newItem("idade").text("Ordem crescente por idade").add()
-                .newItem("nome-idade").text("Ordem Alfabetica e por idade").add()
-                .newItem("idade-nome").text("Ordem por idade e Alfabetica").add()																										   
-                .addPrompt()
-                .createListPrompt()
-                .name("filterTypeSex")
-                .message("Como voce quer filtrar a lista dos Estudantes?")
-                .newItem().text("Masculino").add()
-                .newItem().text("Feminino").add()
-                .newItem().text("Todos").add()
-                .addPrompt();
-                
+                    .name("sortType")
+                    .message("Como voce quer ordenar os Estudantes?")
+                    .newItem("nome").text("Ordem Alfabetica").add()
+                    .newItem("idade").text("Ordem crescente por idade").add()
+                    .newItem("nome-idade").text("Ordem Alfabetica e por idade").add()
+                    .newItem("idade-nome").text("Ordem por idade e Alfabetica").add()
+                    .addPrompt()
+                    .createListPrompt()
+                    .name("filterTypeSex")
+                    .message("Como voce quer filtrar a lista dos Estudantes?")
+                    .newItem().text("Masculino").add()
+                    .newItem().text("Feminino").add()
+                    .newItem().text("Todos").add()
+                    .addPrompt();
+
             // Recebe os dados inseridos pelo usu?rio
             Map<String, PromptResultItemIF> result;
             try {
@@ -64,7 +62,7 @@ public class SearchStudentScene implements Runnable {
 
             var sms = new StudentManagementService("Estudantes.json");
             List<Student> students = sms.getStudents();
-            
+
             var sortType = result.get("sortType").getResult();
             if (sortType.equals("nome")) {
                 students = sortStudentsByAlphabeticalOrder(students);
@@ -79,8 +77,7 @@ public class SearchStudentScene implements Runnable {
             } else if (sortType.equals("idade-nome")) {
                 students = sortStudentsByAlphabeticalOrder(students);
                 students = sortStudentsByAge(students);
-            }
-            else {
+            } else {
                 throw new RuntimeException("Tipo de ordenacao invalido");
             }
 
@@ -93,16 +90,45 @@ public class SearchStudentScene implements Runnable {
 
             } else if (sortSex.equals("Todos")) {
                 // Nao faz nada
-            }
-            else {
+            } else {
                 throw new RuntimeException("Sexo invalido");
             }
-            
-            //Printar lista de estudantes
-            System.out.println(students);
-            Thread.sleep(20000);
 
-        } catch (IOException | InterruptedException e) {
+            //Printar lista de estudantes
+            LinkedHashMap<List<String>, Student> mapOptions = new LinkedHashMap<>();
+
+            if (sms.getStudents().isEmpty()) {
+                System.out.println(applyStyleTo("Nenhum curso cadastrado!", Theme.RED));
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                return;
+            }
+
+            for (Student p : students) {
+                ArrayList<String> studOption = new ArrayList<>();
+
+                String nome = p.getNome();
+                String desc = p.getCpf();
+
+                studOption.add(nome);
+                studOption.add(desc);
+
+                mapOptions.put(studOption, p);
+            }
+
+            PaginatedListMenu<Student> plm = new PaginatedListMenu<>(" Cursos disponíveis: ", mapOptions, Theme.YELLOW, terminal);
+
+            Optional<Student> selectedProgram = plm.init();
+
+            if (selectedProgram.isPresent()) {
+                Popup popup = new Popup(selectedProgram.get().toString(), false);
+                popup.init();
+            }
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -112,7 +138,7 @@ public class SearchStudentScene implements Runnable {
         students.sort((s1, s2) -> s1.getNome().compareTo(s2.getNome()));
         return students;
     }
-   
+
     public List<Student> sortStudentsByAge(List<Student> students) {
         students.sort((s1, s2) -> s1.getIdade() - s2.getIdade());
         return students;

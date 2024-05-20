@@ -45,8 +45,9 @@ public class DeleteEnrollmentScene implements Runnable {
                 throw new RuntimeException(e);
             }
 
-        var ems = new EnrollmentManagementService("Matriculas.json");
-        var sms = new StudentManagementService("Estudantes.json");
+            var ems = new EnrollmentManagementService("Matriculas.json");
+            var sms = new StudentManagementService("Estudantes.json");
+            var pms = new ProgramManagementService("Cursos.json");
 
             var writer = terminal.writer();
 
@@ -59,6 +60,7 @@ public class DeleteEnrollmentScene implements Runnable {
                 Enrollment enrollment = ems.getEnrollmentByRA(result.get("ra").getResult());
                 sms.deleteStudent(enrollment.getCpf());
                 ems.deleteEnrollmentByRA(result.get("ra").getResult());
+                pms.deleteRA(result.get("ra").getResult());
                 writer.println("Matricula deletada com sucesso!");
                 Thread.sleep(2000);
             }

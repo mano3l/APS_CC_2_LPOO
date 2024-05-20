@@ -118,10 +118,10 @@ public class ProgramManagementService {
         }
     }
 
-    public void changeProgramEnrollment(String programName, String ra, boolean isEnrolled) {
+    public void changeProgramEnrollment(String programCode, String ra, boolean isEnrolled) {
         List<Program> programs = this.getPrograms();
         for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
+            if (program.getCodigoDoPrograma().equals(programCode)) {
                 if (isEnrolled) {
                     program.addRA(ra);
                 } else {
@@ -161,6 +161,16 @@ public class ProgramManagementService {
             }
         }
         return formattedCode;
+    }
+
+    public void deleteRA(String ra) {
+        List<Program> programs = this.getPrograms();
+        for (Program program : programs) {
+            if (program.getMatriculados().contains(ra)) {
+                program.removeRA(ra);
+                this.jsonFile.updateJSON(program, programs.indexOf(program));
+            }
+        }
     }
 
     public List<String> getProgramCodes() {

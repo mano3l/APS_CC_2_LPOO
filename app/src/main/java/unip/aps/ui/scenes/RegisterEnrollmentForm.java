@@ -11,6 +11,7 @@ import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
 import unip.aps.models.Enrollment;
+import unip.aps.models.Program;
 import unip.aps.models.Student;
 import unip.aps.services.EnrollmentManagementService;
 import unip.aps.services.ProgramManagementService;
@@ -77,6 +78,17 @@ public class RegisterEnrollmentForm implements Runnable {
             }
 
             var enrollment = createEnrollment(result);
+
+            ProgramManagementService pms = new ProgramManagementService("Cursos.json");
+            for (Program program : pms.getPrograms()) {
+                var programCode = program.getCodigoDoPrograma();
+                var enrollProgramCode = enrollment.getCodigoDoPrograma();
+
+                if (programCode.equals(enrollProgramCode)) {
+//                    program.getMatriculados().add(enrollment.getRa());
+                    pms.changeProgramEnrollment(enrollProgramCode, enrollment.getRa(), true);
+                }
+            }
 
             var writer = terminal.writer();
             if (ems.isEnrollmentRegistered(enrollment)) {
