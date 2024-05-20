@@ -13,20 +13,18 @@ import static org.jline.keymap.KeyMap.key;
 public class Popup {
 
     private final Terminal terminal;
-    private final Boolean cursorWasInvisible;
     private final String message;
 
-    public Popup(String message, Boolean cursorWasInvisible) {
+    public Popup(String message) {
         try {
             this.terminal = TerminalBuilder.builder().system(true).build();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.cursorWasInvisible = cursorWasInvisible;
         this.message = message;
     }
 
-    public Boolean init() {
+    public void init() {
         terminal.puts(InfoCmp.Capability.enter_ca_mode);
         terminal.puts(InfoCmp.Capability.cursor_invisible);
         terminal.flush();
@@ -41,7 +39,7 @@ public class Popup {
 
             if (keyPressed == Key.ENTER) {
                 close();
-                return true;
+                return;
             }
         }
     }
@@ -60,9 +58,6 @@ public class Popup {
 
     private void close() {
         terminal.puts(InfoCmp.Capability.exit_ca_mode);
-        if (cursorWasInvisible) {
-            terminal.puts(InfoCmp.Capability.cursor_visible);
-        }
         terminal.flush();
         try {
             terminal.close();

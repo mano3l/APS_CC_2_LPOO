@@ -80,6 +80,7 @@ public class OptionsMenu<E> {
             var writer = terminal.writer();
             writer.print("\033c");
             terminal.puts(InfoCmp.Capability.cursor_invisible);
+            terminal.flush();
 
             // Create a KeyMap for handling key presses
             KeyMap<Key> keyMap = generateKeyMap(terminal);

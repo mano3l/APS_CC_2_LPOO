@@ -15,7 +15,11 @@ public class MainMenu {
     public void init() {
         while (true) {
             var menu = new OptionsMenu<>("Selecione uma opcao: ", scenesMap, Theme.GREEN);
-            menu.init().ifPresent(Runnable::run);
+            Optional<Runnable> o = menu.init();
+
+            if (o.isEmpty()) break;
+
+            o.get().run();
         }
     }
 

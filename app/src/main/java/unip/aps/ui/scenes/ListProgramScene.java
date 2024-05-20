@@ -25,7 +25,6 @@ public class ListProgramScene implements Runnable {
     @Override
     public void run() {
         var pms = new ProgramManagementService("Cursos.json");
-
         LinkedHashMap<List<String>, Program> mapOptions = new LinkedHashMap<>();
 
         if (pms.getPrograms().isEmpty()) {
@@ -55,7 +54,7 @@ public class ListProgramScene implements Runnable {
         Optional<Program> selectedProgram = plm.init();
 
         if (selectedProgram.isPresent()) {
-            Popup popup = new Popup(selectedProgram.get().toString(), true);
+            Popup popup = new Popup(selectedProgram.get().toString());
             popup.init();
         }
     }
