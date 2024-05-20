@@ -7,9 +7,7 @@ import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
 import unip.aps.services.ProgramManagementService;
-import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.Theme;
-import unip.aps.utils.DataFormatter;
 
 import java.io.IOException;
 import java.util.ArrayList;

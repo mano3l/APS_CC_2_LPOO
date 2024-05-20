@@ -17,10 +17,10 @@ public class EditProgramScene implements Runnable {
     public Map<String, Runnable> initializeOptionsMap() {
         Map<String, Runnable> scenes = new LinkedHashMap<>();
         scenes.put("Trocar nome do curso", new ChangeProgramNameScene());
-        scenes.put("Trocar nível do curso", new ChangeProgramLevelScene());
-        scenes.put("Trocar duração do curso", new ChangeProgramDurationScene());
-        scenes.put("Trocar período do curso", new ChangeProgramScheduleScene());
-        scenes.put("Trocar descrição do curso", new ChangeProgramDescriptionScene());
+        scenes.put("Trocar nivel do curso", new ChangeProgramLevelScene());
+        scenes.put("Trocar duracao do curso", new ChangeProgramDurationScene());
+        scenes.put("Trocar periodo do curso", new ChangeProgramScheduleScene());
+        scenes.put("Trocar descricao do curso", new ChangeProgramDescriptionScene());
         scenes.put("Voltar", null);
         return scenes;
     }

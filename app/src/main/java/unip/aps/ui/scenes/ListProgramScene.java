@@ -1,18 +1,11 @@
 package unip.aps.ui.scenes;
 
-import org.jline.consoleui.prompt.ConsolePrompt;
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-import org.jline.utils.AttributedString;
-import org.jline.utils.AttributedStringBuilder;
 import unip.aps.models.Program;
-import unip.aps.models.Student;
 import unip.aps.services.ProgramManagementService;
 import unip.aps.ui.components.PaginatedListMenu;
 import unip.aps.ui.components.Popup;
 import unip.aps.ui.components.Theme;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -49,7 +42,7 @@ public class ListProgramScene implements Runnable {
             mapOptions.put(progOption, p);
         }
 
-        PaginatedListMenu<Program> plm = new PaginatedListMenu<>(" Cursos disponíveis: ", mapOptions, Theme.YELLOW);
+        PaginatedListMenu<Program> plm = new PaginatedListMenu<>(" Cursos disponï¿½veis: ", mapOptions, Theme.YELLOW);
 
         Optional<Program> selectedProgram = plm.init();
 

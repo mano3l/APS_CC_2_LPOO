@@ -19,7 +19,7 @@ public class EditStudentScene implements Runnable{
         Map<String, Runnable> scenes = new LinkedHashMap<>();
         scenes.put("Trocar nome do estudante", new ChangeStudentNameScene());
         scenes.put("Trocar idade do estudante", new ChangeStudentAgeScene());
-        scenes.put("Trocar endereço do estudante", new ChangeStudentAddressScene());
+        scenes.put("Trocar endereco do estudante", new ChangeStudentAddressScene());
         scenes.put("Trocar telefone do estudante", new ChangeStudentPhoneScene());
         scenes.put("Trocar sexo do estudante", new ChangeStudentSexScene());
         scenes.put("Voltar", null);

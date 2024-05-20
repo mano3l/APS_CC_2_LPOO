@@ -23,7 +23,7 @@ public class ChangeStudentAddressScene implements Runnable {
 
             // Cria o cabe?alho da tela
             List<AttributedString> header = new ArrayList<>();
-            header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar endere?o do aluno \n", Theme.BLACK, Theme.WHITE)).toAttributedString());
+            header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar endereco do aluno \n", Theme.BLACK, Theme.WHITE)).toAttributedString());
 
             var prompt = new ConsolePrompt(terminal);
             var promptBuilder = prompt.getPromptBuilder();

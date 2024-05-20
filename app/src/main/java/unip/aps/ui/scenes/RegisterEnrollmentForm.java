@@ -1,11 +1,7 @@
 package unip.aps.ui.scenes;
 
-import org.checkerframework.checker.units.qual.s;
-import org.jline.builtins.Completers;
 import org.jline.consoleui.prompt.ConsolePrompt;
 import org.jline.consoleui.prompt.PromptResultItemIF;
-import org.jline.reader.Completer;
-import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
@@ -19,7 +15,6 @@ import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.Theme;
 import unip.aps.utils.DataFormatter;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

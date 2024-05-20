@@ -32,7 +32,7 @@ public class ChangeProgramScheduleScene implements Runnable {
         promptBuilder
                 .createInputPrompt()
                 .name("programCode")
-                .message("Digite o código do curso que deseja alterar: ").addPrompt();
+                .message("Digite o codigo do curso que deseja alterar: ").addPrompt();
 
             // Recebe os dados inseridos pelo usu�rio
             Map<String, PromptResultItemIF> result;
@@ -60,7 +60,7 @@ public class ChangeProgramScheduleScene implements Runnable {
                 promptBuilders
                         .createInputPrompt()
                         .name("newProgramSchedule")
-                        .message("Digite o novo período do curso: ").addPrompt();
+                        .message("Digite o novo periodo do curso: ").addPrompt();
 
                 try {
                     results = prompt.prompt(promptBuilders.build());

@@ -1,6 +1,5 @@
 package unip.aps.ui.scenes;
 
-import org.checkerframework.checker.units.qual.s;
 import org.jline.consoleui.prompt.ConsolePrompt;
 import org.jline.consoleui.prompt.PromptResultItemIF;
 import org.jline.terminal.Terminal;
@@ -8,12 +7,7 @@ import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStringBuilder;
 
-import com.google.common.collect.Streams.IntFunctionWithIndex;
-
-import unip.aps.models.Program;
 import unip.aps.models.Student;
-import unip.aps.services.EnrollmentManagementService;
-import unip.aps.services.ProgramManagementService;
 import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.PaginatedListMenu;
 import unip.aps.ui.components.Popup;
@@ -119,7 +113,7 @@ public class SearchStudentScene implements Runnable {
                 mapOptions.put(studOption, p);
             }
 
-            PaginatedListMenu<Student> plm = new PaginatedListMenu<>(" Cursos disponíveis: ", mapOptions, Theme.YELLOW, terminal);
+            PaginatedListMenu<Student> plm = new PaginatedListMenu<>(" Cursos disponï¿½veis: ", mapOptions, Theme.YELLOW, terminal);
 
             Optional<Student> selectedProgram = plm.init();
 

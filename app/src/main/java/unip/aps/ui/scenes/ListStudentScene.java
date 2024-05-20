@@ -1,19 +1,12 @@
 package unip.aps.ui.scenes;
 
-import org.jline.consoleui.prompt.ConsolePrompt;
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
-import org.jline.utils.AttributedString;
-import org.jline.utils.AttributedStringBuilder;
-import unip.aps.models.Program;
+
 import unip.aps.models.Student;
-import unip.aps.services.ProgramManagementService;
 import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.PaginatedListMenu;
 import unip.aps.ui.components.Popup;
 import unip.aps.ui.components.Theme;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;

@@ -32,7 +32,7 @@ public class ChangeProgramLevelScene implements Runnable {
         promptBuilder
                 .createInputPrompt()
                 .name("programCode")
-                .message("Digite o código do curso que deseja alterar: ").addPrompt();
+                .message("Digite o codigo do curso que deseja alterar: ").addPrompt();
 
             // Recebe os dados inseridos pelo usu�rio
             Map<String, PromptResultItemIF> result;
