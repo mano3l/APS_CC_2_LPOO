@@ -57,7 +57,7 @@ public class ListStudentScene implements Runnable {
         Optional<Student> selectedStudent = plm.init();
 
         if (selectedStudent.isPresent()) {
-            Popup popup = new Popup(selectedStudent.get().toString());
+            Popup popup = new Popup(selectedStudent.get().toString(), false);
             popup.init();
         }
     }

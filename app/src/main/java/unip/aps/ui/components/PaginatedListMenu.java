@@ -17,7 +17,7 @@ import static unip.aps.utils.UiUtility.applyStyleTo;
 public class PaginatedListMenu<E> {
 
     private static final int INDENTATION_SPACING = 3;
-    private static final int OPTIONS_PER_PAGE = 3;
+    private static int optionsPerPage;
 
     private final String title;
     private final Map<List<String>, E> optionsMap;
@@ -44,6 +44,7 @@ public class PaginatedListMenu<E> {
         this.pages = new ArrayList<>();
         this.terminal = null;
         this.currentPickerIndex = 0;
+        this.optionsPerPage = 0;
         initializeKeyHandlers();
     }
 
@@ -61,6 +62,7 @@ public class PaginatedListMenu<E> {
         try {
             // Initial terminal config
             terminal = TerminalBuilder.builder().build();
+            optionsPerPage = (terminal.getSize().getRows() - 10) / 3;
             terminal.puts(InfoCmp.Capability.cursor_invisible);
             var bindingReader = new BindingReader(terminal.reader());
             var writer = terminal.writer();
@@ -84,7 +86,7 @@ public class PaginatedListMenu<E> {
                         writer.println(" ".repeat(INDENTATION_SPACING) + activePage().get(i));
                     }
 
-                    var description = descriptionsList.get(pageIndex * OPTIONS_PER_PAGE + i);
+                    var description = descriptionsList.get(pageIndex * optionsPerPage + i);
                     // Print the description related to the current option
                     writer.println(ansi().fgBrightBlack().a(" ".repeat(INDENTATION_SPACING) + description + "\n").reset());
                 }
@@ -182,13 +184,13 @@ public class PaginatedListMenu<E> {
     private List<List<String>> generatePages() {
         List<List<String>> newlist = new ArrayList<>();
         int optionIndex = 0;
-        int numberPages = optionsList.size() % OPTIONS_PER_PAGE != 0
-                ? optionsList.size() / OPTIONS_PER_PAGE + 1
-                : optionsList.size() / OPTIONS_PER_PAGE;
+        int numberPages = optionsList.size() % optionsPerPage != 0
+                ? optionsList.size() / optionsPerPage + 1
+                : optionsList.size() / optionsPerPage;
 
         for (int j = 0; j < numberPages; j++) {
             List<String> nestedList = new ArrayList<>();
-            for (int i = 0; i < OPTIONS_PER_PAGE; i++) {
+            for (int i = 0; i < optionsPerPage; i++) {
                 if (optionIndex < optionsList.size()) {
                     nestedList.add(optionsList.get(optionIndex));
                     optionIndex++;
@@ -236,7 +238,7 @@ public class PaginatedListMenu<E> {
         return ansi()
                 .a(" ".repeat(INDENTATION_SPACING))
                 .fgBrightBlack()
-                .a("Use as SETAS para navegar | ENTER para escolher | Q cancelar")
+                .a("Use as SETAS para navegar | ENTER para escolher | Q Voltar")
                 .reset();
     }
 
@@ -246,16 +248,16 @@ public class PaginatedListMenu<E> {
         activePage()
                 .set(newIndex, picker + applyStyleTo(activePage().get(newIndex), theme));
 
-        var description = descriptionsList.get(pageIndex * OPTIONS_PER_PAGE + newIndex);
-        descriptionsList.set(pageIndex * OPTIONS_PER_PAGE + newIndex, applyStyleTo(description, theme));
+        var description = descriptionsList.get(pageIndex * optionsPerPage + newIndex);
+        descriptionsList.set(pageIndex * optionsPerPage + newIndex, applyStyleTo(description, theme));
     }
 
     private void detachPickerFrom(int previousIndex) {
         activePage()
                 .set(previousIndex, removeAnsiAttributes(activePage().get(previousIndex).replace(picker, "")));
 
-        var description = descriptionsList.get(pageIndex * OPTIONS_PER_PAGE + previousIndex);
-        descriptionsList.set(pageIndex * OPTIONS_PER_PAGE + previousIndex, removeAnsiAttributes(description));
+        var description = descriptionsList.get(pageIndex * optionsPerPage + previousIndex);
+        descriptionsList.set(pageIndex * optionsPerPage + previousIndex, removeAnsiAttributes(description));
     }
 
     private List<String> activePage() {

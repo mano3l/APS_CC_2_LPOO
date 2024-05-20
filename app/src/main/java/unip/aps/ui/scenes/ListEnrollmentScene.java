@@ -55,7 +55,7 @@ public class ListEnrollmentScene implements Runnable {
         Optional<Enrollment> selectedEnrollment = plm.init();
 
         if (selectedEnrollment.isPresent()) {
-            Popup popup = new Popup(selectedEnrollment.get().toString());
+            Popup popup = new Popup(selectedEnrollment.get().toString(), false);
             popup.init();
         }
     }

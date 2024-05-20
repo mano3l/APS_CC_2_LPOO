@@ -1,8 +1,11 @@
 package unip.aps.ui.scenes;
 
 import org.checkerframework.checker.units.qual.s;
+import org.jline.builtins.Completers;
 import org.jline.consoleui.prompt.ConsolePrompt;
 import org.jline.consoleui.prompt.PromptResultItemIF;
+import org.jline.reader.Completer;
+import org.jline.reader.impl.completer.StringsCompleter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.AttributedString;
@@ -10,6 +13,7 @@ import org.jline.utils.AttributedStringBuilder;
 import unip.aps.models.Enrollment;
 import unip.aps.models.Student;
 import unip.aps.services.EnrollmentManagementService;
+import unip.aps.services.ProgramManagementService;
 import unip.aps.services.StudentManagementService;
 import unip.aps.ui.components.Theme;
 import unip.aps.utils.DataFormatter;
@@ -57,7 +61,8 @@ public class RegisterEnrollmentForm implements Runnable {
                     .message("Digite a idade: ").addPrompt()
                     .createInputPrompt()
                     .name("programCode")
-                    .message("Digite o código do curso que deseja matricular o estudante: ").addPrompt()
+                    .message("Digite o código do curso que deseja matricular o estudante: ")
+                    .addPrompt()
                     .createInputPrompt();
 
             var ems = new EnrollmentManagementService("Matriculas.json");
@@ -100,7 +105,6 @@ public class RegisterEnrollmentForm implements Runnable {
 
     public Enrollment createEnrollment(Map<String, PromptResultItemIF> result) {
         var ems = new EnrollmentManagementService("Matriculas.json");
-        var sms = new StudentManagementService("Estudantes.json");
         return new Enrollment(
                 ems.genRA(),
                 DataFormatter.formatCpf(result.get("cpf").getResult()),

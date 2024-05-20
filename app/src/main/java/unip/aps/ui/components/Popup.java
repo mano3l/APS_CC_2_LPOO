@@ -14,18 +14,20 @@ public class Popup {
 
     private final Terminal terminal;
     private final String message;
+    private final boolean cursorWasVisible;
 
-    public Popup(String message) {
+    public Popup(String message, boolean cursorWasVisible) {
         try {
             this.terminal = TerminalBuilder.builder().system(true).build();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         this.message = message;
+        this.cursorWasVisible = cursorWasVisible;
     }
 
     public void init() {
-        terminal.puts(InfoCmp.Capability.enter_ca_mode);
+//        terminal.puts(InfoCmp.Capability.enter_ca_mode);
         terminal.puts(InfoCmp.Capability.cursor_invisible);
         terminal.flush();
 
@@ -57,7 +59,8 @@ public class Popup {
     }
 
     private void close() {
-        terminal.puts(InfoCmp.Capability.exit_ca_mode);
+//        terminal.puts(InfoCmp.Capability.exit_ca_mode);
+        if (cursorWasVisible) terminal.puts(InfoCmp.Capability.cursor_visible);
         terminal.flush();
         try {
             terminal.close();

@@ -84,7 +84,8 @@ public class Program {
 
     @Override
     public String toString() {
-        return "Nome do Programa: " + nomeDoPrograma + "\n" +
+        return "Codigo do Programa: " + codigoDoPrograma + "\n" +
+                "Nome do Programa: " + nomeDoPrograma + "\n" +
                 "Nivel do Programa: " + nivelDoPrograma + "\n"
                 + "Duracao: " + duracao + "\n"
                 + "Horario: " + horario + "\n"

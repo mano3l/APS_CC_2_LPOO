@@ -6,6 +6,7 @@ import unip.aps.models.Program;
 import unip.aps.utils.JSONUtility;
 
 // import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -160,5 +161,13 @@ public class ProgramManagementService {
             }
         }
         return formattedCode;
+    }
+
+    public List<String> getProgramCodes() {
+        List<String> programCodes = new ArrayList<>();
+        for (Program program : getPrograms()) {
+            programCodes.add(program.getCodigoDoPrograma());
+        }
+        return programCodes;
     }
 }

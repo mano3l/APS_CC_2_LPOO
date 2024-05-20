@@ -54,7 +54,7 @@ public class ListProgramScene implements Runnable {
         Optional<Program> selectedProgram = plm.init();
 
         if (selectedProgram.isPresent()) {
-            Popup popup = new Popup(selectedProgram.get().toString());
+            Popup popup = new Popup(selectedProgram.get().toString(), false);
             popup.init();
         }
     }
