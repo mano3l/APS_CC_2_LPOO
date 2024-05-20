@@ -23,7 +23,7 @@ public class ChangeStudentAddressScene implements Runnable {
 
             // Cria o cabe?alho da tela
             List<AttributedString> header = new ArrayList<>();
-            header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar endereço do aluno \n", Theme.BLACK, Theme.WHITE)).toAttributedString());
+            header.add(new AttributedStringBuilder().append(applyStyleTo(" Editar endereï¿½o do aluno \n", Theme.BLACK, Theme.WHITE)).toAttributedString());
 
             var prompt = new ConsolePrompt(terminal);
             var promptBuilder = prompt.getPromptBuilder();
@@ -59,7 +59,7 @@ public class ChangeStudentAddressScene implements Runnable {
 
                 promptBuilders
                         .createInputPrompt()
-                        .name("newStudentPhone")
+                        .name("newStudentAdress")
                         .message("Digite o novo telefone do estudante: ").addPrompt();
 
                 try {
@@ -68,10 +68,10 @@ public class ChangeStudentAddressScene implements Runnable {
                     throw new RuntimeException(e);
                 }
 
-                String studentPhone = results.get("newStudentPhone").getResult();
+                String studentAdress = results.get("newStudentAdress").getResult();
                 String cpf = result.get("cpf").getResult();
 
-                sms.changeStudentPhone(cpf, studentPhone);
+                sms.changeStudentAddress(cpf, studentAdress);
                 writer.println("Curso alterado com sucesso!");
                 Thread.sleep(2000);
             }

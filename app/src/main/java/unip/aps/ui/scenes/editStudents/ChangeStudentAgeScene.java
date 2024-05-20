@@ -60,7 +60,7 @@ public class ChangeStudentAgeScene implements Runnable {
                 promptBuilders
                         .createInputPrompt()
                         .name("newStudentAge")
-                        .message("Digite q nova idade do estudante: ").addPrompt();
+                        .message("Digite a nova idade do estudante: ").addPrompt();
 
                 try {
                     results = prompt.prompt(promptBuilders.build());

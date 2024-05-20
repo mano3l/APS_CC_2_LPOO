@@ -58,7 +58,7 @@ public class StudentManagementService {
         for (Student student : students) {
             if (student.getCpf().equals(cpf)) {
                 student.setNome(newName);
-                student.setSexo(newLastName);
+                student.setSobrenome(newLastName);
                 this.jsonFile.updateJSON(student, students.indexOf(student));
             }
         }

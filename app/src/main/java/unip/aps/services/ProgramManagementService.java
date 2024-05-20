@@ -47,15 +47,15 @@ public class ProgramManagementService {
         return false;
     }
 
-    public Program getProgramByName(String programName) {
-        List<Program> programs = this.getPrograms();
-        for (Program program : programs) {
-            if (program.getNomeDoPrograma().equals(programName)) {
-                return program;
-            }
-        }
-        return null;
-    }
+    // public Program getProgramByName(String programName) {
+    //     List<Program> programs = this.getPrograms();
+    //     for (Program program : programs) {
+    //         if (program.getNomeDoPrograma().equals(programName)) {
+    //             return program;
+    //         }
+    //     }
+    //     return null;
+    // }
 
     public Program getProgramByCode(String programCOD) {
         List<Program> programs = this.getPrograms();
@@ -150,18 +150,15 @@ public class ProgramManagementService {
         int rN = (int) (Math.random() * 9000) + 1000;
         String randomNumber = Integer.toString(rN);
         String formattedCode = "COD" + randomNumber;
-        // if (getPrograms() == null || getPrograms().isEmpty()) {
-        //     return formattedCode;
-        // }
 
-        // for (Program existingProgram : getPrograms()) {
-        //     if (existingProgram == null) {
-        //         return formattedCode;
-        //     }
-        //     if (existingProgram.getCodigoDoPrograma().equals(formattedCode)) {
-        //         return genCode();
-        //     }
-        // }
+        for (Program existingProgram : getPrograms()) {
+            if (existingProgram == null) {
+                return formattedCode;
+            }
+            if (existingProgram.getCodigoDoPrograma().equals(formattedCode)) {
+                return genCode();
+            }
+        }
         return formattedCode;
     }
 }

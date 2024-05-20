@@ -48,7 +48,7 @@ public class DeleteProgramScene implements Runnable {
 
             var writer = terminal.writer();
 
-            var programObj = pms.getProgramByName(result.get("programCode").getResult());
+            var programObj = pms.getProgramByCode(result.get("programCode").getResult());
 
             if (!pms.isProgramRegistered(programObj)) {
                 writer.println("Curso nao cadastrado!");

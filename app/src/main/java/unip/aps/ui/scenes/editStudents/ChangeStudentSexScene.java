@@ -59,8 +59,8 @@ public class ChangeStudentSexScene implements Runnable {
 
                 promptBuilders
                         .createInputPrompt()
-                        .name("newStudentPhone")
-                        .message("Digite o novo telefone do estudante: ").addPrompt();
+                        .name("newStudentSex")
+                        .message("Digite o novo sexo do estudante: ").addPrompt();
 
                 try {
                     results = prompt.prompt(promptBuilders.build());
@@ -68,10 +68,10 @@ public class ChangeStudentSexScene implements Runnable {
                     throw new RuntimeException(e);
                 }
 
-                String studentPhone = results.get("newStudentPhone").getResult();
+                String studentSex = results.get("newStudentSex").getResult();
                 String cpf = result.get("cpf").getResult();
 
-                sms.changeStudentPhone(cpf, studentPhone);
+                sms.changeStudentSex(cpf, studentSex);
                 writer.println("Curso alterado com sucesso!");
                 Thread.sleep(2000);
             }
