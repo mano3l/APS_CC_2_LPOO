@@ -10,7 +10,7 @@ public class ManageStudentsScene implements Runnable {
 
     @Override
     public void run() {
-        var menu = new OptionsMenu<>("Gerenciar estudantes", initializeOptionsMap(), Theme.WHITE);
+        var menu = new OptionsMenu<>("Gerenciar estudantes", initializeOptionsMap(), Theme.MAGENTA);
         menu.init().ifPresent(Runnable::run);
     }
 
