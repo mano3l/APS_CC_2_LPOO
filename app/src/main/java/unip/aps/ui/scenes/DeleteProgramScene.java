@@ -31,10 +31,10 @@ public class DeleteProgramScene implements Runnable {
             var promptBuilder = prompt.getPromptBuilder();
 
 
-            promptBuilder
-                    .createInputPrompt()
-                    .name("programName")
-                    .message("Digite o curso: ").addPrompt();
+        promptBuilder
+                .createInputPrompt()
+                .name("programCode")
+                .message("Digite o curso: ").addPrompt();
 
             // Recebe os dados inseridos pelo usu�rio
             Map<String, PromptResultItemIF> result;
@@ -48,13 +48,13 @@ public class DeleteProgramScene implements Runnable {
 
             var writer = terminal.writer();
 
-            var programObj = pms.getProgramByName(result.get("programName").getResult());
+            var programObj = pms.getProgramByName(result.get("programCode").getResult());
 
             if (!pms.isProgramRegistered(programObj)) {
                 writer.println("Curso nao cadastrado!");
                 Thread.sleep(2000);
             } else {
-                pms.deleteProgram(result.get("programName").getResult());
+                pms.deleteProgram(result.get("programCode").getResult());
                 writer.println("Curso deletado com sucesso!");
                 Thread.sleep(2000);
             }

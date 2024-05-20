@@ -81,7 +81,9 @@ public class RegisterProgramForm implements Runnable {
     }
 
     public Program createProgram(Map<String, PromptResultItemIF> result) {
+        var pms = new ProgramManagementService("Cursos.json");
         return new Program(
+                pms.genCode(),
                 result.get("programName").getResult(),
                 result.get("programLevel").getResult(),
                 result.get("duracao").getResult(),

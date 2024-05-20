@@ -61,7 +61,7 @@ public class ChangeStudentProgram implements Runnable {
 
                 promptBuilders
                         .createInputPrompt()
-                        .name("newProgramName")
+                        .name("newProgramCode")
                         .message("Digite o nome do novo curso: ").addPrompt();
 
                 try {
@@ -69,12 +69,12 @@ public class ChangeStudentProgram implements Runnable {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                var programObj = pms.getProgramByName(results.get("newProgramName").getResult());
+                var programObj = pms.getProgramByCode(results.get("newProgramCode").getResult());
                 if (!pms.isProgramRegistered(programObj)) {
                     writer.println("Curso n�o dispon�vel!");
                     Thread.sleep(2000);
                 } else {
-                    ems.changeStudentProgram(result.get("ra").getResult(), results.get("newProgramName").getResult());
+                    ems.changeStudentProgram(result.get("ra").getResult(), results.get("newProgramCode").getResult());
                     writer.println("Estudante mudou de curso!");
                     Thread.sleep(2000);
                 }

@@ -4,14 +4,14 @@ public class Enrollment {
     private String ra;
     private String cpf;
     private String email;
-    private String nomeDoPrograma;
+    private String codigoDoPrograma;
     private String dataMatricula;
 
-    public Enrollment(String ra, String cpf, String email, String nomeDoPrograma, String dataMatricula) {
+    public Enrollment(String ra, String cpf, String email, String codigoDoPrograma, String dataMatricula) {
         this.ra = ra;
         this.cpf = cpf;
         this.email = email;
-        this.nomeDoPrograma = nomeDoPrograma;
+        this.codigoDoPrograma = codigoDoPrograma;
         this.dataMatricula = dataMatricula;
     }
 
@@ -31,12 +31,12 @@ public class Enrollment {
         this.email = email;
     }
 
-    public String getNomeDoPrograma() {
-        return nomeDoPrograma;
+    public String getCodigoDoPrograma() {
+        return codigoDoPrograma;
     }
 
-    public void setNomeDoPrograma(String nomeDoPrograma) {
-        this.nomeDoPrograma = nomeDoPrograma;
+    public void setCodigoDoPrograma(String codigoDoPrograma) {
+        this.codigoDoPrograma = codigoDoPrograma;
     }
 
     public String getDataMatricula() {
@@ -59,7 +59,7 @@ public class Enrollment {
     public String toString() {
         return "RA: " + ra + "\n" +
                 "CPF: " + cpf + "\n" +
-                "Nome do Programa: " + nomeDoPrograma + "\n" +
+                "Nome do Programa: " + codigoDoPrograma + "\n" +
                 "Data da Matricula: " + dataMatricula + "\n" +
                 "Email: " + email + "\n";
     }

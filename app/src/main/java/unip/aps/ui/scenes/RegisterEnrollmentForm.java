@@ -1,5 +1,6 @@
 package unip.aps.ui.scenes;
 
+import org.checkerframework.checker.units.qual.s;
 import org.jline.consoleui.prompt.ConsolePrompt;
 import org.jline.consoleui.prompt.PromptResultItemIF;
 import org.jline.terminal.Terminal;
@@ -41,7 +42,7 @@ public class RegisterEnrollmentForm implements Runnable {
                     .message("Digite o sobrenome: ").addPrompt()
                     .createInputPrompt()
                     .name("address")
-                    .message("Digite o endereço: ").addPrompt()
+                    .message("Digite o endereï¿½o: ").addPrompt()
                     .createInputPrompt()
                     .name("cpf")
                     .message("Digite o cpf: ").addPrompt()
@@ -55,8 +56,8 @@ public class RegisterEnrollmentForm implements Runnable {
                     .name("age")
                     .message("Digite a idade: ").addPrompt()
                     .createInputPrompt()
-                    .name("programName")
-                    .message("Digite o nome do curso que deseja matricular o estudante: ").addPrompt()
+                    .name("programCode")
+                    .message("Digite o cÃ³digo do curso que deseja matricular o estudante: ").addPrompt()
                     .createInputPrompt();
 
             var ems = new EnrollmentManagementService("Matriculas.json");
@@ -85,7 +86,7 @@ public class RegisterEnrollmentForm implements Runnable {
             var student = createStudent(result);
 
             if (sms.isStudentRegistered(student)) {
-                writer.println("Estudante já cadastrado.");
+                writer.println("Estudante jï¿½ cadastrado.");
                 return;
             } else {
                 sms.registerStudent(student);
@@ -104,7 +105,7 @@ public class RegisterEnrollmentForm implements Runnable {
                 ems.genRA(),
                 DataFormatter.formatCpf(result.get("cpf").getResult()),
                 ems.generateEmail(result.get("firstName").getResult(), result.get("lastName").getResult()),
-                result.get("programName").getResult(),
+                result.get("programCode").getResult(),
                 DataFormatter.setDate()
         );
     }

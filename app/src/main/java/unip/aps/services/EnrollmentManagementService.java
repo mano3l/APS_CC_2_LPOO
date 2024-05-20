@@ -56,7 +56,7 @@ public class EnrollmentManagementService {
         List<Enrollment> enrollments = this.getEnrollments();
         for (Enrollment enrollment : enrollments) {
             if (enrollment.getRa().equals(ra)) {
-                enrollment.setNomeDoPrograma(newProgram);
+                enrollment.setCodigoDoPrograma(newProgram);
                 // REMOVER O RA DO MATRICULADOS [] DO PROGRAMA ANTIGO E ADICIONAR NO NOVO MATRICULADOS [] DO PROGRAMAS
                 this.jsonFile.updateJSON(enrollment, enrollments.indexOf(enrollment));
             }
