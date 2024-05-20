@@ -42,7 +42,7 @@ public class PaginatedListMenu<E> {
         this.optionsMap = optionsMap;
         this.optionsList = new ArrayList<>();
         this.descriptionsList = new ArrayList<>();
-        this.picker = applyStyleTo("•", theme);
+        this.picker = applyStyleTo(">", theme);
         this.selectedOption = "";
         this.theme = theme;
         this.pageIndex = 0;

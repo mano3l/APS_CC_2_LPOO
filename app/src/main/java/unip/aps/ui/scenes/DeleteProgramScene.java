@@ -34,7 +34,7 @@ public class DeleteProgramScene implements Runnable {
         promptBuilder
                 .createInputPrompt()
                 .name("programCode")
-                .message("Digite o curso: ").addPrompt();
+                .message("Digite o código do curso que deseja deletar: ").addPrompt();
 
             // Recebe os dados inseridos pelo usu�rio
             Map<String, PromptResultItemIF> result;
