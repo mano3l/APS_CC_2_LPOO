@@ -72,7 +72,7 @@ public class ChangeStudentSexScene implements Runnable {
                 String cpf = result.get("cpf").getResult();
 
                 sms.changeStudentSex(cpf, studentSex);
-                writer.println("Curso alterado com sucesso!");
+                writer.println("Sexo alterado com sucesso!");
                 Thread.sleep(2000);
             }
 
