@@ -183,7 +183,7 @@ public class OptionsMenu<E> {
         return ansi()
                 .a(placementString)
                 .fgBrightBlack()
-                .a("Use as SETAS para navegar | ENTER para escolher | Q cancelar")
+                .a("Use as SETAS para navegar | ENTER para escolher | Q voltar")
                 .reset();
     }
 

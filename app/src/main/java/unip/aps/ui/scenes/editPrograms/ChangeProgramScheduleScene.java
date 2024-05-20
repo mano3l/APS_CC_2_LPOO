@@ -60,7 +60,7 @@ public class ChangeProgramScheduleScene implements Runnable {
                 promptBuilders
                         .createInputPrompt()
                         .name("newProgramSchedule")
-                        .message("Digite o novo horario do curso: ").addPrompt();
+                        .message("Digite o novo período do curso: ").addPrompt();
 
                 try {
                     results = prompt.prompt(promptBuilders.build());

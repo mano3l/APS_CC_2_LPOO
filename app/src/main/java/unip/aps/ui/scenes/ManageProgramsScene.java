@@ -23,10 +23,10 @@ public class ManageProgramsScene implements Runnable {
 
     public Map<String, Runnable> initializeOptionsMap() {
         Map<String, Runnable> scenes = new LinkedHashMap<>();
-        scenes.put("Cadastrar Programa", new RegisterProgramForm());
-        scenes.put("Listar Programas", new ListProgramScene());
-        scenes.put("Editar programa", new EditProgramScene());
-        scenes.put("Excluir Programa", new DeleteProgramScene());
+        scenes.put("Cadastrar Curso", new RegisterProgramForm());
+        scenes.put("Listar Cursos", new ListProgramScene());
+        scenes.put("Editar Curso", new EditProgramScene());
+        scenes.put("Excluir Curso", new DeleteProgramScene());
         scenes.put("Voltar", null);
         return scenes;
     }

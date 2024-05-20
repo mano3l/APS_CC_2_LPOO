@@ -19,7 +19,7 @@ public class EditProgramScene implements Runnable {
         scenes.put("Trocar nome do curso", new ChangeProgramNameScene());
         scenes.put("Trocar nível do curso", new ChangeProgramLevelScene());
         scenes.put("Trocar duração do curso", new ChangeProgramDurationScene());
-        scenes.put("Trocar horario do curso", new ChangeProgramScheduleScene());
+        scenes.put("Trocar período do curso", new ChangeProgramScheduleScene());
         scenes.put("Trocar descrição do curso", new ChangeProgramDescriptionScene());
         scenes.put("Voltar", null);
         return scenes;

@@ -33,7 +33,7 @@ public class SearchStudentScene implements Runnable {
         try (Terminal terminal = TerminalBuilder.builder().system(true).build()) {
             // Cria o cabe?alho da tela
             List<AttributedString> header = new ArrayList<>();
-            header.add(new AttributedStringBuilder().append(applyStyleTo(" Matricular estudante \n", Theme.BLACK, Theme.RED)).toAttributedString());
+            header.add(new AttributedStringBuilder().append(applyStyleTo(" Listar Estudantes de Forma Ordenada e Filtrada \n", Theme.WHITE, Theme.YELLOW)).toAttributedString());
 
             var prompt = new ConsolePrompt(terminal);
             var promptBuilder = prompt.getPromptBuilder();
